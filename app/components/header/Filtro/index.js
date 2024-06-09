@@ -4,9 +4,9 @@ import './filtro.modules.css';
 
 function Filtro() {
     return (
-      <button className='botonFiltro'>
+      <a className='botonFiltro'>
         <img src="/filtro.png" className="fotoFiltro" alt="Filtro" />
-      </button>
+      </a>
     );
 }
 

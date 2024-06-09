@@ -5,9 +5,9 @@ import './carrito.modules.css';
 
 function Carrito() {
     return (
-      <button className='botonCarrito'>
+      <a className='botonCarrito'>
         <img src="/carrito.png" className="fotoCarrito" alt="Carrito" />
-      </button>
+      </a>
     );
 }
 

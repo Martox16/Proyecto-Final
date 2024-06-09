@@ -4,9 +4,9 @@ import './perfil.modules.css';
 
 function Perfil() {
     return (
-        <button className='botonPerfil'>
+      <a className="botonPerfil">
         <img src="/perfil.png" className="fotoPerfil" alt="Perfil" />
-      </button>
+        </a>
     );
 }
 
