@@ -1,0 +1,33 @@
+.botonFiltro {
+    width: 150px;
+    height: 100px;
+    border-radius: 40px;
+    border: 0px;
+    background: none;
+    background-color: none;
+    position: fixed;
+    right: 10px; 
+    top: 10px;  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fotoBoton {
+    width: 70%; 
+    height: 70%;
+}
+
+@media (max-width: 768px) {
+    .botonFiltro{
+        width: 120px;
+        height: 80px;
+        right: 5px;
+        top: 70px;
+    }
+
+    .fotoFiltro {
+        width: 60%;
+        height: 60%;
+    }
+}
