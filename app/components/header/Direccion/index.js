@@ -1,37 +1,37 @@
-    'use client' //todos los que tienen usestate hay que poner arriba esto.
+'use client';
 
-    import React, { useState } from 'react';
-    import './direccion.modules.css';
+import React, { useState } from 'react';
+import './direccion.modules.css';
 
-    export default function Direccion() {
-        const [mostrarOpciones, setMostrarOpciones] = useState(false);
-        const [direccionSeleccionada, setDireccionSeleccionada] = useState("La Pampa 3270");
+export default function Direccion() {
+    const [mostrarOpciones, setMostrarOpciones] = useState(false);
+    const [direccionSeleccionada, setDireccionSeleccionada] = useState("La Pampa 3270");
 
-        const direcciones = ["La Pampa 3270", "Vallejos 4364", "Yatay 240", "Agregar Dirección", "Editar Dirección"];
+    const direcciones = ["La Pampa 3270", "Vallejos 4364", "Yatay 240","Rio 587", "Corrientes 546", "Agregar Dirección", "Editar Dirección"];
 
-        const handleClick = (direccion) => {
-            setDireccionSeleccionada(direccion);
-            setMostrarOpciones(false);
-        };
+    const handleClick = (direccion) => {
+        setDireccionSeleccionada(direccion);
+        setMostrarOpciones(false);
+    };
 
-        return (
-            <div className="direccion-container">
-                <button onClick={() => setMostrarOpciones(!mostrarOpciones)} className="Adress-button">
-                    {direccionSeleccionada}
-                </button>
-                {mostrarOpciones && (
-                    <div className="direccion-opciones">
-                        {direcciones.map((direccion, index) => (
-                            <button
-                                key={index}
-                                onClick={() => handleClick(direccion)}
-                                className="Adress-button">
-                                {direccion}
-                            </button>
-                        ))}
-                    </div>
-                )}
+    // Filtrar las direcciones para no mostrar la seleccionada
+    const direccionesFiltradas = direcciones.filter(direccion => direccion !== direccionSeleccionada);
+
+    return (
+        <div className="direccion-container">
+            <button onClick={() => setMostrarOpciones(!mostrarOpciones)} className="Adress-button">
+                {direccionSeleccionada}
+            </button>
+            <div className={`direccion-opciones ${mostrarOpciones ? 'show' : ''}`}>
+                {direccionesFiltradas.map((direccion, index) => (
+                    <button
+                        key={index}
+                        onClick={() => handleClick(direccion)}
+                        className="Adress-button">
+                        {direccion}
+                    </button>
+                ))}
             </div>
-        );
-    }
-
+        </div>
+    );
+}

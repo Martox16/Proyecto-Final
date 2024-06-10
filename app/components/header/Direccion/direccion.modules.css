@@ -1,9 +1,11 @@
 .direccion-container {
+    position: relative;
     display: flex;
     align-items: center;
-  }
-  
-  .Adress-button {
+    flex-direction: column; /* Para apilar los botones verticalmente */
+}
+
+.Adress-button {
     font-size: 16px;
     font-weight: bold;
     color: #333;
@@ -14,21 +16,65 @@
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
-  }
-  
-  .Adress-button:hover {
-    background-color: #f0f0f0;
-  }
-  
-  .Adress-button:focus {
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.Adress-button:hover {
+    background-color: none;
+}
+
+.Adress-button:focus {
     outline: none;
-    box-shadow: 0 0 0 2px rgba(255, 165, 0, 0.5);
-  }
-  
-  @media (max-width: 600px) {
+    background-color: #FFFAF0; /* Mantener el fondo al hacer clic */
+    border: 1px solid #FFA500; /* Mantener el borde al hacer clic */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Mantener la sombra al hacer clic */
+}
+
+.direccion-opciones {
+    position: absolute;
+    top: 100%; /* Colocar debajo del botón principal */
+    left: 0;
+    right: 0;
+    display: none;
+    flex-direction: column; /* Apilar verticalmente */
+    background-color: none;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 8px;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    z-index: 1000; /* Asegurarse de que el menú esté por encima de otros elementos */
+}
+
+.direccion-opciones.show {
+    display: flex;
+    max-height: 300px; /* Altura máxima para la animación */
+    opacity: 1;
+    overflow-y: auto; /* Habilitar el desplazamiento vertical */
+}
+
+.direccion-opciones .Adress-button {
+    margin: 4px 0; /* Espaciado entre los botones */
+    width: calc(100% - 20px); /* Ajustar ancho para evitar desbordamiento */
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+@media (max-width: 600px) {
     .Adress-button {
-      font-size: 14px;
-      padding: 6px 12px;
+        font-size: 14px;
+        padding: 6px 12px;
     }
-  }
-  
+
+    .direccion-opciones .Adress-button {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+
+    .direccion-opciones.show {
+        max-height: 200px; /* Reducir la altura máxima en pantallas pequeñas */
+    }
+}
