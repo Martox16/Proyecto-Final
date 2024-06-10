@@ -17,6 +17,10 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    height: 50px; /* Ajustar la altura para que coincida con el botón de filtrar */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .Adress-button:hover {
@@ -67,6 +71,7 @@
     .Adress-button {
         font-size: 14px;
         padding: 6px 12px;
+        height: 40px; /* Ajustar la altura para dispositivos móviles */
     }
 
     .direccion-opciones .Adress-button {
