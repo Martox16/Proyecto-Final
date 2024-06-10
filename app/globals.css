@@ -66,3 +66,14 @@ body {
     }
   }
  
+  .cardContainer {
+    display: flex;
+    overflow-x: auto;
+    padding: 10px;
+    gap: 10px;
+    scrollbar-width: none; 
+}
+
+.cardContainer::-webkit-scrollbar {
+    display: none;
+}

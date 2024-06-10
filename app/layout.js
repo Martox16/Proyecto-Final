@@ -33,7 +33,14 @@ export default function RootLayout({ children }) {
         </div>
       </div>
       <div class="body">
-    <Card />
+    <div className="cardContainer">
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+        </div>
 </div>
 
     </body>
