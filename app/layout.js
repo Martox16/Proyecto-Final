@@ -5,6 +5,7 @@ import Carrito from "./components/header/Carrito/index.js";
 import Perfil from "./components/header/Perfil/index.js";
 import Filtro from "./components/header/Filtro/index.js";
 import Buscador from "./components/header/Buscador/index.js";
+import Card from "./components/Body-main/Card/index.js";
 
 
 
@@ -31,6 +32,10 @@ export default function RootLayout({ children }) {
           <Filtro />
         </div>
       </div>
+      <div class="body">
+    <Card />
+</div>
+
     </body>
   </html>
 

@@ -1,0 +1,28 @@
+.card{
+    width: 200px;
+    border: 1px solid #000;
+    background-color: #FFF7E9;
+    
+}
+.nameCard{
+    font-size: 15px;
+}
+.cardFooter{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.imagenPanaderia{
+    width: 200px;
+    height: 150px;
+}
+.estrella{
+    width: 20px;
+    height: 20px;
+}
+.textCardFooter{
+    font-size: 15px;
+
+}
