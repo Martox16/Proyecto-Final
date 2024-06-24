@@ -16,7 +16,6 @@ export default function Direccion() {
             setDirecciones(data);
             // Si hay direcciones cargadas, selecciona la primera por defecto
             if (data.length > 0) {
-                console.log(data[0].ubicacion)
                 setDireccionSeleccionada(data[0].ubicacion);
             }
         })
@@ -40,25 +39,32 @@ export default function Direccion() {
 
     return (
         <div className="direccion-container">
-             {direcciones.length === 0 && (
-                <button onClick={handleAgregarDireccion} className="Adress-button">
-                    Agregar Dirección
-                </button>
-            )}
             {direcciones.length > 0 && (
                 <button onClick={() => setMostrarOpciones(!mostrarOpciones)} className="Adress-button">
                     {direccionSeleccionada ? direccionSeleccionada : "Selecciona una dirección"}
                 </button>
-            )}  
+            )}
+
             <div className={`direccion-opciones ${mostrarOpciones ? 'show' : ''}`}>
                 {direcciones.map((direccion, index) => (
                     <button
                         key={index}
-                        onClick={() => handleClick(direccion)}
+                        onClick={() => handleClick(direccion.ubicacion)}
                         className="Adress-button">
                         {direccion.ubicacion}
                     </button>
-                ))} 
+                ))}
+
+                {direccionSeleccionada && (
+                    <>
+                        <button onClick={handleAgregarDireccion} className="Adress-button">
+                            Agregar Dirección
+                        </button>
+                        <button onClick={handleEditarDireccion} className="Adress-button">
+                            Editar Dirección
+                        </button>
+                    </>
+                )}
             </div>
         </div>
     );
