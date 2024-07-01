@@ -5,7 +5,7 @@ import Carrito from "./components/header/Carrito/index.js";
 import Perfil from "./components/header/Perfil/index.js";
 import Filtro from "./components/header/Filtro/index.js";
 import Buscador from "./components/header/Buscador/index.js";
-import ClientContent from "./ClientContent"; // Importa ClientContent
+import Card from "./components/Body-main/Card/index.js"; 
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,7 +30,9 @@ export default function RootLayout({ children }) {
             <Filtro />
           </div>
         </div>
-        <ClientContent /> {/* Renderiza ClientContent aquí */}
+        <div className="main-content">
+          <Card />
+        </div>
       </body>
     </html>
   );
