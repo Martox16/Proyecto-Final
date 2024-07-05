@@ -27,7 +27,7 @@
 
 .card {
     flex: 0 0 auto; /* Cada tarjeta tendrá un ancho fijo */
-    width: 180px;
+    width: 250px; /* Ajusta el ancho de la tarjeta según sea necesario */
     border: 1px solid #ddd;
     border-radius: 10px;
     overflow: hidden;
@@ -36,7 +36,7 @@
     font-family: Arial, sans-serif;
     margin: 7px 0; /* Separación vertical entre tarjetas */
     position: relative; /* Necesario para posicionar el texto dentro de la imagen */
-    box-sizing: border-box; 
+    box-sizing: border-box;
 }
 
 .imagenPanaderia {
@@ -71,6 +71,7 @@
     display: flex;
     align-items: center;
 }
+
 .estrella {
     width: 20px; 
     height: 20px; 
