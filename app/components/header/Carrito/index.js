@@ -5,9 +5,13 @@ import './carrito.modules.css';
 
 function Carrito() {
     return (
-      <a className='botonCarrito'>
+      <>
+        <a className='botonCarrito'>
         <img src="/carrito.png" className="fotoCarrito" alt="Carrito" />
       </a>
+      </>
+      
+      
     );
 }
 
