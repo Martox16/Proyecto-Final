@@ -1,11 +1,5 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Direccion from "./components/header/Direccion/index.js";
-import Carrito from "./components/header/Carrito/index.js";
-import Perfil from "./components/header/Perfil/index.js";
-import Filtro from "./components/header/Filtro/index.js";
-import Buscador from "./components/header/Buscador/index.js";
-import Card from "./components/Body-main/Card/index.js"; 
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,20 +13,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         {children}
-        <div className="header">
-          <div className="header-top">
-            <Perfil />
-            <Direccion />
-            <Carrito />
-          </div>
-          <div className="header-bottom">
-            <Buscador />
-            <Filtro />
-          </div>
-        </div>
-        <div className="main-content">
-          <Card />
-        </div>
+  
       </body>
     </html>
   );
