@@ -42,7 +42,8 @@ function Card() {
   }, []);
 
   const handleCardClick = (id) => {
-    router.push(`/tienda/${id}`);
+    localStorage.setItem('selectedTiendaId', id); // Guardar el ID en el almacenamiento local
+    router.push("/view/infoTienda");
   };
 
   const renderCards = (items) =>
