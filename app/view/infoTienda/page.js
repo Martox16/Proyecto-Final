@@ -2,8 +2,10 @@
 
 import React, { useEffect, useState } from 'react';
 import styles from './info.module.css';
+import DireccionTienda from "../../components/infoTienda/direccionTienda/index.js"; // Verifica la ruta del archivo
+import NombreTienda from "../../components/infoTienda/nombreTienda/index.js"; // Verifica la ruta del archivo
 
-const InfoTiendaPage = () => {
+const InfoTienda = () => {
   const [id, setId] = useState(null);
 
   useEffect(() => {
@@ -14,9 +16,14 @@ const InfoTiendaPage = () => {
   return (
     <div className={styles.container}>
       <h1>ID: {id}</h1>
-      <p>Hola</p>
+      {id && (
+        <>
+          <NombreTienda />
+          <DireccionTienda />
+        </>
+      )}
     </div>
   );
 };
 
-export default InfoTiendaPage;
+export default InfoTienda;

@@ -1,0 +1,51 @@
+"use client";
+import React, { useState, useEffect } from 'react';
+
+const DireccionTienda = ({ id }) => {
+  const [direccion, setDireccion] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (id) {
+      const apiUrl = `http://localhost:3000/infoTiendas/${id}`;
+      fetch(apiUrl)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Error al obtener la dirección');
+          }
+          return response.json();
+        })
+        .then(data => {
+          if (data && data.length > 0) {
+            setDireccion(data[0].direccion); // Asegúrate de que 'direccion' esté en la respuesta
+          } else {
+            setError('No se encontró la dirección');
+          }
+          setLoading(false);
+        })
+        .catch(error => {
+          console.error('Error al obtener la dirección:', error);
+          setError(error.message);
+          setLoading(false);
+        });
+    }
+  }, [id]);
+
+  if (loading) {
+    return <p>Cargando dirección...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
+
+  return (
+    <div>
+      <h2>Dirección del Restaurante</h2>
+      <p>{direccion}</p>
+    </div>
+  );
+};
+
+export default DireccionTienda;
