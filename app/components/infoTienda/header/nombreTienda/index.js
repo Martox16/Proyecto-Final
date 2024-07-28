@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './nombreTienda.module.css';
 
+
 const NombreTienda = () => {
   const [nombre, setNombre] = useState(null);
   const [id, setId] = useState(null);
@@ -35,7 +36,7 @@ const NombreTienda = () => {
 
   return (
     <div className={styles.nombreContainer}>
-      <p>Nombre: {nombre}</p>
+      <p>{nombre}</p>
     </div>
   );
 };

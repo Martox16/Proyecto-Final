@@ -1,11 +1,11 @@
 
 import styles from "./home.module.css";
-import Direccion from "../../components/header/Direccion/index.js";
-import Carrito from "../../components/header/Carrito/index.js";
-import Perfil from "../../components/header/Perfil/index.js";
-import Filtro from "../../components/header/Filtro/index.js";
-import Buscador from "../../components/header/Buscador/index.js";
-import Card from "../../components/Body-main/Card/index.js"; 
+import Direccion from "../../components/home/header/Direccion/index.js";
+import Carrito from "../../components/home/header/Carrito/index.js";
+import Perfil from "../../components/home/header/Perfil/index.js";
+import Filtro from "../../components/home/header/Filtro/index.js";
+import Buscador from "../../components/home/header/Buscador/index.js";
+import Card from "../../components/home/Body-main/Card/index.js"; 
 
 export default function Home() {
   return (
