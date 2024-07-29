@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 import styles from './info.module.css';
 import Header from "../../components/infoTienda/header/index.js";
 import DireccionTienda from "../../components/infoTienda/direccionTienda/index.js";
+import Valoracion from "../../components/infoTienda/valoracion/index.js";
+
 
 const InfoTienda = () => {
   const [id, setId] = useState(null);
@@ -19,6 +21,7 @@ const InfoTienda = () => {
         <>
           <Header />
           <DireccionTienda/>
+          <Valoracion />
         </>
       )}
       <h1>ID: {id}</h1>
