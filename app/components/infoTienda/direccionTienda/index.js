@@ -35,7 +35,8 @@ const DireccionTienda = () => {
 
   return (
     <div className={styles.direccionContainer}>
-      <p>Dirección: {direccion}</p>
+      
+      <p className={styles.txt}>Dirección:<a className={styles.subr}>{direccion}</a></p>
     </div>
   );
 };

@@ -1,5 +1,12 @@
 .direccionContainer {
     font-size: 16px;
     color: #333;
+    padding-left: 2%;
   }
   
+  .subr{
+    text-decoration: underline;
+  }
+  .txt{
+    font-weight: bold;
+  }

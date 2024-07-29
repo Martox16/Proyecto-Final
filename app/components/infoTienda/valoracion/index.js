@@ -30,12 +30,15 @@ const Valoracion = () => {
   }, [id]);
 
   if (valoracion === null) {
-    return <div>Cargando valoración...</div>;
+    return <div>...</div>;
   }
 
   return (
     <div className={styles.valoracionContainer}>
-      <p>Valoración: {valoracion}</p>
+      <img src='/estrella.png' alt='Estrella' className={styles.valoracionImg} />
+      <p className={styles.valoracionNum}>
+        <a className={styles.valorRight}>{valoracion}</a>
+      </p>
     </div>
   );
 };

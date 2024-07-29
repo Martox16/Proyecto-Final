@@ -1,0 +1,31 @@
+.valoracionContainer {
+    display: flex;
+    align-items: center;
+    border: 2px solid #FF731D; /* Borde naranja alrededor del contenedor */
+    padding: 4px 8px; /* Aumento del espacio entre el borde y el contenido */
+    border-radius: 8px; /* Bordes redondeados */
+    background-color: #FFF7E9; /* Color de fondo amarillo claro */
+    max-width: 140px; /* Ajusta el ancho máximo del contenedor */
+    height: 36px; /* Altura ajustada del contenedor */
+    overflow: hidden; /* Asegura que los bordes redondeados se mantengan bien */
+  }
+  
+  .valoracionImg {
+    width: 24px; /* Tamaño reducido de la imagen */
+    height: 24px; /* Tamaño reducido de la imagen */
+    margin-right: 6px; /* Espacio entre la imagen y el número */
+  }
+  
+  .valoracionNum {
+    text-align: right; /* Alinea el texto a la derecha dentro del contenedor */
+    font-size: 18px; /* Tamaño del texto reducido para mantener el contenedor pequeño */
+    display: flex; /* Alinea el contenido del div */
+    align-items: center; /* Alinea el número verticalmente al centro */
+    margin: 0; /* Elimina el margen por defecto del párrafo */
+  }
+  
+  .valorRight {
+    margin-right: 4px; /* Espacio adicional a la derecha del texto */
+    font-weight: bold; /* Aplica negrita al texto */
+  }
+  

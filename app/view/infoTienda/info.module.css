@@ -1,0 +1,7 @@
+.direYval {
+    display: flex;
+    justify-content: space-between; /* Espacio entre los elementos */
+    align-items: center; /* Alinea los elementos verticalmente al centro */
+    padding: 10px; /* Espacio interno opcional */
+  }
+  

@@ -20,8 +20,10 @@ const InfoTienda = () => {
       {id && (
         <>
           <Header />
+          <div className={styles.direYval}>
           <DireccionTienda/>
           <Valoracion />
+          </div>
         </>
       )}
       <h1>ID: {id}</h1>
