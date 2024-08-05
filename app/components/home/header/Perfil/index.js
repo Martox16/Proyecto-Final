@@ -7,7 +7,7 @@ function Perfil() {
     const router = useRouter();
 
     const handlePerfilClick = () => {
-        router.push('/view/perfil');
+        router.push('/view/menuBar');
     };
 
     return (
