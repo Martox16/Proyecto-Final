@@ -5,28 +5,23 @@ import styles from './info.module.css';
 import Header from "../../components/infoTienda/header/index.js";
 import DireccionTienda from "../../components/infoTienda/direccionTienda/index.js";
 import Valoracion from "../../components/infoTienda/valoracion/index.js";
+import Paquete from "../../components/infoTienda/paquete/index.js";
 
 
-const InfoTienda = () => {
-  const [id, setId] = useState(null);
 
-  useEffect(() => {
-    const selectedTiendaId = localStorage.getItem('selectedTiendaId');
-    setId(selectedTiendaId);
-  }, []);
-
+function InfoTienda() {
   return (
     <div className={styles.container}>
-      {id && (
+       
         <>
           <Header />
           <div className={styles.direYval}>
           <DireccionTienda/>
           <Valoracion />
           </div>
+          <Paquete />
         </>
-      )}
-      <h1>ID: {id}</h1>
+      
     </div>
   );
 };
