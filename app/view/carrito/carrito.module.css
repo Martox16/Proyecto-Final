@@ -1,0 +1,23 @@
+.name{
+    text-align: center;
+    margin-top: 50px;
+    text-transform: uppercase;
+    text-decoration: underline;
+    font-size: 25px;
+}
+
+
+ .botonFlecha {
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer; /* Añadir cursor de puntero para indicar que es clickeable */
+}
+
+.fotoFlecha {
+    width: 30px;
+    height: 30px;
+    font-family: 'Poppins', sans-serif;
+    margin-left: 20px;
+    margin-top: 30px;
+
+}

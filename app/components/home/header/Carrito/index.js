@@ -1,18 +1,21 @@
-'use client' //todos los que tienen usestate hay que poner arriba esto.
+'use client'; // todos los que tienen useState hay que poner arriba esto.
+import React from 'react';
+import { useRouter } from 'next/navigation';
+import styles from './carrito.modules.css'; 
 
-import React, { useState } from 'react';
-import './carrito.modules.css';
 
 function Carrito() {
-    return (
-      <>
-        <a className='botonCarrito'>
-        <img src="/carrito.png" className="fotoCarrito" alt="Carrito" />
+  const router = useRouter();
+
+  const handlePerfilClick = () => {
+      router.push('/view/carrito');
+  };
+
+  return (
+      <a className="botonCarrito" onClick={handlePerfilClick}>
+          <img src="/carrito.png" className="fotoCarrito" alt="Carrito" />
       </a>
-      </>
-      
-      
-    );
+  );
 }
 
 export default Carrito;
