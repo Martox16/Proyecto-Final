@@ -41,16 +41,16 @@ const Carrito = () => {
         {loading ? (
           <p>Cargando...</p>
         ) : items.length > 0 ? (
-          <ul>
+          <ul className={styles.list}>
            <div className={styles.activo} ><p>Hay un pedido activo</p></div> 
             {items.map((item, index) => (
               <li key={index}>
-{item.nombre}<br />
- ${item.preciooriginal}<br />
-${item.precioxpagina}<br />
-{item.descripcion}<br />
- {item.cantdisponible}<br />
-{item.pedidoactivo ? 'Sí' : 'No'}
+<p className={styles.nombre}>{item.nombre}</p><br />
+<p className={styles.preciooriginal}>${item.preciooriginal}</p> <br />
+<p className={styles.precioxpagina}>${item.precioxpagina}</p><br />
+<p className={styles.descripcion}>{item.descripcion}</p><br />
+<p className={styles.cantdisponible}>{item.cantdisponible}</p><br />
+
               </li>
             ))}
           </ul>

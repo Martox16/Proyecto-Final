@@ -15,3 +15,17 @@
     font-weight: bold;
     margin: 10px;
   }
+  .list{
+    list-style: none;
+  }
+  
+  .nombre{
+    font-size:20px ;
+    font-weight: bolder;
+    color: #000;
+  }
+  .preciooriginal{}
+  .precioxpagina{}
+  .descripcion{}
+  .cantdisponible{}
+  
