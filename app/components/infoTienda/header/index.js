@@ -5,7 +5,7 @@ import styles from './header.module.css';
 
 const Header = () => {
   return (
-    <div className={styles.headerContainer}>
+    <div className={styles.headerContainer}> 
       <ImagenPrincipal />
       <NombreTienda />
     </div>

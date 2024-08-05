@@ -1,7 +1,7 @@
 .menuBarContainer {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center; /* Centra el contenido horizontalmente */
     padding: 20px;
 }
 
@@ -9,12 +9,18 @@
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    width: 100%; /* Asegura que el header ocupe todo el ancho disponible */
 }
 
 .cardContainer {
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 10px; /* Espacio entre los elementos */
+    justify-content: space-between; /* Distribuye los elementos uniformemente */
+    align-items: center;
     width: 100%;
+    max-width: 500px; /* Ajusta el ancho máximo según sea necesario */
+    padding: 15px 0px; /* Ajusta el padding */
+    background-color: #FFF8EA;
+    border-radius: 15px; /* Borde redondeado */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra para darle un efecto de tarjeta */
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
 }
