@@ -81,7 +81,7 @@ const Carrito = () => {
                         alt="logo"
                       />
                     </div>
-                    <div>
+                    <div className={styles.container}>
                       <p className={styles.nombre}>{item.nombre}</p>
                       <p className={styles.descripcion}>
                         {item.descripcion}

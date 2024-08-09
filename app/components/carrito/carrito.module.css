@@ -1,3 +1,64 @@
+
+
+/* Estilo del nombre */
+.nombre {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #000;
+}
+
+/* Estilo de la descripción */
+.descripcion {
+  font-size: 1rem;
+  color: #888;
+}
+
+/* Estilo del precio original */
+.preciooriginal {
+  font-size: 1rem;
+  color: #888;
+  text-decoration: line-through;
+}
+
+/* Estilo del precio por página */
+.precioxpagina {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fcbf29;
+}
+
+/* Estilo para cantidad disponible */
+.cantdisponible {
+  font-size: 1rem;
+  color: #888;
+}
+
+/* Estilo para el estado activo */
+.activo {
+  background-color: #fcbf29;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 5px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   .content {
     text-align: center;
     color: grey;
@@ -7,10 +68,16 @@
 .li{
   border: 2px solid #f9db00;
   display: flex;
-  flex-direction: row;
-  align-content: center;
-  justify-content: center;
   align-items: center;
+  padding: 16px 0;
+  justify-content: space-between;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  
+  align-items: flex-start;
 }
   .activo{
     background-color: #FFF5E5;
@@ -22,16 +89,15 @@
     font-weight: bold;
     margin: 10px;
   }
-
-.logo{
-  width: 120px;
-}
-
-
-
   .list{
     list-style: none;
+    padding: 0;
   }
+  
+.logo {
+  width: 100px;
+  margin-right: 16px;
+}
   
 
   
