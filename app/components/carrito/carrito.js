@@ -45,6 +45,11 @@ const Carrito = () => {
       return items.reduce((total, item) => total + item.precioxpagina, 0);
     };
   
+    const mostrarPagar = (item) =>{
+      if(item == items[items.length-1]){
+        return <Subtotal amount={calcularSubtotal} />
+      }
+    }
 
     return (
     <div>
@@ -67,6 +72,7 @@ const Carrito = () => {
               <p>¡Pedido en marcha!</p>
               {mostrarDetalles &&
                 items.map((item, index) => (
+                  <div>
                   <li className={styles.li} key={index}>
                     <div>
                       <img
@@ -92,9 +98,12 @@ const Carrito = () => {
                     </div>
 
                   </li>
-                  
+                    {mostrarPagar(item)}
+                  </div>
                 ))}
+                
             </ul>
+            
           </>
         ) : (
           <p>¡Aquí aparecerá la comida que agregues al carrito!</p>
