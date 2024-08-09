@@ -2,10 +2,12 @@
 
 import React, { useState, useEffect } from 'react';
 import styles from './carrito.module.css';
+import Subtotal from '../Subtotal/Subtotal'; 
 
 const Carrito = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [mostrarDetalles, setMostrarDetalles] = useState(false);
 
   useEffect(() => {
     const fetchCarritoItems = async () => {
@@ -35,31 +37,81 @@ const Carrito = () => {
     fetchCarritoItems();
   }, []); // Solo se ejecuta una vez al montar el componente
 
-  return (
+  const toggleDetalles = () => {
+    setMostrarDetalles(!mostrarDetalles);
+  }
+
+    const calcularSubtotal = () => {
+      return items.reduce((total, item) => total + item.precioxpagina, 0);
+    };
+  
+    const mostrarPagar = (item) =>{
+      if(item == items[items.length-1]){
+        return <Subtotal amount={calcularSubtotal} />
+      }
+    }
+
+    return (
     <div>
       <div className={styles.content}>
         {loading ? (
           <p>Cargando...</p>
         ) : items.length > 0 ? (
-          <ul className={styles.list}>
-           <div className={styles.activo} ><p>Hay un pedido activo</p></div> 
-            {items.map((item, index) => (
-              <li key={index}>
-<p className={styles.nombre}>{item.nombre}</p><br />
-<p className={styles.preciooriginal}>${item.preciooriginal}</p> <br />
-<p className={styles.precioxpagina}>${item.precioxpagina}</p><br />
-<p className={styles.descripcion}>{item.descripcion}</p><br />
-<p className={styles.cantdisponible}>{item.cantdisponible}</p><br />
+          <>
+            <ul className={styles.list}>
+              <div
+                className={styles.activo}
+                onClick={toggleDetalles}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => e.key === 'Enter' && toggleDetalles()}
+                style={{ cursor: 'pointer' }} // Añadir estilo para indicar que es interactivo
+              >
+                <p>Hay un pedido activo</p>
+              </div>
+              <p>¡Pedido en marcha!</p>
+              {mostrarDetalles &&
+                items.map((item, index) => (
+                  <div>
+                  <li className={styles.li} key={index}>
+                    <div>
+                      <img
+                        src="/logo.png"
+                        className={styles.logo}
+                        alt="logo"
+                      />
+                    </div>
+                    <div>
+                      <p className={styles.nombre}>{item.nombre}</p>
+                      <p className={styles.descripcion}>
+                        {item.descripcion}
+                      </p>
+                      <p className={styles.preciooriginal}>
+                        ${item.preciooriginal}
+                      </p>
+                      <p className={styles.precioxpagina}>
+                        ${item.precioxpagina}
+                      </p>
+                      <p className={styles.cantdisponible}>
+                        {item.cantdisponible}
+                      </p>
+                    </div>
 
-              </li>
-            ))}
-          </ul>
+                  </li>
+                    {mostrarPagar(item)}
+                  </div>
+                ))}
+                
+            </ul>
+            
+          </>
         ) : (
           <p>¡Aquí aparecerá la comida que agregues al carrito!</p>
         )}
       </div>
     </div>
   );
+
 };
 
 export default Carrito;
