@@ -1,130 +1,104 @@
-.cardContainer {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-  }
-  
-  .card {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 100%;
-    max-width: 400px;
-    display: flex;
-    align-items: center;
-    position: relative;
-    margin: 5px 50px;
-  }
-  
-  .logo {
-    width: 80px; /* Ajustado para un mejor escalado */
-    height: auto;
-    margin-right: 20px;
-  }
-  
-  .separator {
-    height: 70px;
-    width: 1px;
-    background-color: #ddd;
-    margin-right: 20px;
-  }
-  
-  .content {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  .h3 {
-    font-size: 16px;
-    margin: 0;
-    font-weight: bold;
-  }
-  
-  .p {
-    font-size: 14px;
-    color: #666;
-    margin: 10px 0;
-  }
-  
-  .pricing {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 10px;
-  }
-  
-  .originalPrice {
-    text-decoration: line-through;
-    color: #999;
-    margin-bottom: 5px;
-  }
-  
-  .discountedPrice {
-    font-size: 22px; /* Ajustado para mejor visibilidad */
-    color: #FF9900;
-    font-weight: bold;
-  }
-  
-  .controls {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin-top: 10px;
-  }
-  
-  .decrementButton, .incrementButton {
-    background-color: #EEE;
-    border: none;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    font-size: 18px;
-    cursor: pointer;
-  }
-  
-  .decrementButton:hover, .incrementButton:hover {
-    background-color: #DDD;
-  }
-  
-  .span {
-    margin: 0 10px;
-    font-size: 18px;
-  }
-  
-  @media (max-width: 768px) {
-    .card {
-      flex-direction: row; /* Mantener el layout horizontal en pantallas pequeñas */
-      align-items: flex-start;
-      max-width: 100%;
-    }
-  
-    .logo {
-      width: 100px; /* Ajustar tamaño en pantallas pequeñas */
-      margin-right: 10px;
-      margin-top: 30px;
-    }
-  
-    .separator {
-      height: 50px; /* Ajustar altura del separador */
-      margin-top: 30px;
-    }
-  
-    .content {
-      flex-grow: 1;
-    }
-  
-    .pricing {
+.cardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  margin: 0 auto; /* Centra el contenedor */
+  max-width: 1200px; /* Ajusta el ancho máximo para evitar que se extienda demasiado */
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 15px;
+  width: calc(33.333% - 40px); /* Asegura que las tarjetas sean simétricas y con espacio entre ellas */
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.logo {
+  border-radius: 10px;
+  max-width: 80px;
+  margin-right: 15px;
+}
+
+.cardContent {
+  flex-grow: 1;
+}
+
+.h3 {
+  margin: 0;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.p {
+  margin: 5px 0;
+  color: #666;
+  font-size: 0.9em;
+}
+
+.cardPrice {
+  margin-top: 10px;
+  font-size: 1.2em;
+  color: #FF9800;
+}
+
+.priceDiscount {
+  text-decoration: line-through;
+  color: #bbb;
+  font-size: 0.9em;
+  margin-right: 5px;
+}
+
+.price {
+  font-size: 22px; /* Ajustado para mejor visibilidad */
+  color: #FF9800;
+  font-weight: bold;
+}
+
+.cardQuantity {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.quantity {
+  margin: 0 10px;
+  font-size: 1.2em;
+}
+
+.btnDecrease, .btnIncrease {
+  background-color: #FF9800;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 50%;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.btnDecrease:hover, .btnIncrease:hover {
+  background-color: #e68a00;
+}
+
+@media (max-width: 768px) {
+  .cardsContainer {
       flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .controls {
-      justify-content: flex-end;
-      width: 100%;
-    }
+      align-items: center;
+      padding: 10px; /* Reduce el padding en pantallas pequeñas */
   }
-  
+
+  .card {
+      width: 90%; /* Asegura que la tarjeta ocupe el ancho de la pantalla */
+      margin-bottom: 20px; /* Espacio entre tarjetas en pantallas pequeñas */
+  }
+}
