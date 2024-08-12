@@ -2,12 +2,14 @@
 
 import React, { useState, useEffect } from 'react';
 import styles from './carrito.module.css';
-import Subtotal from '../Subtotal/Subtotal'; 
+import Subtotal from '../Subtotal/Subtotal';
 
 const Carrito = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [mostrarDetalles, setMostrarDetalles] = useState(false);
+  const [cantidad, setCantidad] = useState({});
+  const [error, setError] = useState(null);
+  const [subtotal, setSubtotal] = useState(0);
 
   useEffect(() => {
     const fetchCarritoItems = async () => {
@@ -24,34 +26,51 @@ const Carrito = () => {
 
         const data = await response.json();
 
-        // Set the fetched object directly to the state
+        // Inicializa las cantidades en 0
+        const initialQuantities = {};
+        data.forEach(item => {
+          initialQuantities[item.id] = 0;
+        });
+        setCantidad(initialQuantities);
+
         setItems(data);
-        console.log(data); // Log the data to verify its structure
       } catch (error) {
         console.error('Error al conectar con la API:', error);
+        setError(error);
       } finally {
         setLoading(false);
       }
     };
 
     fetchCarritoItems();
-  }, []); // Solo se ejecuta una vez al montar el componente
+  }, []);
 
-  const toggleDetalles = () => {
-    setMostrarDetalles(!mostrarDetalles);
+  useEffect(() => {
+    const nuevoSubtotal = items.reduce((total, item) => {
+      return total + item.precioxpagina * (cantidad[item.id] || 0);
+    }, 0);
+    setSubtotal(nuevoSubtotal);
+  }, [items, cantidad]);
+
+  const handleIncrement = (id) => {
+    setCantidad(prevState => ({
+      ...prevState,
+      [id]: (prevState[id] || 0) + 1,
+    }));
+  };
+
+  const handleDecrement = (id) => {
+    setCantidad(prevState => ({
+      ...prevState,
+      [id]: Math.max((prevState[id] || 0) - 1, 0),
+    }));
+  };
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
   }
 
-    const calcularSubtotal = () => {
-      return items.reduce((total, item) => total + item.precioxpagina, 0);
-    };
-  
-    const mostrarPagar = (item) =>{
-      if(item == items[items.length-1]){
-        return <Subtotal amount={calcularSubtotal} />
-      }
-    }
-
-    return (
+  return (
     <div>
       <div className={styles.content}>
         {loading ? (
@@ -59,21 +78,9 @@ const Carrito = () => {
         ) : items.length > 0 ? (
           <>
             <ul className={styles.list}>
-              <div
-                className={styles.activo}
-                onClick={toggleDetalles}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => e.key === 'Enter' && toggleDetalles()}
-                style={{ cursor: 'pointer' }} // Añadir estilo para indicar que es interactivo
-              >
-                <p>Hay un pedido activo</p>
-              </div>
-              <p>¡Pedido en marcha!</p>
-              {mostrarDetalles &&
-                items.map((item, index) => (
-                  <div>
-                  <li className={styles.li} key={index}>
+              {items.map((item, index) => (
+                <div key={item.id}>
+                  <li className={styles.li}>
                     <div>
                       <img
                         src="/logo.png"
@@ -83,27 +90,30 @@ const Carrito = () => {
                     </div>
                     <div className={styles.container}>
                       <p className={styles.nombre}>{item.nombre}</p>
-                      <p className={styles.descripcion}>
-                        {item.descripcion}
-                      </p>
-                      <p className={styles.preciooriginal}>
-                        ${item.preciooriginal}
-                      </p>
-                      <p className={styles.precioxpagina}>
-                        ${item.precioxpagina}
-                      </p>
-                      <p className={styles.cantdisponible}>
-                        {item.cantdisponible}
-                      </p>
+                      <p className={styles.descripcion}>{item.descripcion}</p>
+                      <p className={styles.preciooriginal}>${item.preciooriginal}</p>
+                      <p className={styles.precioxpagina}>${item.precioxpagina}</p>
+                      <div className={styles.cardQuantity}>
+                        <button
+                          onClick={() => handleDecrement(item.id)}
+                          className={styles.btnDecrease}
+                        >
+                          -
+                        </button>
+                        <span className={styles.quantity}>{cantidad[item.id]}</span>
+                        <button
+                          onClick={() => handleIncrement(item.id)}
+                          className={styles.btnIncrease}
+                        >
+                          +
+                        </button>
+                      </div>
                     </div>
-
                   </li>
-                    {mostrarPagar(item)}
-                  </div>
-                ))}
-                
+                  {index === items.length - 1 && <Subtotal amount={subtotal} />}
+                </div>
+              ))}
             </ul>
-            
           </>
         ) : (
           <p>¡Aquí aparecerá la comida que agregues al carrito!</p>
@@ -111,7 +121,6 @@ const Carrito = () => {
       </div>
     </div>
   );
-
 };
 
 export default Carrito;

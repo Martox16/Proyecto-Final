@@ -1,23 +1,29 @@
-.name{
-    text-align: center;
-    margin-top: 50px;
-    text-transform: uppercase;
-    text-decoration: underline;
-    font-size: 25px;
-}
 
 
- .botonFlecha {
-    display: inline-block;
-    margin-right: 10px;
-    cursor: pointer; /* Añadir cursor de puntero para indicar que es clickeable */
+
+.botonFlecha {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px; /* Ajusta el tamaño según sea necesario */
+    height: 30px; /* Ajusta el tamaño según sea necesario */
+    border: 1px solid #cccccc; /* Borde gris */
+    border-radius: 50%; /* Hace que el botón sea circular */
+    margin-right: 10px; /* Espacio entre la flecha y el texto */
+    cursor: pointer;
 }
 
 .fotoFlecha {
     width: 30px;
     height: 30px;
-    font-family: 'Poppins', sans-serif;
-    margin-left: 20px;
-    margin-top: 30px;
+}
 
+.name {
+    font-family: 'Arial', sans-serif; /* O la fuente específica que desees */
+    font-size: 17px; /* Ajusta según el tamaño que prefieras */
+    font-weight: bold; /* Asegúrate de que el texto sea negrita */
+    color: #000000; /* Negro */
+    display: inline-block; /* Para que esté en línea con la flecha */
+    vertical-align: middle; /* Alinea verticalmente el texto con la flecha */
+    letter-spacing: 0.5px; /* Ajusta el espaciado de las letras si es necesario */
 }

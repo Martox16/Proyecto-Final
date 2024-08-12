@@ -1,136 +1,104 @@
-
-
-/* Estilo del nombre */
-.nombre {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #000;
-}
-
-/* Estilo de la descripción */
-.descripcion {
-  font-size: 1rem;
-  color: #888;
-}
-
-/* Estilo del precio original */
-.preciooriginal {
-  font-size: 1rem;
-  color: #888;
-  text-decoration: line-through;
-}
-
-/* Estilo del precio por página */
-.precioxpagina {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #fcbf29;
-}
-
-/* Estilo para cantidad disponible */
-.cantdisponible {
-  font-size: 1rem;
-  color: #888;
-}
-
-/* Estilo para el estado activo */
-.activo {
-  background-color: #fcbf29;
-  color: #fff;
-  padding: 8px 16px;
-  border-radius: 5px;
-  text-align: center;
-  margin-bottom: 16px;
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  .content {
-    text-align: center;
-    color: grey;
-    font-size: 15px;
-    margin: 20px;
-  }
-.li{
-  border: 2px solid #f9db00;
-  display: flex;
-  align-items: center;
-  padding: 16px 0;
-  justify-content: space-between;
-}
+/* carrito.module.css */
 
 .container {
+  padding: 5px;
+  font-family: 'Arial', sans-serif;
+}
+
+.content {
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.li {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  padding: 15px;
+}
+
+.logoContainer {
+  margin-right: 15px;
+}
+
+.logo {
+  width: 80%;
+  height: auto;
+}
+
+.itemContainer {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  
-  align-items: flex-start;
 }
-  .activo{
-    background-color: #FFF5E5;
-    color: #000;
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    font-weight: bold;
-    margin: 10px;
-  }
-  .list{
-    list-style: none;
-    padding: 0;
-  }
-  
-.logo {
-  width: 100px;
-  margin-right: 16px;
-}
-  
 
-  
-  .activo p {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 0;
-  }
-  
-  .nombre {
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .preciooriginal {
-    text-decoration: line-through;
-    color: #999;
-    font-size: 14px;
-  }
-  
-  .precioxpagina {
-    color: #ff6600;
-    font-size: 16px;
-    font-weight: bold;
-  }
-  
-  .descripcion {
-    font-size: 14px;
-    color: #666;
-  }
-  
-  .cantdisponible {
-    font-size: 14px;
-    color: #333;
-  }
+.nombre {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.descripcion {
+  color: #777;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.precioxpagina {
+  color: #f57c00;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.cardQuantity {
+  display: flex;
+  align-items: center;
+}
+
+.btnDecrease, .btnIncrease {
+  background-color: #f57c00;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.quantity {
+  margin: 0 10px;
+  font-size: 16px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.subtotal {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.btnPagar {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+
+}

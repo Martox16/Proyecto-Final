@@ -5,7 +5,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 210px;
+    width: 90%;
   }
+
   
   .subtotalContent {
     display: flex;

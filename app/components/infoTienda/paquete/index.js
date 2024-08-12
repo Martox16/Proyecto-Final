@@ -5,6 +5,7 @@ const Paquete = () => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const [cantidad, setCantidad] = useState({});
+  
 
   useEffect(() => {
     const selectedTiendaId = localStorage.getItem('selectedTiendaId');
