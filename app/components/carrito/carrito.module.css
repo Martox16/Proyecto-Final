@@ -102,3 +102,8 @@
   font-size: 18px;
 
 }
+
+.btnDisabled {
+  background-color: gray;
+  cursor: not-allowed;
+}

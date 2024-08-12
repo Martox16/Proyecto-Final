@@ -2,13 +2,20 @@
 
 import React, { useState } from 'react';
 import './miPerfil.modules.css';
+import styles from './miPerfil.modules.css';
 
 function MiPerfil() {
     return (
       <>
-        <a className='botonMiPerfil'>
+      <div>
+        <div>      <a className='botonMiPerfil'>
         <img src="/menuBar/miPerfil.png" className="fotoMipefil" alt="MiPerfil" />
-      </a>
+      </a></div>
+      <div>      <p className='desc'>Mi perfil</p></div>
+
+
+      </div>
+
       </>
       
       

@@ -11,6 +11,8 @@ const Carrito = () => {
   const [error, setError] = useState(null);
   const [subtotal, setSubtotal] = useState(0);
 
+  const maxCantidad = 10; // Puedes ajustar la cantidad máxima según sea necesario
+
   useEffect(() => {
     const fetchCarritoItems = async () => {
       try {
@@ -28,7 +30,7 @@ const Carrito = () => {
 
         // Inicializa las cantidades en 0
         const initialQuantities = {};
-        data.forEach(item => {
+        data.forEach((item) => {
           initialQuantities[item.id] = 0;
         });
         setCantidad(initialQuantities);
@@ -53,24 +55,30 @@ const Carrito = () => {
   }, [items, cantidad]);
 
   const handleIncrement = (id) => {
-    setCantidad(prevState => ({
+    setCantidad((prevState) => ({
       ...prevState,
-      [id]: (prevState[id] || 0) + 1,
+      [id]: Math.min((prevState[id] || 0) + 1, maxCantidad),
     }));
   };
 
   const handleDecrement = (id) => {
-    setCantidad(prevState => ({
+    setCantidad((prevState) => ({
       ...prevState,
       [id]: Math.max((prevState[id] || 0) - 1, 0),
     }));
   };
 
+  const getButtonClass = (id) => {
+    const cant = cantidad[id] || 0;
+    return {
+      decreaseClass: cant === 0 ? styles.btnDisabled : '',
+      increaseClass: cant === maxCantidad ? styles.btnDisabled : '',
+    };
+  };
+
   if (error) {
     return <div>Error: {error.message}</div>;
   }
-
-
 
   return (
     <div>
@@ -80,41 +88,47 @@ const Carrito = () => {
         ) : items.length > 0 ? (
           <>
             <ul className={styles.list}>
-              {items.map((item, index) => (
-                <div key={item.id}>
-                  <li className={styles.li}>
-                    <div>
-                      <img
-                        src="/logo.png"
-                        className={styles.logo}
-                        alt="logo"
-                      />
-                    </div>
-                    <div className={styles.container}>
-                      <p className={styles.nombre}>{item.nombre}</p>
-                      <p className={styles.descripcion}>{item.descripcion}</p>
-                      <p className={styles.preciooriginal}>${item.preciooriginal}</p>
-                      <p className={styles.precioxpagina}>${item.precioxpagina}</p>
-                      <div className={styles.cardQuantity}>
-                        <button
-                          onClick={() => handleDecrement(item.id)}
-                          className={styles.btnDecrease}
-                        >
-                          -
-                        </button>
-                        <span className={styles.quantity}>{cantidad[item.id]}</span>
-                        <button
-                          onClick={() => handleIncrement(item.id)}
-                          className={styles.btnIncrease}
-                        >
-                          +
-                        </button>
+              {items.map((item, index) => {
+                const { decreaseClass, increaseClass } = getButtonClass(item.id);
+
+                return (
+                  <div key={item.id}>
+                    <li className={styles.li}>
+                      <div>
+                        <img
+                          src="/logo.png"
+                          className={styles.logo}
+                          alt="logo"
+                        />
                       </div>
-                    </div>
-                  </li>
-                  {index === items.length - 1 && <Subtotal amount={subtotal} />}
-                </div>
-              ))}
+                      <div className={styles.container}>
+                        <p className={styles.nombre}>{item.nombre}</p>
+                        <p className={styles.descripcion}>{item.descripcion}</p>
+                        <p className={styles.preciooriginal}>${item.preciooriginal}</p>
+                        <p className={styles.precioxpagina}>${item.precioxpagina}</p>
+                        <div className={styles.cardQuantity}>
+                          <button
+                            onClick={() => handleDecrement(item.id)}
+                            className={`${styles.btnDecrease} ${decreaseClass}`}
+                            disabled={cantidad[item.id] === 0}
+                          >
+                            -
+                          </button>
+                          <span className={styles.quantity}>{cantidad[item.id]}</span>
+                          <button
+                            onClick={() => handleIncrement(item.id)}
+                            className={`${styles.btnIncrease} ${increaseClass}`}
+                            disabled={cantidad[item.id] === maxCantidad}
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                    </li>
+                    {index === items.length - 1 && <Subtotal amount={subtotal} />}
+                  </div>
+                );
+              })}
             </ul>
           </>
         ) : (

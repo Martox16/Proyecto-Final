@@ -6,9 +6,13 @@ import './historial.modules.css';
 function historialPedidos() {
     return (
       <>
-        <a className='botonHistorial'>
+      <div>   
+        <div><a className='botonHistorial'>
         <img src="/menuBar/historialPedidos.png" className="fotoHistorial" alt="Historial" />
-      </a>
+      </a></div>
+             <div>      <p className='desc'>Historial de <br /> pedidos</p></div>
+
+      </div>
       </>
       
       

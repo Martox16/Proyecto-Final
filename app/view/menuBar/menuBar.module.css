@@ -14,13 +14,23 @@
 
 .cardContainer {
     display: flex;
-    justify-content: space-between; /* Distribuye los elementos uniformemente */
-    align-items: center;
+    justify-content: space-between;/* Distribuye los elementos uniformemente */
+    align-items: flex-start;
     width: 100%;
     max-width: 500px; /* Ajusta el ancho máximo según sea necesario */
-    padding: 15px 0px; /* Ajusta el padding */
+    padding-top: 20px;
     background-color: #FFF8EA;
     border-radius: 15px; /* Borde redondeado */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra para darle un efecto de tarjeta */
-    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    margin-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    
+}
+
+.micuenta-name{
+    font-weight: bolder;
+    font-size: 15px;
+    letter-spacing: 0.5px;
 }

@@ -4,8 +4,11 @@
 }
 
 .fotoAyuda {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     margin-left: 10px;
     margin-right: 10px;
+}
+.desc{
+    font-size: 14px;
 }

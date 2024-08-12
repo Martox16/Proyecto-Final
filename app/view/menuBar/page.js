@@ -20,8 +20,19 @@ function MenuBar() {
                 <MetodoPago />
                 <CentroAyuda />
             </div>
+            <div className='micuenta-contenedor'>
+              <p className='micuentaname'>Mi cuenta</p>  
+              <div className='direcciones'>
+              <img src="../../public/menuBar/ubicacion.png" className="fotoubicacion" alt="ubicacion"/>
+              <p className='desc'>direcciones</p>
+              </div>
+
+
+            </div>
+
         </div>
     );
 }
+
 
 export default MenuBar;

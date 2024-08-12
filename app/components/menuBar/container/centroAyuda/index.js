@@ -6,9 +6,16 @@ import './ayuda.modules.css';
 function CentroAyuda() {
     return (
       <>
-        <a className='botonAyuda'>
+    <div>    
+      <div>
+       <a className='botonAyuda'>
         <img src="/menuBar/centroAyuda.png" className="fotoAyuda" alt="Ayuda" />
       </a>
+      </div>   
+      <div>      <p className='desc'>Centro de <br />ayuda</p></div>
+
+      
+      </div>
       </>
       
       

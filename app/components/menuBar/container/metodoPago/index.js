@@ -6,10 +6,14 @@ import './metodo.modules.css';
 function MetodoPago() {
     return (
       <>
-
-        <a className='botonMetodo'>
+      <div>
+        <div>      <a className='botonMetodo'>
         <img src="/menuBar/metodoPago.png" className="fotoMetodo" alt="Metodo" />
-       </a>
+       </a></div>
+<div>       <p className='desc'>Metodo de <br /> pago</p></div>
+
+      </div>
+
       </>
       
       
