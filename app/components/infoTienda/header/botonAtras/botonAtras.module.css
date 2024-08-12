@@ -1,0 +1,10 @@
+.botonAtras {
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer; /* Añadir cursor de puntero para indicar que es clickeable */
+}
+
+.imagenFlecha {
+    width: 30px;
+    height: 30px;
+}
