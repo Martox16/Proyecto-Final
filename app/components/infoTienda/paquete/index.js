@@ -55,35 +55,33 @@ const Paquete = () => {
   }
 
   return (
-    <div>
-      <ul className={styles.cardContainer}>
+    <div className={styles.cardsContainer}>
+      <ul>
         {data.map(item => (
           <li key={item.id} className={styles.card}>
-            <img src="/Logo.png" alt="FoodSave" className={styles.logo} />
-            <div className={styles.separator}>  
-            </div>
-            <div className={styles.content}>
+            <img src="/logo.png" alt="FoodSave" className={styles.logo} />
+            <div className={styles.cardContent}>
               <h3 className={styles.h3}>{item.nombre}</h3>
               <p className={styles.p}>{item.descripcion}</p>
-              <div className={styles.pricing}>
-                <span className={styles.originalPrice}>${item.preciooriginal}</span>
-                <span className={styles.discountedPrice}>${item.precioxpagina}</span>
+              <div className={styles.cardPrice}>
+                <span className={styles.priceDiscount}>${item.preciooriginal}</span>
+                <span className={styles.price}>${item.precioxpagina}</span>
               </div>
-              <div className={styles.controls}>
-                <button
-                  onClick={() => handleDecrement(item.id)}
-                  className={styles.decrementButton}
-                >
-                  -
-                </button>
-                <span className={styles.span}>{cantidad[item.id]}</span>
-                <button
-                  onClick={() => handleIncrement(item.id)}
-                  className={styles.incrementButton}
-                >
-                  +
-                </button>
-              </div>
+            </div>
+            <div className={styles.cardQuantity}>
+              <button
+                onClick={() => handleDecrement(item.id)}
+                className={styles.btnDecrease}
+              >
+                -
+              </button>
+              <span className={styles.quantity}>{cantidad[item.id]}</span>
+              <button
+                onClick={() => handleIncrement(item.id)}
+                className={styles.btnIncrease}
+              >
+                +
+              </button>
             </div>
           </li>
         ))}

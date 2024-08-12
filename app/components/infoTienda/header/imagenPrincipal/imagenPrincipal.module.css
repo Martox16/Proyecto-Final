@@ -1,7 +1,7 @@
 .imagenContainer {
   position: relative;
   width: 100vw; /* Ocupa todo el ancho de la ventana */
-  height: 30vh; /* Ocupa el 35% del alto de la ventana */
+  height: 35vh; /* Ocupa el 35% del alto de la ventana */
   overflow: hidden; /* Asegura que no haya scrolls visibles */
 }
 
