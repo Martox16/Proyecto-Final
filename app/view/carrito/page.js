@@ -15,7 +15,7 @@ const CarritoPage = () => {
         <a className={styles.botonFlecha} onClick={handleClick}>
             <img src="/flechaAtras.png" className={styles.fotoFlecha} alt="Flecha" />
         </a>
-        <h1 className={styles.name} >Carrito</h1>
+        <h1 className={styles.name} > Carrito</h1>
       <Carrito />
     </div>
   );

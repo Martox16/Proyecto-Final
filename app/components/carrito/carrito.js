@@ -70,6 +70,8 @@ const Carrito = () => {
     return <div>Error: {error.message}</div>;
   }
 
+
+
   return (
     <div>
       <div className={styles.content}>

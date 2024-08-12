@@ -11,6 +11,9 @@
     border-radius: 50%; /* Hace que el botón sea circular */
     margin-right: 10px; /* Espacio entre la flecha y el texto */
     cursor: pointer;
+    margin-top:10px;  
+    margin-left: 10px; 
+    
 }
 
 .fotoFlecha {
@@ -26,4 +29,6 @@
     display: inline-block; /* Para que esté en línea con la flecha */
     vertical-align: middle; /* Alinea verticalmente el texto con la flecha */
     letter-spacing: 0.5px; /* Ajusta el espaciado de las letras si es necesario */
+    padding-left: 10px;
+    padding-bottom: 15px;
 }
