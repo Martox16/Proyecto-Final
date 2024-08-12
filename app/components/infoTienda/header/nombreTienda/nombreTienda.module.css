@@ -1,10 +1,9 @@
 .nombreContainer {
   position: absolute;
-  bottom: 0; /* Pegado a la parte baja del contenedor de la imagen */
-  left: 10px; /* Ajusta según necesidad */
+  bottom: 10px; /* Ajusta según sea necesario */
+  left: 10px; /* Ajusta según sea necesario */
   font-size: 20px;
   color: #ffffff;
   font-family: system-ui;
-  font-weight: bold; /* Puedes usar 'bold' para texto más grueso */
-  }
-  
+  font-weight: bold;
+}

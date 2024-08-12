@@ -1,0 +1,12 @@
+.botonAtras {
+    position: absolute;
+    top: 10px; /* Ajusta según sea necesario */
+    left: 10px; /* Ajusta según sea necesario */
+    z-index: 10; /* Asegura que el botón esté sobre otros elementos */
+  }
+  
+  .imagenFlecha {
+    width: 30px;
+    height: 30px;
+  }
+  

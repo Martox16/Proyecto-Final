@@ -60,13 +60,15 @@ const Paquete = () => {
       <ul>
         {data.map(item => (
           <li key={item.id} className={styles.card}>
-            <img src="/logo.png" alt="FoodSave" className={styles.logo} />
-            <div className={styles.cardContent}>
-              <h3 className={styles.h3}>{item.nombre}</h3>
-              <p className={styles.p}>{item.descripcion}</p>
-              <div className={styles.cardPrice}>
-                <span className={styles.priceDiscount}>${item.preciooriginal}</span>
-                <span className={styles.price}>${item.precioxpagina}</span>
+            <div className={styles.cardInner}>
+              <img src="/logo.png" alt="FoodSave" className={styles.logo} />
+              <div className={styles.cardContent}>
+                <h3 className={styles.h3}>{item.nombre}</h3>
+                <p className={styles.p}>{item.descripcion}</p>
+                <div className={styles.cardPrice}>
+                  <span className={styles.priceDiscount}>${item.preciooriginal}</span>
+                  <span className={styles.price}>${item.precioxpagina}</span>
+                </div>
               </div>
             </div>
             <div className={styles.cardQuantity}>
@@ -92,3 +94,4 @@ const Paquete = () => {
 };
 
 export default Paquete;
+  
