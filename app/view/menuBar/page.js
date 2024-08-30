@@ -20,11 +20,25 @@ function MenuBar() {
                 <MetodoPago />
                 <CentroAyuda />
             </div>
-            <div className='micuenta-contenedor'>
-              <p className='micuentaname'>Mi cuenta</p>  
-              <div className='direcciones'>
-              <img src="../../public/menuBar/ubicacion.png" className="fotoubicacion" alt="ubicacion"/>
-              <p className='desc'>direcciones</p>
+            <div  className={styles.micuentacontenedor}>
+              <p className={styles.micuentaname}>Mi cuenta</p>  
+             
+              <div className={styles.contenedor}>
+              <img src="/menuBar/direccion.png" className={styles.fotoimg} alt="imagen direccion"/>
+              <p className={styles.desc}>Direcciones</p>
+              <img src="/menuBar/flecha.png" className={styles.fotoflecha} alt="imagen flecha"/>
+              </div>
+
+              <div className={styles.contenedor}>
+              <img src="/menuBar/idioma.png" className={styles.fotoimg} alt="imagen idioma"/>
+              <p className={styles.desc}>Idioma</p>
+              <img src="/menuBar/flecha.png" className={styles.fotoflecha} alt="imagen flecha"/>
+              </div>
+
+              <div className={styles.contenedor}>
+              <img src="/menuBar/accesibilidad.png"className={styles.fotoimg} alt="imagen accesibilidad"/>
+              <p className={styles.desc}>Accesibilidad</p>
+              <img src="/menuBar/flecha.png" className={styles.fotoflecha} alt="imagen flecha"/>
               </div>
 
 

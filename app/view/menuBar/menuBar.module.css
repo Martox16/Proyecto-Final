@@ -34,3 +34,50 @@
     font-size: 15px;
     letter-spacing: 0.5px;
 }
+
+.micuentacontenedor{
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 350px;
+    font-family: Arial, sans-serif;
+}
+
+.micuentaname {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .contenedor{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: 1px dotted #000;
+  }
+.fotoimg{
+    width: 40px; 
+    
+    margin-right: 15px; 
+}
+.fotoflecha{
+    width: 15px; 
+    height: 15px;
+}
+
+.contenedor:last-child {
+    border-bottom: none; 
+  }
+
+  
+  .desc {
+    flex-grow: 1;
+    font-size: 16px;
+  }
+
+  
+  
