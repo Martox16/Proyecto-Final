@@ -2,6 +2,7 @@
 'use client';
 // app/editarPerfil/page.js
 import React, { useEffect, useState } from 'react';
+import styles from './editarperfil.module.css';
 
 const EditarPerfil = ({ searchParams }) => {
 //   const id = searchParams.id;
@@ -31,7 +32,7 @@ const EditarPerfil = ({ searchParams }) => {
           apellido: data.apellido,
           telefono: data.telefono,
           email: data.mail,
-          nacimiento: data.nacimiento,
+          nacimiento: data.fechanac,
         });
         setLoading(false);
       } catch (error) {
@@ -72,30 +73,58 @@ const EditarPerfil = ({ searchParams }) => {
   if (error) return <div>{error}</div>;
 
   return (
-    <div style={{ maxWidth: '400px', margin: 'auto' }}>
-      <h1>Editar Perfil</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Nombre</label>
-          <input name="nombre" value={formData.nombre} onChange={handleChange} />
+    <div className={styles.container}>
+        
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <div className={styles['form-group']}>
+          <label className={styles.label}>Nombre</label>
+          <input
+            name="nombre"
+            value={formData.nombre}
+            onChange={handleChange}
+            className={styles.input}
+          />
         </div>
-        <div>
-          <label>Apellido</label>
-          <input name="apellido" value={formData.apellido} onChange={handleChange} />
+        <div className={styles['form-group']}>
+          <label className={styles.label}>Apellido</label>
+          <input
+            name="apellido"
+            value={formData.apellido}
+            onChange={handleChange}
+            className={styles.input}
+          />
         </div>
-        <div>
-          <label>Teléfono</label>
-          <input name="telefono" value={formData.telefono} onChange={handleChange} />
+        <div className={styles['form-group']}>
+          <label className={styles.label}>Teléfono</label>
+          <input
+            name="telefono"
+            value={formData.telefono}
+            onChange={handleChange}
+            className={styles.input}
+          />
         </div>
-        <div>
-          <label>Email</label>
-          <input name="email" value={formData.email} onChange={handleChange} />
+        <div className={styles['form-group']}>
+          <label className={styles.label}>Email</label>
+          <input
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            className={styles.input}
+          />
         </div>
-        <div>
-          <label>Fecha de Nacimiento</label>
-          <input type="date" name="nacimiento" value={formData.nacimiento} onChange={handleChange} />
+        <div className={styles['form-group']}>
+          <label className={styles.label}>Fecha de Nacimiento</label>
+          <input
+            type="date"
+            name="nacimiento"
+            value={formData.nacimiento}
+            onChange={handleChange}
+            className={styles.input}
+          />
         </div>
-        <button type="submit">Editar</button>
+        <button type="submit" className={styles.button}>
+          Editar
+        </button>
       </form>
     </div>
   );
