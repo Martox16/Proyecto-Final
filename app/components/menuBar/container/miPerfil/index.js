@@ -3,22 +3,27 @@
 import React, { useState } from 'react';
 import './miPerfil.modules.css';
 import styles from './miPerfil.modules.css';
+import { useRouter } from 'next/navigation';
+
 
 function MiPerfil() {
+    const router = useRouter(); // Inicializa el router
+
+    const handleClick = () => {
+        router.push('/nuevaPagina'); // Reemplaza '/nuevaPagina' con la ruta a la que quieras navegar
+    };
+
     return (
       <>
-      <div>
-        <div>      <a className='botonMiPerfil'>
-        <img src="/menuBar/miPerfil.png" className="fotoMipefil" alt="MiPerfil" />
-      </a></div>
-      <div>      <p className='desc'>Mi perfil</p></div>
-
-
-      </div>
-
+        <div onClick={handleClick}> 
+          <a className='botonMiPerfil'>
+            <img src="/menuBar/miPerfil.png" className="fotoMipefil" alt="MiPerfil" />
+          </a>
+          <div>
+            <p className='desc'>Mi perfil</p>
+          </div>
+        </div>
       </>
-      
-      
     );
 }
 

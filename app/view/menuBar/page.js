@@ -41,6 +41,12 @@ function MenuBar() {
               <img src="/menuBar/flecha.png" className={styles.fotoflecha} alt="imagen flecha"/>
               </div>
 
+              <div className={styles.logoutContainer}>
+                <button className={styles.logoutButton}>
+                    Cerrar sesión
+                </button>
+            </div>
+
 
             </div>
 
