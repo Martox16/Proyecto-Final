@@ -10,7 +10,7 @@ function MiPerfil() {
     const router = useRouter(); // Inicializa el router
 
     const handleClick = () => {
-        router.push('/nuevaPagina'); // Reemplaza '/nuevaPagina' con la ruta a la que quieras navegar
+        router.push('/editarperfil'); // Reemplaza '/nuevaPagina' con la ruta a la que quieras navegar
     };
 
     return (
