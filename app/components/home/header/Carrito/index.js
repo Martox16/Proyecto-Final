@@ -8,7 +8,7 @@ function Carrito() {
   const router = useRouter();
 
   const handlePerfilClick = () => {
-      router.push('/view/carrito');
+      router.push('/view/incio');
   };
 
   return (

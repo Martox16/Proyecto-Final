@@ -1,0 +1,11 @@
+/* components/inicio/imagenFS.module.css */
+.imagenContainer {
+    text-align: center;
+    margin-top: 40px; /* Baja la imagen más cerca del centro de la pantalla */
+  }
+  
+  .imagenFS {
+    width: 240px; /* Tamaño ajustado de la imagen */
+    height: auto;
+  }
+  
