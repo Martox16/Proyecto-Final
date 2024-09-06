@@ -1,0 +1,39 @@
+.iniciarSesionContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    background-color: #ffffff;
+    position: relative;
+}
+
+.topSection {
+    width: 100%;
+    height: 120px; /* Ajusta la altura según sea necesario */
+    background-color: #FFAE12;
+    position: relative;
+    z-index: 1; /* Asegura que la parte superior esté por encima del fondo */
+}
+
+.topSection::after {
+    content: '';
+    width: 100%;
+    height: 100px; /* Ajusta la altura del arco */
+    background-color: #ffffff;
+    position: absolute;
+    bottom: -50px; /* Para que la curva se muestre en la parte inferior de la sección */
+    left: 0;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    z-index: 2;
+}
+
+.flechaContainer {
+    position: relative;
+    margin-top: -30px; /* Ajusta la flecha para que baje debajo del arco */
+    z-index: 3; /* Asegura que la flecha esté visible sobre el contenido */
+    display: flex;
+    justify-content: center; /* Centra la flecha horizontalmente */
+    width: 100%;
+}
