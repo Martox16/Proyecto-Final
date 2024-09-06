@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+.botonInicio {
+        background-color: white;
+        color: #FFAE12;
+        border: 2px solid #FFAE12;
+        padding: 15px 30px;
+        font-size: 16px;
+        border-radius: 10px;
+        cursor: pointer;
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+        margin-bottom: 25px; /* Agrega espacio debajo del botón */
+        font-family: 'Poppins', sans-serif;
+  }
