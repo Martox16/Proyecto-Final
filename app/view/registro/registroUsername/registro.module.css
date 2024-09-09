@@ -1,0 +1,44 @@
+/* iniciarSesion.module.css */
+.RegistroContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    background-color: #ffffff;
+    position: relative;
+}
+
+.topSection {
+    width: 100%;
+    height: 120px;
+    background-color: #FFAE12;
+    position: relative;
+    z-index: 1;
+}
+
+/* El arco en la parte inferior de la sección superior */
+.topSection::after {
+    content: '';
+    width: 100%;
+    height: 100px;
+    background-color: #ffffff;
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    z-index: 2;
+}
+
+/* Aseguramos que la flecha no interfiera con el contenido */
+.flechaContainer {
+    position: relative;
+    margin-top: -30px; /* Asegura que la flecha esté justo debajo del arco */
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+
