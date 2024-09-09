@@ -1,4 +1,3 @@
-
 'use client';
 // app/editarPerfil/page.js
 
@@ -7,7 +6,6 @@ import styles from './editarperfil.module.css';
 import FlechaAtras from '../../components/componentesGenerales/flechaAtras';
 
 const EditarPerfil = ({ searchParams }) => {
-//   const id = searchParams.id;
   const id = 1;
   const [perfil, setPerfil] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -20,6 +18,7 @@ const EditarPerfil = ({ searchParams }) => {
     nacimiento: '',
     FotoPerfil: '', // Añadido para la imagen
   });
+  const [selectedImage, setSelectedImage] = useState(null); // Nuevo estado para la imagen seleccionada
 
   useEffect(() => {
     const fetchProfileData = async () => {
@@ -29,7 +28,6 @@ const EditarPerfil = ({ searchParams }) => {
           throw new Error('Error al obtener los datos del perfil');
         }
         const data = await response.json();
-        console.log(data); // Verifica si `data.fotoUrl` tiene el valor correctov
         setPerfil(data);
         setFormData({
           nombre: data.nombre,
@@ -53,21 +51,39 @@ const EditarPerfil = ({ searchParams }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Nueva función para manejar la selección de la imagen
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedImage(file); // Guarda la imagen seleccionada
+    const imageUrl = URL.createObjectURL(file); // Muestra la vista previa de la imagen seleccionada
+    setFormData({ ...formData, FotoPerfil: imageUrl });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`/api/infoPerfil/${id}`, {
+      const formDataToSend = new FormData();
+      formDataToSend.append('nombre', formData.nombre);
+      formDataToSend.append('apellido', formData.apellido);
+      formDataToSend.append('telefono', formData.telefono);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('nacimiento', formData.nacimiento);
+      
+      // Solo añade la foto si hay una nueva
+      if (formData.FotoPerfil) {
+        formDataToSend.append('FotoPerfil', formData.FotoPerfil);
+      }
+  
+      // Enviar los datos a la API de '/actualizarPerfil'
+      const response = await fetch(`/actualizarPerfil`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+        body: formDataToSend,
       });
-
+  
       if (!response.ok) {
         throw new Error('Error al actualizar el perfil');
       }
-
+  
       alert('Perfil actualizado con éxito');
     } catch (error) {
       alert('Error al actualizar el perfil');
@@ -79,20 +95,28 @@ const EditarPerfil = ({ searchParams }) => {
 
   return (
     <div className={styles.container}>
-        <FlechaAtras />
+      <FlechaAtras />
       <form className={styles.form} onSubmit={handleSubmit}>
-      <div className={styles['form-group']}>
-            <img 
-              src={formData.FotoPerfil}
-              alt="Foto de perfil" 
-              className={styles.imagenperfil} 
-            />
-            <img 
+        <div className={styles['form-group']}>
+          <img
+            src={formData.FotoPerfil}
+            alt="Foto de perfil"
+            className={styles.imagenperfil}
+          />
+          <label htmlFor="fileInput" className={styles.fotocamara}>
+            <img
               src="/fotocamara.png"
-              alt="Foto camara" 
-              className={styles.fotocamara} 
+              alt="Foto camara"
+              className={styles.fotocamara}
             />
-          </div>
+          </label>
+          <input
+            id="fileInput"
+            type="file"
+            style={{ display: 'none' }} // Escondemos el input, y usamos el icono como disparador
+            onChange={handleImageChange}
+          />
+        </div>
         <div className={styles['form-group']}>
           <label className={styles.label}>Nombre</label>
           <input
@@ -140,7 +164,7 @@ const EditarPerfil = ({ searchParams }) => {
           />
         </div>
         <button type="submit" className={styles.button}>
-          Editar
+          Guardar cambios
         </button>
       </form>
     </div>
@@ -148,3 +172,4 @@ const EditarPerfil = ({ searchParams }) => {
 };
 
 export default EditarPerfil;
+
