@@ -1,13 +1,18 @@
-'use client';
+"use client";
 import React, { useState, useEffect } from 'react';
-
 
 function Nombre() {
     const [nombre, setNombre] = useState('');
-    const id = 1; // Reemplaza esto con el ID del usuario que desees buscar
 
     useEffect(() => {
         const fetchNombre = async () => {
+            const id = localStorage.getItem('userId'); // Obtén el ID del localStorage
+            
+            if (!id) {
+                console.error('ID de usuario no encontrado en localStorage');
+                return;
+            }
+
             try {
                 const response = await fetch(`http://localhost:3000/infoPerfil/${id}`);
                 if (response.ok) {
@@ -22,7 +27,7 @@ function Nombre() {
         };
 
         fetchNombre();
-    }, [id]);
+    }, []);
 
     return (
         <div>

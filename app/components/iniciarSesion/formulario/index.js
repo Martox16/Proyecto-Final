@@ -16,7 +16,12 @@ const Formulario = () => {
             const response = await fetch(`http://localhost:3000/iniciarSesion/${nombre}/${contrasena}`);
             if (response.ok) {
                 const data = await response.json();
-                router.push('/view/home'); // Redirigir a la página de inicio si la autenticación es exitosa
+                
+                // Guardar el ID del usuario en localStorage
+                localStorage.setItem('userId', data.id);
+
+                // Redirigir a la página de inicio
+                router.push('/view/home');
             } else if (response.status === 404) {
                 alert('Nombre no encontrado');
             } else if (response.status === 401) {

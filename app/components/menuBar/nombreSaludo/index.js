@@ -5,7 +5,7 @@ import styles from './nombreSaludo.module.css';
 function NombreSaludo() {
     const [nombre, setNombre] = useState('');
     const [apellido, setApellido] = useState('');
-    const id = 1; // Reemplaza esto con el ID del usuario que desees buscar
+    const id = localStorage.getItem('userId'); // Reemplaza esto con el ID del usuario que desees buscar
 
     useEffect(() => {
         const fetchNombreApellido = async () => {

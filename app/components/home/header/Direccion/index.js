@@ -8,7 +8,7 @@ export default function Direccion() {
     const [direcciones, setDirecciones] = useState([]);
 
     useEffect(() => {
-        const userId = '1'; // Supongamos que aquí tienes el ID de usuario
+        const userId = localStorage.getItem('userId'); // Supongamos que aquí tienes el ID de usuario
         const apiUrl = `http://localhost:3000/direccion/${userId}`; // Reemplaza 'puerto' con el puerto donde se ejecutan las APIs
         fetch(apiUrl)
         .then(response => response.json())
