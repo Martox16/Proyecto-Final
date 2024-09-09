@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import Principal from './view/home/page'
+import Principal from './view/inicio/page'
 
 
 export default function Home() {
