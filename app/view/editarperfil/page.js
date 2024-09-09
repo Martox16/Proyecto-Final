@@ -3,6 +3,7 @@
 // app/editarPerfil/page.js
 import React, { useEffect, useState } from 'react';
 import styles from './editarperfil.module.css';
+import FlechaAtras from '../../components/componentesGenerales/flechaAtras';
 
 const EditarPerfil = ({ searchParams }) => {
 //   const id = searchParams.id;
@@ -16,6 +17,7 @@ const EditarPerfil = ({ searchParams }) => {
     telefono: '',
     email: '',
     nacimiento: '',
+    FotoPerfil: '', // Añadido para la imagen
   });
 
   useEffect(() => {
@@ -26,6 +28,7 @@ const EditarPerfil = ({ searchParams }) => {
           throw new Error('Error al obtener los datos del perfil');
         }
         const data = await response.json();
+        console.log(data); // Verifica si `data.fotoUrl` tiene el valor correctov
         setPerfil(data);
         setFormData({
           nombre: data.nombre,
@@ -33,6 +36,7 @@ const EditarPerfil = ({ searchParams }) => {
           telefono: data.telefono,
           email: data.mail,
           nacimiento: data.fechanac,
+          FotoPerfil: data.fotoPerfil,
         });
         setLoading(false);
       } catch (error) {
@@ -74,8 +78,15 @@ const EditarPerfil = ({ searchParams }) => {
 
   return (
     <div className={styles.container}>
-        
+        <FlechaAtras />
       <form className={styles.form} onSubmit={handleSubmit}>
+      <div className={styles['form-group']}>
+            <img 
+              src={formData.FotoPerfil}
+              alt="Foto de perfil" 
+              className={styles.imagenperfil} 
+            />
+          </div>
         <div className={styles['form-group']}>
           <label className={styles.label}>Nombre</label>
           <input
