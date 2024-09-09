@@ -1,3 +1,4 @@
+/* iniciarSesion.module.css */
 .iniciarSesionContainer {
     display: flex;
     flex-direction: column;
@@ -10,30 +11,47 @@
 
 .topSection {
     width: 100%;
-    height: 120px; /* Ajusta la altura según sea necesario */
+    height: 120px;
     background-color: #FFAE12;
     position: relative;
-    z-index: 1; /* Asegura que la parte superior esté por encima del fondo */
+    z-index: 1;
 }
 
+/* El arco en la parte inferior de la sección superior */
 .topSection::after {
     content: '';
     width: 100%;
-    height: 100px; /* Ajusta la altura del arco */
+    height: 100px;
     background-color: #ffffff;
     position: absolute;
-    bottom: -50px; /* Para que la curva se muestre en la parte inferior de la sección */
+    bottom: -50px;
     left: 0;
     border-top-left-radius: 50px;
     border-top-right-radius: 50px;
     z-index: 2;
 }
 
+/* Aseguramos que la flecha no interfiera con el contenido */
 .flechaContainer {
     position: relative;
-    margin-top: -30px; /* Ajusta la flecha para que baje debajo del arco */
-    z-index: 3; /* Asegura que la flecha esté visible sobre el contenido */
+    margin-top: -30px; /* Asegura que la flecha esté justo debajo del arco */
+    z-index: 3;
     display: flex;
-    justify-content: center; /* Centra la flecha horizontalmente */
+    justify-content: center;
     width: 100%;
+}
+
+/* Contenedor de los componentes */
+.contentContainer {
+    margin-top: 60px; /* Distancia desde la flecha */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 20px;
+}
+
+/* Estilo para que los componentes tengan espacio suficiente */
+.contentContainer > * {
+    margin-top: 20px; /* Espaciado entre cada componente */
 }
