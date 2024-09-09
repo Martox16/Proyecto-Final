@@ -7,7 +7,7 @@ function BotonRegistro() {
   const router = useRouter();
 
   const handleRegistro = () => {
-      router.push('/view/registro/registroUsername');
+      router.push('/view/registro');
   };
 
   return (
