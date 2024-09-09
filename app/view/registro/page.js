@@ -2,6 +2,8 @@ import React from 'react';
 import FlechaAtras from '../../components/componentesGenerales/flechaAtras/index.js';
 import styles from './registro.module.css';
 import Titulo from '../../components/registro/titulo/index.js';
+import Formulario from '../../components/registro/formulario/index.js';
+
 
 
 const Registro = () => {
@@ -15,6 +17,7 @@ const Registro = () => {
 
             <div className={styles.contentContainer}>
                 <Titulo />
+                <Formulario />
 
             </div>
         

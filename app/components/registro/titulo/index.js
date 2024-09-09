@@ -5,7 +5,7 @@ import styles from './titulo.module.css';
 const Titulo = () => {
     return (
         <h1 className={styles.titulo}>
-            Registro
+            Registrarse
         </h1>
     );
 };
