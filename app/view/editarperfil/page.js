@@ -34,7 +34,7 @@ const EditarPerfil = ({ searchParams }) => {
           apellido: data.apellido,
           telefono: data.telefono,
           email: data.mail,
-          nacimiento: data.fechanac,
+          nacimiento: new Date(data.fechaNac).toISOString().split('T')[0],
           FotoPerfil: data.fotoPerfil,
         });
         setLoading(false);
@@ -68,26 +68,27 @@ const EditarPerfil = ({ searchParams }) => {
       formDataToSend.append('telefono', formData.telefono);
       formDataToSend.append('email', formData.email);
       formDataToSend.append('nacimiento', formData.nacimiento);
-      
-      // Solo añade la foto si hay una nueva
-      if (formData.FotoPerfil) {
-        formDataToSend.append('FotoPerfil', formData.FotoPerfil);
-      }
-  
-      // Enviar los datos a la API de '/actualizarPerfil'
-      const response = await fetch(`/actualizarPerfil`, {
+
+      // Añadimos la imagen al FormData solo si se ha seleccionado una nueva
+      if (selectedImage) {
+        formDataToSend.append('FotoPerfil', selectedImage);
+      }  
+
+      const response = await fetch(`/api/infoPerfil/${id}`, {
         method: 'PUT',
         body: formDataToSend,
       });
-  
+
+
       if (!response.ok) {
         throw new Error('Error al actualizar el perfil');
       }
-  
+
       alert('Perfil actualizado con éxito');
     } catch (error) {
       alert('Error al actualizar el perfil');
-    }
+    
+}
   };
 
   if (loading) return <div>Cargando...</div>;
