@@ -1,6 +1,7 @@
 
 'use client';
 // app/editarPerfil/page.js
+
 import React, { useEffect, useState } from 'react';
 import styles from './editarperfil.module.css';
 import FlechaAtras from '../../components/componentesGenerales/flechaAtras';
@@ -85,6 +86,11 @@ const EditarPerfil = ({ searchParams }) => {
               src={formData.FotoPerfil}
               alt="Foto de perfil" 
               className={styles.imagenperfil} 
+            />
+            <img 
+              src="/fotocamara.png"
+              alt="Foto camara" 
+              className={styles.fotocamara} 
             />
           </div>
         <div className={styles['form-group']}>
