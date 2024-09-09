@@ -68,14 +68,15 @@ const EditarPerfil = ({ searchParams }) => {
       formDataToSend.append('telefono', formData.telefono);
       formDataToSend.append('email', formData.email);
       formDataToSend.append('nacimiento', formData.nacimiento);
-
+      formDataToSend.append('id',1 );
+      console.log("prueba");
       // Añadimos la imagen al FormData solo si se ha seleccionado una nueva
       if (selectedImage) {
         formDataToSend.append('FotoPerfil', selectedImage);
       }  
 
-      const response = await fetch(`/api/infoPerfil/${id}`, {
-        method: 'PUT',
+      const response = await fetch(`http://localhost:3000/actualizarPerfil`, {
+        method: 'POST',
         body: formDataToSend,
       });
 
