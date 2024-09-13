@@ -14,12 +14,17 @@ const EditarPerfil = ({ searchParams }) => {
     nombre: '',
     apellido: '',
     telefono: '',
-    email: '',
-    nacimiento: '',
-    FotoPerfil: '', // Añadido para la imagen
+    password:'',
+    vendedor:'',
+    username:'',
+    mail: '',
+    fechaNac: '',
+    id:'',
+    fotoPerfil: ''
+  // Añadido para la imagen
   });
   const [selectedImage, setSelectedImage] = useState(null); // Nuevo estado para la imagen seleccionada
-
+console.log(formData)
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
@@ -33,9 +38,13 @@ const EditarPerfil = ({ searchParams }) => {
           nombre: data.nombre,
           apellido: data.apellido,
           telefono: data.telefono,
-          email: data.mail,
-          nacimiento: new Date(data.fechaNac).toISOString().split('T')[0],
-          FotoPerfil: data.fotoPerfil,
+          password: data.password,
+          vendedor: data.vendedor,
+          username: data.username,
+          mail: data.mail,
+          fechaNac: new Date(data.fechaNac).toISOString().split('T')[0],
+          fotoPerfil: data.fotoPerfil || '',
+          id: 1
         });
         setLoading(false);
       } catch (error) {
@@ -61,33 +70,62 @@ const EditarPerfil = ({ searchParams }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('tomi');
     try {
-      const formDataToSend = new FormData();
-      formDataToSend.append('nombre', formData.nombre);
-      formDataToSend.append('apellido', formData.apellido);
-      formDataToSend.append('telefono', formData.telefono);
-      formDataToSend.append('email', formData.email);
-      formDataToSend.append('nacimiento', formData.nacimiento);
-      formDataToSend.append('id',1 );
-      console.log("prueba");
+      console.log('formDataToSend Antes');
+      
+      
+      const formDataToSend = {
+        nombre : formData.nombre || '',
+        apellido: formData.apellido || '',
+        telefono: formData.telefono || '',
+        password: 'mati345',
+        vendedor: false,
+        username: 'matilopez05',
+        fechaNac: formData.fechaNac || '',
+        fotoPerfil: formData.fotoPerfil || '',
+        mail: formData.mail || '',
+        id: 1
+    };
+      
+      console.log('formDataToSend despues');
+      console.log(formDataToSend);
+/*
+      formDataToSend.append('nombre', formData.nombre || '');
+
+      formDataToSend.append('apellido', formData.apellido || '');
+      formDataToSend.append('telefono', formData.telefono || '');
+      formDataToSend.append('password', formData.password || '');
+      formDataToSend.append('vendedor', formData.vendedor || '');
+      formDataToSend.append('username', formData.username || '');
+      formDataToSend.append('fechaNac', formData.nacimiento || '');
+      formDataToSend.append('mail', formData.mail || '');
+      formDataToSend.append('id', id || '');
+      formDataToSend.append('fotoPerfil',"a" || "");
       // Añadimos la imagen al FormData solo si se ha seleccionado una nueva
       if (selectedImage) {
-        formDataToSend.append('FotoPerfil', selectedImage);
+        formDataToSend.append('fotoPerfil', selectedImage);
       }  
-
-      const response = await fetch(`http://localhost:3000/actualizarPerfil`, {
+ */
+      console.log('formDataToSend', formDataToSend);
+      const response = await fetch (`http://localhost:3000/actualizarPerfil`, {
         method: 'POST',
-        body: formDataToSend,
+        headers: {
+          'Content-Type': 'application/json',
+          // Otros encabezados si son necesarios
+        },
+        
+        body: JSON.stringify(formDataToSend)
       });
 
-
+      console.log(response);
       if (!response.ok) {
-        throw new Error('Error al actualizar el perfil');
+        throw new Error('No');
       }
 
       alert('Perfil actualizado con éxito');
     } catch (error) {
-      alert('Error al actualizar el perfil');
+      alert(error);
     
 }
   };
@@ -101,7 +139,7 @@ const EditarPerfil = ({ searchParams }) => {
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles['form-group']}>
           <img
-            src={formData.FotoPerfil}
+            src={formData.fotoPerfil}
             alt="Foto de perfil"
             className={styles.imagenperfil}
           />
@@ -149,8 +187,8 @@ const EditarPerfil = ({ searchParams }) => {
         <div className={styles['form-group']}>
           <label className={styles.label}>Email</label>
           <input
-            name="email"
-            value={formData.email}
+            name="mail"
+            value={formData.mail}
             onChange={handleChange}
             className={styles.input}
           />
@@ -159,8 +197,8 @@ const EditarPerfil = ({ searchParams }) => {
           <label className={styles.label}>Fecha de Nacimiento</label>
           <input
             type="date"
-            name="nacimiento"
-            value={formData.nacimiento}
+            name="fechaNac"
+            value={formData.fechaNac}
             onChange={handleChange}
             className={styles.input}
           />
