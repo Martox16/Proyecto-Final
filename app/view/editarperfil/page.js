@@ -74,7 +74,7 @@ console.log(formData)
     try {
       console.log('formDataToSend Antes');
       
-      
+      /**/
       const formDataToSend = {
         nombre : formData.nombre || '',
         apellido: formData.apellido || '',
