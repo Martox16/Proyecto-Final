@@ -182,6 +182,7 @@ console.log(formData)
             value={formData.telefono}
             onChange={handleChange}
             className={styles.input}
+            type="tel"
           />
         </div>
         <div className={styles['form-group']}>
@@ -191,6 +192,7 @@ console.log(formData)
             value={formData.mail}
             onChange={handleChange}
             className={styles.input}
+            type="email"
           />
         </div>
         <div className={styles['form-group']}>
