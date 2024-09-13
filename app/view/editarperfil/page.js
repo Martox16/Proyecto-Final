@@ -79,9 +79,9 @@ console.log(formData)
         nombre : formData.nombre || '',
         apellido: formData.apellido || '',
         telefono: formData.telefono || '',
-        password: 'mati345',
+        password: formData.password || '',
         vendedor: false,
-        username: 'matilopez05',
+        username: formData.username || '',
         fechaNac: formData.fechaNac || '',
         fotoPerfil: formData.fotoPerfil || '',
         mail: formData.mail || '',
@@ -164,6 +164,7 @@ console.log(formData)
             value={formData.nombre}
             onChange={handleChange}
             className={styles.input}
+            required
           />
         </div>
         <div className={styles['form-group']}>
@@ -173,6 +174,27 @@ console.log(formData)
             value={formData.apellido}
             onChange={handleChange}
             className={styles.input}
+            required
+          />
+        </div>
+        <div className={styles['form-group']}>
+          <label className={styles.label}>Usuario</label>
+          <input
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            className={styles.input}
+            required
+          />
+        </div>
+        <div className={styles['form-group']}>
+          <label className={styles.label}>Contraseña</label>
+          <input
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            className={styles.input}
+            required
           />
         </div>
         <div className={styles['form-group']}>
@@ -183,6 +205,7 @@ console.log(formData)
             onChange={handleChange}
             className={styles.input}
             type="tel"
+            required
           />
         </div>
         <div className={styles['form-group']}>
@@ -193,6 +216,7 @@ console.log(formData)
             onChange={handleChange}
             className={styles.input}
             type="email"
+            required
           />
         </div>
         <div className={styles['form-group']}>
@@ -203,6 +227,7 @@ console.log(formData)
             value={formData.fechaNac}
             onChange={handleChange}
             className={styles.input}
+            required
           />
         </div>
         <button type="submit" className={styles.button}>
