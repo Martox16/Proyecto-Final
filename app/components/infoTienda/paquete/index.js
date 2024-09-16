@@ -11,9 +11,6 @@ const Paquete = () => {
     if (selectedTiendaId) {
       fetchData(selectedTiendaId);
     }
-    // Cargar cantidades del carrito almacenadas en Local Storage al cargar el componente
-    const savedCart = JSON.parse(localStorage.getItem('cartItems')) || {};
-    setCantidad(savedCart);
   }, []);
 
   const fetchData = async (idLocal) => {
@@ -25,28 +22,46 @@ const Paquete = () => {
       }
       const result = await response.json();
       setData(result);
+
+      // Cargar cantidades del carrito desde localStorage o inicializar en 0
+      const savedCart = JSON.parse(localStorage.getItem('cartItems')) || {};
+      const initialCantidad = {};
+      result.forEach(item => {
+        initialCantidad[item.id] = savedCart[item.id] || 0; // Si ya hay cantidad en el carrito, úsala
+      });
+      setCantidad(initialCantidad);
+
     } catch (err) {
       console.error('Fetch error:', err);
       setError(err.message);
     }
   };
 
-  const handleIncrement = (item) => {
-    const newCantidad = {
-      ...cantidad,
-      [item.id]: (cantidad[item.id] || 0) + 1,
-    };
-    setCantidad(newCantidad);
-    localStorage.setItem('cartItems', JSON.stringify(newCantidad)); // Guardar el carrito en Local Storage
+  // Guardar el estado del carrito en localStorage cuando cambia la cantidad
+  const updateCartInLocalStorage = (updatedCantidad) => {
+    localStorage.setItem('cartItems', JSON.stringify(updatedCantidad));
   };
 
-  const handleDecrement = (item) => {
-    const newCantidad = {
-      ...cantidad,
-      [item.id]: Math.max((cantidad[item.id] || 0) - 1, 0),
-    };
-    setCantidad(newCantidad);
-    localStorage.setItem('cartItems', JSON.stringify(newCantidad)); // Actualizar el carrito en Local Storage
+  const handleIncrement = (id) => {
+    setCantidad(prevState => {
+      const updatedCantidad = {
+        ...prevState,
+        [id]: prevState[id] + 1,
+      };
+      updateCartInLocalStorage(updatedCantidad);
+      return updatedCantidad;
+    });
+  };
+
+  const handleDecrement = (id) => {
+    setCantidad(prevState => {
+      const updatedCantidad = {
+        ...prevState,
+        [id]: Math.max(prevState[id] - 1, 0), // Mínimo 0
+      };
+      updateCartInLocalStorage(updatedCantidad);
+      return updatedCantidad;
+    });
   };
 
   if (error) {
@@ -71,14 +86,14 @@ const Paquete = () => {
             </div>
             <div className={styles.cardQuantity}>
               <button
-                onClick={() => handleDecrement(item)}
+                onClick={() => handleDecrement(item.id)}
                 className={styles.btnDecrease}
               >
                 -
               </button>
-              <span className={styles.quantity}>{cantidad[item.id] || 0}</span>
+              <span className={styles.quantity}>{cantidad[item.id]}</span>
               <button
-                onClick={() => handleIncrement(item)}
+                onClick={() => handleIncrement(item.id)}
                 className={styles.btnIncrease}
               >
                 +
