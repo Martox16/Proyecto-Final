@@ -10,11 +10,9 @@ const Carrito = () => {
 
   // Efecto para cargar datos de la tienda y productos
   useEffect(() => {
-    // Cargar los ítems del carrito desde Local Storage
     const savedCart = JSON.parse(localStorage.getItem('cartItems')) || {};
     setCartItems(savedCart);
 
-    // Obtener la información de la tienda
     const fetchNombreLocal = async () => {
       const selectedTiendaId = localStorage.getItem('selectedTiendaId');
       if (selectedTiendaId) {
@@ -33,7 +31,6 @@ const Carrito = () => {
 
     fetchNombreLocal();
 
-    // Obtener la información de los productos
     const fetchProductos = async () => {
       const selectedTiendaId = localStorage.getItem('selectedTiendaId');
       if (selectedTiendaId) {
@@ -53,18 +50,44 @@ const Carrito = () => {
     fetchProductos();
   }, []);
 
-  // Eliminar producto del carrito (solo frontend)
-  const handleRemove = (id) => {
-    const newCartItems = { ...cartItems };
-    delete newCartItems[id]; // Eliminar producto del carrito en el estado
-    setCartItems(newCartItems);
-    localStorage.setItem('cartItems', JSON.stringify(newCartItems)); // Actualizar Local Storage
+  const updateCartInLocalStorage = (updatedCart) => {
+    localStorage.setItem('cartItems', JSON.stringify(updatedCart));
   };
 
-  // Filtrar productos que están en el carrito y tienen una cantidad mayor a 0
+  // Incrementar cantidad de un producto en el carrito
+  const handleIncrement = (id) => {
+    setCartItems(prevCartItems => {
+      const updatedCart = {
+        ...prevCartItems,
+        [id]: (prevCartItems[id] || 0) + 1,
+      };
+      updateCartInLocalStorage(updatedCart);
+      return updatedCart;
+    });
+  };
+
+  // Decrementar cantidad de un producto en el carrito
+  const handleDecrement = (id) => {
+    setCartItems(prevCartItems => {
+      const updatedCart = {
+        ...prevCartItems,
+        [id]: Math.max((prevCartItems[id] || 0) - 1, 0),
+      };
+      updateCartInLocalStorage(updatedCart);
+      return updatedCart;
+    });
+  };
+
+  // Eliminar producto del carrito
+  const handleRemove = (id) => {
+    const newCartItems = { ...cartItems };
+    delete newCartItems[id];
+    setCartItems(newCartItems);
+    updateCartInLocalStorage(newCartItems);
+  };
+
   const productosFiltrados = Object.entries(cartItems).filter(([id, cantidad]) => cantidad > 0);
 
-  // Crear un mapa de productos por ID para fácil acceso
   const productosPorId = productos.reduce((acc, producto) => {
     acc[producto.id] = producto;
     return acc;
@@ -87,6 +110,11 @@ const Carrito = () => {
                   <strong>Precio por página:</strong> ${producto?.precioxpagina || 'No disponible'} <br />
                   <strong>Nombre del local:</strong> {nombreLocal}
                 </span>
+                <div className={styles.controlesCantidad}>
+                  <button className={styles.botonCantidad} onClick={() => handleDecrement(id)}>-</button>
+                  <span className={styles.numeroCantidad}>{cantidad}</span>
+                  <button className={styles.botonCantidad} onClick={() => handleIncrement(id)}>+</button>
+                </div>
                 <button className={styles.botonEliminar} onClick={() => handleRemove(id)}>Eliminar</button>
               </li>
             );
