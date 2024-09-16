@@ -5,13 +5,15 @@ const Paquete = () => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const [cantidad, setCantidad] = useState({});
-  
 
   useEffect(() => {
     const selectedTiendaId = localStorage.getItem('selectedTiendaId');
     if (selectedTiendaId) {
       fetchData(selectedTiendaId);
     }
+    // Cargar cantidades del carrito almacenadas en Local Storage al cargar el componente
+    const savedCart = JSON.parse(localStorage.getItem('cartItems')) || {};
+    setCantidad(savedCart);
   }, []);
 
   const fetchData = async (idLocal) => {
@@ -23,32 +25,28 @@ const Paquete = () => {
       }
       const result = await response.json();
       setData(result);
-
-      // Inicializar la cantidad por cada ítem
-      const initialCantidad = {};
-      result.forEach(item => {
-        initialCantidad[item.id] = 0; // Valor inicial es 0
-      });
-      setCantidad(initialCantidad);
-
     } catch (err) {
       console.error('Fetch error:', err);
       setError(err.message);
     }
   };
 
-  const handleIncrement = (id) => {
-    setCantidad(prevState => ({
-      ...prevState,
-      [id]: prevState[id] + 1,
-    }));
+  const handleIncrement = (item) => {
+    const newCantidad = {
+      ...cantidad,
+      [item.id]: (cantidad[item.id] || 0) + 1,
+    };
+    setCantidad(newCantidad);
+    localStorage.setItem('cartItems', JSON.stringify(newCantidad)); // Guardar el carrito en Local Storage
   };
 
-  const handleDecrement = (id) => {
-    setCantidad(prevState => ({
-      ...prevState,
-      [id]: Math.max(prevState[id] - 1, 0), // Mínimo 0
-    }));
+  const handleDecrement = (item) => {
+    const newCantidad = {
+      ...cantidad,
+      [item.id]: Math.max((cantidad[item.id] || 0) - 1, 0),
+    };
+    setCantidad(newCantidad);
+    localStorage.setItem('cartItems', JSON.stringify(newCantidad)); // Actualizar el carrito en Local Storage
   };
 
   if (error) {
@@ -73,14 +71,14 @@ const Paquete = () => {
             </div>
             <div className={styles.cardQuantity}>
               <button
-                onClick={() => handleDecrement(item.id)}
+                onClick={() => handleDecrement(item)}
                 className={styles.btnDecrease}
               >
                 -
               </button>
-              <span className={styles.quantity}>{cantidad[item.id]}</span>
+              <span className={styles.quantity}>{cantidad[item.id] || 0}</span>
               <button
-                onClick={() => handleIncrement(item.id)}
+                onClick={() => handleIncrement(item)}
                 className={styles.btnIncrease}
               >
                 +
@@ -94,4 +92,3 @@ const Paquete = () => {
 };
 
 export default Paquete;
-  
