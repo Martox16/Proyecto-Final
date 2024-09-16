@@ -6,7 +6,7 @@ import styles from './editarperfil.module.css';
 import FlechaAtras from '../../components/componentesGenerales/flechaAtras';
 
 const EditarPerfil = ({ searchParams }) => {
-  const id = 1;
+  const id = localStorage.getItem('userId');
   const [perfil, setPerfil] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
