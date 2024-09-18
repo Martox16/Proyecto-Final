@@ -44,7 +44,7 @@ console.log(formData)
           mail: data.mail,
           fechaNac: new Date(data.fechaNac).toISOString().split('T')[0],
           fotoPerfil: data.fotoPerfil || '',
-          id: 1
+          id: localStorage.getItem('userId')
         });
         setLoading(false);
       } catch (error) {
@@ -85,7 +85,7 @@ console.log(formData)
         fechaNac: formData.fechaNac || '',
         fotoPerfil: formData.fotoPerfil || '',
         mail: formData.mail || '',
-        id: 1
+        id: localStorage.getItem('userId')
     };
       
       console.log('formDataToSend despues');

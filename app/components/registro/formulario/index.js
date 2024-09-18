@@ -45,7 +45,7 @@
                 if (response.ok) {
                     // Si el registro es exitoso, redirigimos al home
                     localStorage.setItem('userId', data.id);
-                    router.push('/view/home');
+                    router.push('/view/inicio');
                 } else {
                     // Si ocurre un error, mostramos el mensaje de error
                     setError(data.mensaje || 'Error en el registro');
