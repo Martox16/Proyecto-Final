@@ -1,4 +1,7 @@
+"use client"; // Agrega esta línea al principio del archivo
+
 import React from 'react';
+import { useRouter } from 'next/navigation'; // Cambia aquí
 import styles from "./menuBar.module.css";
 import NombreSaludo from '../../components/menuBar/nombreSaludo';
 import Flecha from '../../components/menuBar/flechaAtras';
@@ -8,6 +11,15 @@ import MetodoPago from '../../components/menuBar/container/metodoPago';
 import CentroAyuda from '../../components/menuBar/container/centroAyuda';
 
 function MenuBar() {
+    const router = useRouter(); // Inicializa el hook useRouter
+
+    const handlePerfilClick = () => {
+        console.log("Redirigiendo a /inicio..."); // Para depuración
+        localStorage.setItem('userId', '0');
+
+        router.push('/view/inicio'); 
+    };
+
     return (
         <div className={styles.menuBarContainer}>
             <div className={styles.header}>
@@ -20,39 +32,35 @@ function MenuBar() {
                 <MetodoPago />
                 <CentroAyuda />
             </div>
-            <div  className={styles.micuentacontenedor}>
-              <p className={styles.micuentaname}>Mi cuenta</p>  
-             
-              <div className={styles.contenedor}>
-              <img src="/menuBar/direccion.png" className={styles.fotoimg} alt="imagen direccion"/>
-              <p className={styles.desc}>Direcciones</p>
-              <img src="/menuBar/flecha.png" className={styles.fotoflecha} alt="imagen flecha"/>
-              </div>
+            <div className={styles.micuentacontenedor}>
+                <p className={styles.micuentaname}>Mi cuenta</p>
 
-              <div className={styles.contenedor}>
-              <img src="/menuBar/idioma.png" className={styles.fotoimg} alt="imagen idioma"/>
-              <p className={styles.desc}>Idioma</p>
-              <img src="/menuBar/flecha.png" className={styles.fotoflecha} alt="imagen flecha"/>
-              </div>
+                <div className={styles.contenedor}>
+                    <img src="/menuBar/direccion.png" className={styles.fotoimg} alt="imagen direccion" />
+                    <p className={styles.desc}>Direcciones</p>
+                    <img src="/menuBar/flecha.png" className={styles.fotoflecha} alt="imagen flecha" />
+                </div>
 
-              <div className={styles.contenedor}>
-              <img src="/menuBar/accesibilidad.png"className={styles.fotoimg} alt="imagen accesibilidad"/>
-              <p className={styles.desc}>Accesibilidad</p>
-              <img src="/menuBar/flecha.png" className={styles.fotoflecha} alt="imagen flecha"/>
-              </div>
+                <div className={styles.contenedor}>
+                    <img src="/menuBar/idioma.png" className={styles.fotoimg} alt="imagen idioma" />
+                    <p className={styles.desc}>Idioma</p>
+                    <img src="/menuBar/flecha.png" className={styles.fotoflecha} alt="imagen flecha" />
+                </div>
 
-              <div className={styles.logoutContainer}>
-                <button className={styles.logoutButton}>
-                    Cerrar sesión
-                </button>
+                <div className={styles.contenedor}>
+                    <img src="/menuBar/accesibilidad.png" className={styles.fotoimg} alt="imagen accesibilidad" />
+                    <p className={styles.desc}>Accesibilidad</p>
+                    <img src="/menuBar/flecha.png" className={styles.fotoflecha} alt="imagen flecha" />
+                </div>
+
+                <div className={styles.logoutContainer}>
+                    <button className={styles.logoutButton} onClick={handlePerfilClick}>
+                        Cerrar sesión
+                    </button>
+                </div>
             </div>
-
-
-            </div>
-
         </div>
     );
 }
-
 
 export default MenuBar;

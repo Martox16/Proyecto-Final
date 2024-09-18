@@ -20,7 +20,7 @@ const NombreTienda = () => {
         .then(response => response.json())
         .then(data => {
           const tienda = data.find(tienda => tienda.id == id); // Encuentra la tienda con el ID seleccionado
-          if (tienda) {
+          if (tienda) { 
             setNombre(tienda.nombre);
           } else {
             console.error("Tienda no encontrada con el ID:", id);

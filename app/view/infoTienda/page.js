@@ -19,7 +19,7 @@ function InfoTienda() {
 
   return (
     <div className={styles.container}>
-      <Header onIrAlCarrito={irAlCarrito} />
+      <Header  />
       <div className={styles.direYval}>
         <DireccionTienda />
         <Valoracion />
