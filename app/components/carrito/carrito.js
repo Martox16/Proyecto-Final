@@ -15,6 +15,7 @@ const Carrito = () => {
 
     const fetchNombreLocal = async () => {
       const selectedTiendaId = localStorage.getItem('selectedTiendaId');
+      console.log('Tienda ID:', selectedTiendaId);
       if (selectedTiendaId) {
         try {
           const response = await fetch('http://localhost:3000/infoTiendas');
