@@ -3,7 +3,7 @@ import styles from './nombreTienda.module.css';
 
 
 const NombreTienda = () => {
-  const [nombre, setNombre] = useState(null);
+  const [nombrelocal, setNombre] = useState(null);
   const [id, setId] = useState(null);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const NombreTienda = () => {
         .then(data => {
           const tienda = data.find(tienda => tienda.id == id); // Encuentra la tienda con el ID seleccionado
           if (tienda) { 
-            setNombre(tienda.nombre);
+            setNombre(tienda.nombrelocal);
           } else {
             console.error("Tienda no encontrada con el ID:", id);
           }
@@ -30,13 +30,13 @@ const NombreTienda = () => {
     }
   }, [id]);
 
-  if (!nombre) {
+  if (!nombrelocal) {
     return <div>Cargando nombre...</div>;
   }
 
   return (
     <div className={styles.nombreContainer}>
-      <p>{nombre}</p>
+      <p>{nombrelocal}</p>
     </div>
   );
 };
