@@ -39,11 +39,9 @@ export default function Direccion() {
 
     return (
         <div className="direccion-container">
-            {direcciones.length > 0 && (
-                <button onClick={() => setMostrarOpciones(!mostrarOpciones)} className="Adress-button">
-                    {direccionSeleccionada ? direccionSeleccionada : "Selecciona una dirección"}
-                </button>
-            )}
+            <button onClick={() => setMostrarOpciones(!mostrarOpciones)} className="Adress-button">
+                {direccionSeleccionada ? direccionSeleccionada : "Agregar Dirección"}
+            </button>
 
             <div className={`direccion-opciones ${mostrarOpciones ? 'show' : ''}`}>
                 {direcciones.map((direccion, index) => (
@@ -55,15 +53,16 @@ export default function Direccion() {
                     </button>
                 ))}
 
+                {/* Mostrar el botón de agregar dirección en ambos casos */}
+                <button onClick={handleAgregarDireccion} className="Adress-button">
+                    Agregar Dirección
+                </button>
+
+                {/* Mostrar botón de editar dirección solo si hay una seleccionada */}
                 {direccionSeleccionada && (
-                    <>
-                        <button onClick={handleAgregarDireccion} className="Adress-button">
-                            Agregar Dirección
-                        </button>
-                        <button onClick={handleEditarDireccion} className="Adress-button">
-                            Editar Dirección
-                        </button>
-                    </>
+                    <button onClick={handleEditarDireccion} className="Adress-button">
+                        Editar Dirección
+                    </button>
                 )}
             </div>
         </div>
