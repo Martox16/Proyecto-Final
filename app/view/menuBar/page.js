@@ -9,6 +9,7 @@ import MiPerfil from '../../components/menuBar/container/miPerfil';
 import HistorialPedidos from '../../components/menuBar/container/historialPedidos';
 import MetodoPago from '../../components/menuBar/container/metodoPago';
 import CentroAyuda from '../../components/menuBar/container/centroAyuda';
+import Direccion from '../../components/menuBar/cuenta/direcciones';
 
 function MenuBar() {
     const router = useRouter(); // Inicializa el hook useRouter
@@ -35,11 +36,7 @@ function MenuBar() {
             <div className={styles.micuentacontenedor}>
                 <p className={styles.micuentaname}>Mi cuenta</p>
 
-                <div className={styles.contenedor}>
-                    <img src="/menuBar/direccion.png" className={styles.fotoimg} alt="imagen direccion" />
-                    <p className={styles.desc}>Direcciones</p>
-                    <img src="/menuBar/flecha.png" className={styles.fotoflecha} alt="imagen flecha" />
-                </div>
+                <Direccion />
 
                 <div className={styles.contenedor}>
                     <img src="/menuBar/idioma.png" className={styles.fotoimg} alt="imagen idioma" />

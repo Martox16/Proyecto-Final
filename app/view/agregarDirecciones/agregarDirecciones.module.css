@@ -1,0 +1,68 @@
+/* agregarDirecciones.module.css */
+
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+  }
+  
+  .title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  
+  .label {
+    font-size: 16px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    display: block;
+  }
+  
+  .input {
+    width: 90%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #FFD966;
+    background-color: #FFF7E6;
+    font-size: 16px;
+  }
+  
+  .textarea {
+    width: 90%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #FFD966;
+    background-color: #FFF7E6;
+    font-size: 16px;
+    resize: vertical;
+  }
+  
+  .button {
+    width: 97%;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #FFF7E6;
+    border: 1px solid #FFD966;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  .button:hover {
+    background-color: #FFD966;
+  }
+  

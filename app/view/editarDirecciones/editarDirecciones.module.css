@@ -1,0 +1,59 @@
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+  }
+  
+  .title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .direccionesList {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+  }
+  
+  .direccionItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #FFD966;
+    border-radius: 8px;
+    background-color: #FFF7E6;
+    margin-bottom: 10px;
+  }
+  
+  .button {
+    width: 45%; 
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #FFF7E6;
+    border: 1px solid #FFD966;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  .button:hover {
+    background-color: #FFD966; 
+  }
+  
+  .addDireccion {
+    margin-top: 20px;
+  }
+  
+  .addDireccion input {
+    width: 90%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #FFD966;
+    background-color: #FFF7E6;
+    font-size: 16px;
+    margin-bottom: 10px; 
+  }
+  
