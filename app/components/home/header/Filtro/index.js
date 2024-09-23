@@ -1,11 +1,12 @@
 'use client' //todos los que tienen usestate hay que poner arriba esto.
 import React, { useState } from 'react';
-import './filtro.modules.css';
+import styles from './styles.module.css';
+import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
 
 function Filtro() {
     return (
-      <a className='botonFiltro'>
-        <img src="/filtro.png" className="fotoFiltro" alt="Filtro" />
+      <a className={styles.botonFiltro}>
+        <AdjustmentsHorizontalIcon style={{width: 35, height: 'auto'}}/>
       </a>
     );
 }

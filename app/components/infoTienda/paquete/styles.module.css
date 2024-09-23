@@ -19,7 +19,6 @@
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 15px;
-  width: calc(33.333% - 40px); /* Ajusta el ancho con el margen para evitar deformaciones */
   background-color: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
@@ -57,7 +56,7 @@
 .p {
   margin: 5px 0;
   color: #666;
-  font-size: 0.6em;
+  font-size: .9em;
 }
 
 .cardPrice {

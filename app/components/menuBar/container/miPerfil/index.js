@@ -1,8 +1,7 @@
 'use client' //todos los que tienen usestate hay que poner arriba esto.
 
 import React, { useState } from 'react';
-import './miPerfil.modules.css';
-import styles from './miPerfil.modules.css';
+import styles from './styles.module.css';
 import { useRouter } from 'next/navigation';
 
 
@@ -14,16 +13,14 @@ function MiPerfil() {
     };
 
     return (
-      <>
-        <div onClick={handleClick}> 
-          <a className='botonMiPerfil'>
-            <img src="/menuBar/miPerfil.png" className="fotoMipefil" alt="MiPerfil" />
-          </a>
-          <div>
-            <p className='desc'>Mi perfil</p>
-          </div>
+      <div onClick={handleClick} className={styles.contenedor}> 
+        <a className='botonMiPerfil'>
+          <img src="/menuBar/miPerfil.png" className="fotoMipefil" alt="MiPerfil" />
+        </a>
+        <div>
+          <p className='desc'>Mi perfil</p>
         </div>
-      </>
+      </div>
     );
 }
 

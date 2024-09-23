@@ -6,7 +6,7 @@ import styles from './carrito.module.css';
 const Carrito = () => {
   const [cartItems, setCartItems] = useState({});
   const [productos, setProductos] = useState([]);
-  const [nombreLocal, setNombreLocal] = useState(null);
+  const [nombrelocal, setNombreLocal] = useState(null);
 
   // Efecto para cargar datos de la tienda y productos
   useEffect(() => {
@@ -22,7 +22,7 @@ const Carrito = () => {
           const data = await response.json();
           const tienda = data.find(tienda => tienda.id == selectedTiendaId);
           if (tienda) {
-            setNombreLocal(tienda.nombre);
+            setNombreLocal(tienda.nombrelocal);
           }
         } catch (error) {
           console.error('Error fetching tienda data:', error);
@@ -97,7 +97,6 @@ const Carrito = () => {
   return (
     <div className={styles.contenedor}>
       <h1 className={styles.titulo}>Carrito de compras</h1>
-      {nombreLocal && <h2 className={styles.nombreLocal}>{nombreLocal}</h2>}
       <ul className={styles.lista}>
         {productosFiltrados.length > 0 ? (
           productosFiltrados.map(([id, cantidad]) => {
@@ -105,11 +104,12 @@ const Carrito = () => {
 
             return (
               <li key={id} className={styles.itemLista}>
+                <div className={styles.divcarrito}>
                 <span className={styles.infoProducto}>
                   <strong>Nombre del paquete:</strong> {producto?.nombre || 'No disponible'} <br />
                   <strong>Cantidad:</strong> {cantidad} <br />
                   <strong>Precio por página:</strong> ${producto?.precioxpagina || 'No disponible'} <br />
-                  <strong>Nombre del local:</strong> {nombreLocal}
+                  <strong>Nombre del local:</strong> {nombrelocal}
                 </span>
                 <div className={styles.controlesCantidad}>
                   <button className={styles.botonCantidad} onClick={() => handleDecrement(id)}>-</button>
@@ -117,6 +117,8 @@ const Carrito = () => {
                   <button className={styles.botonCantidad} onClick={() => handleIncrement(id)}>+</button>
                 </div>
                 <button className={styles.botonEliminar} onClick={() => handleRemove(id)}>Eliminar</button>
+                </div>
+                
               </li>
             );
           })

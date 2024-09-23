@@ -2,6 +2,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import './perfil.modules.css';
+import { UserCircleIcon } from "@heroicons/react/24/outline";
 
 function Perfil() {
     const router = useRouter();
@@ -12,7 +13,7 @@ function Perfil() {
 
     return (
         <a className="botonPerfil" onClick={handlePerfilClick}>
-            <img src="/perfil.png" className="fotoPerfil" alt="Perfil" />
+            <UserCircleIcon/>
         </a>
     );
 }
