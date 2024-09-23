@@ -2,6 +2,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './carrito.modules.css'; 
+import { ShoppingCartIcon } from '@heroicons/react/24/solid';
 
 
 function Carrito() {
@@ -13,7 +14,7 @@ function Carrito() {
 
   return (
       <a className="botonCarrito" onClick={handlePerfilClick}>
-          <img src="/carrito.png" className="fotoCarrito" alt="Carrito" />
+        <ShoppingCartIcon style={{fill:"#FFA500"}}/>
       </a>
   );
 }

@@ -1,16 +1,20 @@
-
-.botonMetodo {
+.botonMiPerfil {
     display: inline-block;
-    
     cursor: pointer; /* Añadir cursor de puntero para indicar que es clickeable */
 }
 
-.fotoMetodo {
+.fotoMipefil {
     width: 35px;
     height: 35px;
-    margin-left: 10px;
-    margin-right: 10px;
+    
+
 }
 .desc{
     font-size: 14px;
+}
+
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
