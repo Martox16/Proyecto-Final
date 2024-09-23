@@ -1,0 +1,40 @@
+.headerContainer {
+    display: flex;
+    flex-direction: row-reverse; /* Invertir el orden de los elementos */
+    align-items: stretch; /* Asegurar que ambos elementos tengan la misma altura */
+    padding: 20px;
+    border: none; /* Bordes invisibles */
+  }
+  
+  .imagenContainer,
+  .textContainer {
+    flex: 1; /* Ambos ocupan la mitad del espacio disponible */
+    display: flex;
+    align-items: center; /* Centrar verticalmente el contenido en ambos contenedores */
+  }
+  
+  .imagenContainer {
+    margin-right: 15px; /* Separación entre la imagen y el texto */
+  }
+  
+  .imagen {
+    width: 100%; /* Ajustar la imagen al tamaño del contenedor */
+    height: auto; /* Mantener la proporción de la imagen */
+    border-radius: 10px;
+  }
+  
+  .textContainer {
+    text-align: left; /* Alinear el texto a la izquierda */
+    display: flex; /* Hacer del contenedor un flex container */
+    align-items: center; /* Centrar verticalmente el contenido del contenedor de texto */
+  }
+  
+  .valoracionNum {
+    font-weight: bold;
+    margin-right: 5px; /* Espacio entre el número de valoración y el emoji de estrella */
+  }
+  
+  .valoracionImg {
+    font-size: 20px; /* Tamaño del emoji de estrella */
+  }
+  

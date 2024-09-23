@@ -35,6 +35,11 @@ const Formulario = () => {
         }
     };
 
+    const manejarClick = (e) => {
+        e.preventDefault(); // Prevenir el comportamiento por defecto del enlace
+        router.push('/view/recuperarContra/ingresarMailContra'); // Redirigir a la página de recuperación de contraseña
+    };
+
     return (
         <form className={styles.formulario} onSubmit={handleSubmit}>
             <input 
@@ -52,7 +57,9 @@ const Formulario = () => {
                 className={styles.input} 
             />
             <div className={styles.extra}>
-                <a href="#" className={styles.olvidaste}>¿Olvidaste tu contraseña?</a>
+                <a href="#" className={styles.olvidaste} onClick={manejarClick}>
+                    ¿Olvidaste tu contraseña?
+                </a>
                 <button type="submit" className={styles.boton}>Iniciar sesión</button>
             </div>
         </form>

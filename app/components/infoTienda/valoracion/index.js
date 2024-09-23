@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import styles from './valoracion.module.css'; // Asegúrate de que el path sea correcto
+import { useRouter } from 'next/navigation'; // Cambia esta línea
+import styles from './valoracion.module.css';
 
 const Valoracion = () => {
+  const router = useRouter();
   const [valoracion, setValoracion] = useState(null);
   const [id, setId] = useState(null);
 
@@ -14,13 +16,13 @@ const Valoracion = () => {
 
   useEffect(() => {
     if (id) {
-      const apiUrl = `http://localhost:3000/infoTiendas`; // URL de tu API de tiendas
+      const apiUrl = `http://localhost:3000/infoTiendas`;
       fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-          const tienda = data.find(tienda => tienda.id == id); // Encuentra la tienda con el ID seleccionado
+          const tienda = data.find(tienda => tienda.id == id);
           if (tienda) {
-            setValoracion(tienda.cantestrellas); // Establece la valoración desde 'cantestrellas'
+            setValoracion(tienda.cantestrellas);
           } else {
             console.error("Tienda no encontrada con el ID:", id);
           }
@@ -29,15 +31,19 @@ const Valoracion = () => {
     }
   }, [id]);
 
+  const handleClick = () => {
+    router.push('/view/valoracion');
+  };
+
   if (valoracion === null) {
     return <div>...</div>;
   }
 
   return (
-    <div className={styles.valoracionContainer}>
+    <div className={styles.valoracionContainer} onClick={handleClick}>
       <img src='/estrella.png' alt='Estrella' className={styles.valoracionImg} />
       <p className={styles.valoracionNum}>
-        <a className={styles.valorRight}>{valoracion}</a>
+        <span className={styles.valorRight}>{valoracion}</span>
       </p>
     </div>
   );

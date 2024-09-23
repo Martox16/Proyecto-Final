@@ -1,0 +1,40 @@
+/* Contenedor principal para las valoraciones */
+.valoracionesContainer {
+    padding: 20px;
+  }
+  
+  /* Mensaje cuando no hay reseñas disponibles */
+  .noResenias {
+    color: #4a90e2; /* Azul para el mensaje de no reseñas disponibles */
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* Mensaje de error */
+  .error {
+    color: #e94e77; /* Color rojo para el mensaje de error */
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* Estilo para la lista de reseñas */
+  .listaResenas {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  /* Estilo para cada elemento de la lista de reseñas */
+  .elementoResena {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Estilo para los nombres de los autores */
+  .autorResena {
+    color: #333; /* Color del nombre del autor */
+  }
+  

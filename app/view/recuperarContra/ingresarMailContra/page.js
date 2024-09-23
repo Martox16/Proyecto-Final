@@ -4,7 +4,7 @@ import FlechaAtras from '../../../components/componentesGenerales/flechaAtras/in
 import Titulo from '../../../components/ingresarNuevaContra/titulo/index.js';
 import styles from './ingresarMailContra.module.css';
 
-const IniciarSesion = () => {
+const RecuperarContra = () => {
     return (
         <div className={styles.ContraContainer}>
             
@@ -24,4 +24,4 @@ const IniciarSesion = () => {
     );
 };
 
-export default IniciarSesion;
+export default RecuperarContra;
