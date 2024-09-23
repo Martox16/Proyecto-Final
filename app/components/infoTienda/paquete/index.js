@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from './producto.module.css';
+import styles from './styles.module.css';
 import Logo from '../../../../public/Logo-FoodSave.svg'
 
 const Paquete = () => {
