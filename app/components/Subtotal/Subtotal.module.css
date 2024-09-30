@@ -1,52 +1,29 @@
-.subtotalContainer {
-    border-top: 1px solid #ddd;
-    padding: 10px 20px;
-    background-color: #f0f0f0;
+.totalContainer{
+    background-color: rgba(238, 236, 236, 0.61);
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
     align-items: center;
-    margin-top: 210px;
-    width: 90%;
-  }
+    justify-content: space-between;
+    margin-top: 10%;
+}
 
-  
-  .subtotalContent {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+.total {
+    font-size: 15px;
+    text-align: left;
+    margin-top: 20px;
+    margin-right: 10px;
   }
   
-  .subtotalText {
-    flex-grow: 1;
-  }
-  
-  .label {
-    font-size: 14px;
-    font-weight: bold;
-    color: #333;
-    margin: 0;
-  }
-  
-  .amount {
-    font-size: 18px;
-    font-weight: bold;
-    color: #000;
-    margin: 0;
-  }
-  
-  .payButton {
-    background-color: #32cd32;
-    color: #fff;
+  .botonPagar {
+    background-color: #00c853;
+    color: white;
     border: none;
-    border-radius: 20px;
+    border-radius: 8px;
     padding: 10px 20px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-size: 15px;
+    width: 50%;
   }
   
-  .payButton:hover {
-    background-color: #28a745;
+  .botonPagar:hover {
+    background-color: #00a745;
   }
-  
