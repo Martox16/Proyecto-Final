@@ -1,40 +1,39 @@
-/* Contenedor principal para las valoraciones */
 .valoracionesContainer {
-    padding: 20px;
-  }
-  
-  /* Mensaje cuando no hay reseñas disponibles */
-  .noResenias {
-    color: #4a90e2; /* Azul para el mensaje de no reseñas disponibles */
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  /* Mensaje de error */
-  .error {
-    color: #e94e77; /* Color rojo para el mensaje de error */
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  /* Estilo para la lista de reseñas */
-  .listaResenas {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  /* Estilo para cada elemento de la lista de reseñas */
-  .elementoResena {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  /* Estilo para los nombres de los autores */
-  .autorResena {
-    color: #333; /* Color del nombre del autor */
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.listaValoraciones {
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+  max-width: 600px;
+}
+
+.valoracionItem {
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.valoracionItem strong {
+  display: block;
+  font-size: 1em; /* Reducido de 1.2em */
+  margin-bottom: 8px; /* Reducido de 10px */
+}
+
+.valoracionItem p {
+  font-size: 0.9em; /* Reducido de 1em */
+  line-height: 1.4; /* Reducido de 1.5 */
+  margin: 5px 0;
+}
+
+.noValoraciones {
+  font-size: 1.2em;
+  color: #777;
+}
