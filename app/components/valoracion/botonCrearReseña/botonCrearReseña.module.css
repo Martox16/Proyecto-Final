@@ -1,0 +1,27 @@
+.botonContainer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: transparent;
+    padding-bottom: 10px; /* Ajusta el espaciado inferior si es necesario */
+}
+
+.boton {
+    background-color: #fff6e9; /* Color de fondo similar al de la imagen */
+    border: 2px solid #f18a00; /* Color del borde */
+    color: #000; /* Color del texto */
+    padding: 15px 40px; /* Ajusta el padding para hacerlo más alto y ancho */
+    font-size: 16px;
+    border-radius: 25px; /* Borde redondeado */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    cursor: pointer;
+    width: 80%; /* Ajusta el ancho al 80% del contenedor */
+    max-width: 500px; /* Establece un ancho máximo para pantallas grandes */
+    text-align: center; /* Alinea el texto al centro */
+}
+
+.boton:hover {
+    background-color: #fce3b2; /* Un poco más oscuro al hacer hover */
+}
