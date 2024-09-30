@@ -2,20 +2,22 @@
 
 import React, { useEffect, useState } from 'react';
 import styles from './carrito.module.css';
+import Subtotal from '../subtotal/subtotal'; 
+import { useRouter } from 'next/navigation'; 
 
 const Carrito = () => {
   const [cartItems, setCartItems] = useState({});
   const [productos, setProductos] = useState([]);
   const [nombrelocal, setNombreLocal] = useState(null);
+  const [total, setTotal] = useState(0);
+  const router = useRouter();
 
-  // Efecto para cargar datos de la tienda y productos
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem('cartItems')) || {};
     setCartItems(savedCart);
 
     const fetchNombreLocal = async () => {
       const selectedTiendaId = localStorage.getItem('selectedTiendaId');
-      console.log('Tienda ID:', selectedTiendaId);
       if (selectedTiendaId) {
         try {
           const response = await fetch('http://localhost:3000/infoTiendas');
@@ -51,11 +53,18 @@ const Carrito = () => {
     fetchProductos();
   }, []);
 
+  useEffect(() => {
+    const totalCalculado = Object.entries(cartItems).reduce((acc, [id, cantidad]) => {
+      const producto = productos.find(prod => prod.id == id);
+      return acc + (producto?.precioxpagina || 0) * cantidad;
+    }, 0);
+    setTotal(totalCalculado);
+  }, [cartItems, productos]);
+
   const updateCartInLocalStorage = (updatedCart) => {
     localStorage.setItem('cartItems', JSON.stringify(updatedCart));
   };
 
-  // Incrementar cantidad de un producto en el carrito
   const handleIncrement = (id) => {
     setCartItems(prevCartItems => {
       const updatedCart = {
@@ -67,7 +76,6 @@ const Carrito = () => {
     });
   };
 
-  // Decrementar cantidad de un producto en el carrito
   const handleDecrement = (id) => {
     setCartItems(prevCartItems => {
       const updatedCart = {
@@ -79,7 +87,6 @@ const Carrito = () => {
     });
   };
 
-  // Eliminar producto del carrito
   const handleRemove = (id) => {
     const newCartItems = { ...cartItems };
     delete newCartItems[id];
@@ -105,20 +112,19 @@ const Carrito = () => {
             return (
               <li key={id} className={styles.itemLista}>
                 <div className={styles.divcarrito}>
-                <span className={styles.infoProducto}>
-                  <strong>Nombre del paquete:</strong> {producto?.nombre || 'No disponible'} <br />
-                  <strong>Cantidad:</strong> {cantidad} <br />
-                  <strong>Precio por página:</strong> ${producto?.precioxpagina || 'No disponible'} <br />
-                  <strong>Nombre del local:</strong> {nombrelocal}
-                </span>
-                <div className={styles.controlesCantidad}>
-                  <button className={styles.botonCantidad} onClick={() => handleDecrement(id)}>-</button>
-                  <span className={styles.numeroCantidad}>{cantidad}</span>
-                  <button className={styles.botonCantidad} onClick={() => handleIncrement(id)}>+</button>
+                  <span className={styles.infoProducto}>
+                    <strong>Nombre del paquete:</strong> {producto?.nombre || 'No disponible'} <br />
+                    <strong>Cantidad:</strong> {cantidad} <br />
+                    <strong>Precio por página:</strong> ${producto?.precioxpagina || 'No disponible'} <br />
+                    <strong>Nombre del local:</strong> {nombrelocal}
+                  </span>
+                  <div className={styles.controlesCantidad}>
+                    <button className={styles.botonCantidad} onClick={() => handleDecrement(id)}>-</button>
+                    <span className={styles.numeroCantidad}>{cantidad}</span>
+                    <button className={styles.botonCantidad} onClick={() => handleIncrement(id)}>+</button>
+                  </div>
+                  <button className={styles.botonEliminar} onClick={() => handleRemove(id)}>Eliminar</button>
                 </div>
-                <button className={styles.botonEliminar} onClick={() => handleRemove(id)}>Eliminar</button>
-                </div>
-                
               </li>
             );
           })
@@ -126,6 +132,8 @@ const Carrito = () => {
           <p className={styles.mensajeVacio}>El carrito está vacío</p>
         )}
       </ul>
+
+      {productosFiltrados.length > 0 && <Subtotal total={total} />} {/* Subtotal componente */}
     </div>
   );
 };
