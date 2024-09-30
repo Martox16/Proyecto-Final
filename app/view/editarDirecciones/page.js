@@ -1,21 +1,23 @@
+// components/editarDireccion.js
 'use client';
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './editarDirecciones.module.css';
 import FlechaAtras from '../../components/componentesGenerales/flechaAtras';
+import AgregarDireccion from '../agregarDirecciones/page';
 
 const EditarDireccion = () => {
-  const id = localStorage.getItem('userId');
   const [direcciones, setDirecciones] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showAgregar, setShowAgregar] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
     const fetchDirecciones = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/direccion/${id}`);
+        const response = await fetch('/direcciones.json'); // Cambia la URL al archivo JSON
         if (!response.ok) {
           throw new Error('Error al obtener las direcciones');
         }
@@ -29,25 +31,24 @@ const EditarDireccion = () => {
     };
 
     fetchDirecciones();
-  }, [id]);
+  }, []);
 
-  const eliminarDireccion = async (direccionId) => {
-    try {
-      await fetch(`http://localhost:3000/direccion/${direccionId}`, {
-        method: 'DELETE',
-      });
-      setDirecciones((prevDirecciones) => prevDirecciones.filter(d => d.id !== direccionId));
-    } catch (error) {
-      setError('Error al eliminar la dirección');
-    }
+  const eliminarDireccion = (direccionId) => {
+    setDirecciones((prevDirecciones) => prevDirecciones.filter(d => d.id !== direccionId));
   };
 
-  const agregarDireccion = () => {
-    router.push('/view/agregarDirecciones'); // Redirect to add address page
+  const agregarDireccion = (nuevaDireccion) => {
+    setDirecciones((prevDirecciones) => [...prevDirecciones, nuevaDireccion]);
+    setShowAgregar(false); // Ocultar formulario de agregar
   };
 
   const irAEditar = (direccionId) => {
-    router.push(`/agregarDireccion?id=${direccionId}`); // Redirect to edit address page
+    const direccion = direcciones.find(d => d.id === direccionId);
+    if (direccion) {
+      // Pasar todos los datos de la dirección a la página de edición
+      const { calle, ciudad, pais, detalle, referencia } = direccion;
+      router.push(`/editarDireccion`);
+    }
   };
 
   if (loading) return <div>Cargando...</div>;
@@ -56,15 +57,18 @@ const EditarDireccion = () => {
   return (
     <div className={styles.container}>
       <FlechaAtras />
-      <h1>Editar Dirección</h1>
-      <button className={styles.button} onClick={agregarDireccion}>Agregar Dirección</button>
+      <h1>Editar Direcciones</h1>
+      <button onClick={() => setShowAgregar(true)}>Agregar Dirección</button>
+      {showAgregar && <AgregarDireccion onAddDireccion={agregarDireccion} />}
       <div className={styles.direccionesList}>
         {direcciones.length > 0 ? (
           direcciones.map((direccion) => (
             <div key={direccion.id} className={styles.direccionItem}>
-              {direccion.calle}
-              <button className={styles.button} onClick={() => irAEditar(direccion.id)}>Editar</button>
-              <button className={styles.button} onClick={() => eliminarDireccion(direccion.id)}>Eliminar</button>
+              <div>
+                {direccion.calle}, {direccion.ciudad}, {direccion.pais} - {direccion.detalle} ({direccion.referencia})
+              </div>
+              <button onClick={() => irAEditar(direccion.id)}>Editar</button>
+              <button onClick={() => eliminarDireccion(direccion.id)}>Eliminar</button>
             </div>
           ))
         ) : (

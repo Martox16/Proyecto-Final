@@ -8,7 +8,7 @@ const Subtotal = ({ total }) => {
   const router = useRouter();
 
   const handleIrAPagar = () => {
-    router.push('/pago');  
+    router.push('/metodosapagar');  
   };
 
   return (

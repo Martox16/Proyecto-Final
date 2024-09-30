@@ -1,177 +1,60 @@
+// components/agregarDireccion.js
 'use client';
 
 import React, { useState } from 'react';
 import styles from './agregarDirecciones.module.css';
 import FlechaAtras from '../../components/componentesGenerales/flechaAtras';
 
-const DireccionAgregar = () => {
+const AgregarDireccion = ({ onAddDireccion }) => {
   const [formData, setFormData] = useState({
+    pais: '',
     ciudad: '',
     calle: '',
     detalle: '',
     referencia: '',
-    pais: '',
-    etiqueta: '',             
-    Detalledeentrega: '',
-    idusuario: 1
   });
 
   const handleChange = (e) => {
-    if(e.target.name == "etiqueta"){
-        let value;
-        switch(e.target.value){
-            case 'Trabajo':
-                value = 1;
-                break;
-            case 'Casa':
-                value = 2;
-                break;
-            case 'Otro':
-                value = 3;
-                break;
-            default:
-              value = 0;
-              break;
-        };
-        setFormData({ ...formData, [e.target.name]: value });
-    }else if(e.target.name == "Detalledeentrega"){
-        let value;
-        console.log(e.target.value)
-        switch(e.target.value){
-            case 'Personal':
-                value = 1;
-                break;
-            case 'Portería':
-                value = 2;
-                break;
-            default:
-              value = 0;
-              break;
-        };
-        setFormData({ ...formData, [e.target.name]: value });
-    }else{
-            setFormData({ ...formData, [e.target.name]: e.target.value });
-        }
-    };
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch('http://localhost:3000/direccion', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        throw new Error('Error al agregar la dirección');
-      }
-
-      alert('Dirección agregada con éxito');
-      setFormData({ 
-        ciudad: '',
-        calle: '',
-        detalle: '',
-        referencia: '',
-        pais: '',
-        etiqueta: '',
-        Detalledeentrega: '',
-        idusuario: 1
-      });
-    } catch (error) {
-      alert('Error: ' + error.message);
-    }
+    const nuevaDireccion = { ...formData, id: Date.now() }; // Genera un ID único
+    onAddDireccion(nuevaDireccion); // Llama a la función para agregar la dirección
+    alert('Dirección agregada con éxito');
+    setFormData({ pais: '', ciudad: '', calle: '', detalle: '', referencia: '' }); // Restablece el formulario
   };
 
   return (
     <div className={styles.container}>
       <FlechaAtras />
       <h1 className={styles.title}>Agregar Dirección</h1>
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles['form-group']}>
-          <label className={styles.label}>País</label>
-          <input
-            name="pais"
-            value={formData.pais}
-            onChange={handleChange}
-            className={styles.input}
-            required
-          />
+          <label className={styles.label} htmlFor="pais">País</label>
+          <input type="text" name="pais" id="pais" className={styles.input} placeholder="País" value={formData.pais} onChange={handleChange} required />
         </div>
         <div className={styles['form-group']}>
-          <label className={styles.label}>Ciudad</label>
-          <input
-            name="ciudad"
-            value={formData.ciudad}
-            onChange={handleChange}
-            className={styles.input}
-            required
-          />
+          <label className={styles.label} htmlFor="ciudad">Ciudad</label>
+          <input type="text" name="ciudad" id="ciudad" className={styles.input} placeholder="Ciudad" value={formData.ciudad} onChange={handleChange} required />
         </div>
         <div className={styles['form-group']}>
-          <label className={styles.label}>Calle</label>
-          <input
-            name="calle"
-            value={formData.calle}
-            onChange={handleChange}
-            className={styles.input}
-            required
-          />
+          <label className={styles.label} htmlFor="calle">Calle</label>
+          <input type="text" name="calle" id="calle" className={styles.input} placeholder="Calle" value={formData.calle} onChange={handleChange} required />
         </div>
         <div className={styles['form-group']}>
-          <label className={styles.label}>Detalle: Piso, dpto</label>
-          <input
-            name="detalle"
-            value={formData.detalle}
-            onChange={handleChange}
-            className={styles.input}
-            required
-          />
+          <label className={styles.label} htmlFor="detalle">Detalle</label>
+          <textarea name="detalle" id="detalle" className={styles.textarea} placeholder="Detalle" value={formData.detalle} onChange={handleChange} />
         </div>
         <div className={styles['form-group']}>
-          <label className={styles.label}>Referencia</label>
-          <textarea
-            name="referencia"
-            value={formData.referencia}
-            onChange={handleChange}
-            className={styles.textarea}
-          />
+          <label className={styles.label} htmlFor="referencia">Referencia</label>
+          <input type="text" name="referencia" id="referencia" className={styles.input} placeholder="Referencia" value={formData.referencia} onChange={handleChange} />
         </div>
-        <div className={styles['form-group']}>
-          <label className={styles.label}>Etiqueta</label>
-          <select
-            name="etiqueta"
-            value={formData.etiqueta}
-            onChange={handleChange}
-            className={styles.input}
-          >
-            <option value="">Seleccionar</option>
-            <option value="Casa">Casa</option>
-            <option value="Trabajo">Trabajo</option>
-            <option value="Otro">Otro</option>
-          </select>
-        </div>
-        <div className={styles['form-group']}>
-          <label className={styles.label}>Detalle de Entrega</label>
-          <select
-            name="Detalledeentrega"
-            value={formData.Detalledeentrega}
-            onChange={handleChange}
-            className={styles.input}
-          >
-            <option value="">Seleccionar</option>
-            <option value="Personal">Personal</option>
-            <option value="Portería">Portería</option>
-          </select>
-        </div>
-        <button type="submit" className={styles.button}>
-          Guardar Dirección
-        </button>
+        <button type="submit" className={styles.button}>Guardar Dirección</button>
       </form>
     </div>
   );
 };
 
-export default DireccionAgregar;
+export default AgregarDireccion;

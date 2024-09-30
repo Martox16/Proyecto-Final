@@ -90,23 +90,7 @@ console.log(formData)
       
       console.log('formDataToSend despues');
       console.log(formDataToSend);
-/*
-      formDataToSend.append('nombre', formData.nombre || '');
 
-      formDataToSend.append('apellido', formData.apellido || '');
-      formDataToSend.append('telefono', formData.telefono || '');
-      formDataToSend.append('password', formData.password || '');
-      formDataToSend.append('vendedor', formData.vendedor || '');
-      formDataToSend.append('username', formData.username || '');
-      formDataToSend.append('fechaNac', formData.nacimiento || '');
-      formDataToSend.append('mail', formData.mail || '');
-      formDataToSend.append('id', id || '');
-      formDataToSend.append('fotoPerfil',"a" || "");
-      // Añadimos la imagen al FormData solo si se ha seleccionado una nueva
-      if (selectedImage) {
-        formDataToSend.append('fotoPerfil', selectedImage);
-      }  
- */
       console.log('formDataToSend', formDataToSend);
       const response = await fetch (`http://localhost:3000/actualizarPerfil`, {
         method: 'POST',
