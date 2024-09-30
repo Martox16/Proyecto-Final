@@ -19,6 +19,7 @@ const Formulario = () => {
                 
                 // Guardar el ID del usuario en localStorage
                 localStorage.setItem('userId', data.id);
+                
 
                 // Redirigir a la página de inicio
                 router.push('/view/home');
