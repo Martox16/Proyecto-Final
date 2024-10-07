@@ -16,11 +16,11 @@ const metodosAPagar = () => {
             <div className={styles.envioOpciones}>
             <button className={styles.botonEnvio}>
                 <img src="/delivery.png" alt="Delivery" className={styles.iconoEnvio} />
-                Delivery
+                <p className={styles.p}>Delivery</p>
             </button>
             <button className={styles.botonEnvio}>
                 <img src="/local.png" alt="Local" className={styles.iconoEnvio} />
-                Local
+                <p className={styles.p}>Local</p>
             </button>
             </div>
           </div>
@@ -31,15 +31,15 @@ const metodosAPagar = () => {
             <div className={styles.pagoOpciones}>
             <button className={styles.botonEnvio}>
                 <img src="/precio.png" alt="Efectivo" className={styles.iconoEnvio} />
-                Efectivo
+                <p className={styles.p}>Efectivo</p>
             </button>
             <button className={styles.botonEnvio}>
                 <img src="/tarjeta.png" alt="Tarjeta" className={styles.iconoEnvio} />
-                Tarjeta
+                <p className={styles.p}>Tarjeta</p>
             </button>
             <button className={styles.botonEnvio}>
                 <img src="/agregarTarjeta.png" alt="Agregar tarjeta" className={styles.iconoEnvio} />
-                +
+                <p className={styles.p}>+</p>
             </button>
             </div>
             <img src="/cupon.png" alt="Cupón" className={styles.iconoEnvio} />
