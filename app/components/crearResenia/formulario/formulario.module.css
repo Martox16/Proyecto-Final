@@ -1,0 +1,44 @@
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 600px; /* Aumentar el ancho máximo del formulario */
+    margin: 0 auto;
+}
+
+.formulario label {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.formulario input,
+.formulario textarea {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Aumentar el ancho del textarea */
+.formulario textarea {
+    height: 150px; /* Ajustar la altura según sea necesario */
+    width: 100%; /* Hacer que el ancho sea 100% del contenedor */
+    max-width: 100%; /* Asegurarse de que no exceda el contenedor */
+    resize: horizontal; /* Permitir que el usuario ajuste el ancho */
+}
+
+.formulario button {
+    background-color: #FFAE12;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.formulario button:hover {
+    background-color: #e6950e;
+}
