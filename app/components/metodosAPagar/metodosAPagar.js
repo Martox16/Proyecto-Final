@@ -12,7 +12,7 @@ const metodosAPagar = () => {
     
           {/* Envío */}
           <div className={styles.envio}>
-            <h2>Envío</h2>
+            <h2 className={styles.titulo2}>Envío</h2>
             <div className={styles.envioOpciones}>
             <button className={styles.botonEnvio}>
                 <img src="/delivery.png" alt="Delivery" className={styles.iconoEnvio} />
@@ -27,7 +27,7 @@ const metodosAPagar = () => {
     
           {/* Método de Pago */}
           <div className={styles.metodoPago}>
-            <h2>Método De Pago</h2>
+            <h2 className={styles.titulo2}>Método De Pago</h2>
             <div className={styles.pagoOpciones}>
             <button className={styles.botonEnvio}>
                 <img src="/precio.png" alt="Efectivo" className={styles.iconoEnvio} />
@@ -48,7 +48,7 @@ const metodosAPagar = () => {
     
           {/* Resumen */}
           <div className={styles.resumen}>
-            <h2>Resumen</h2>
+            <h2 className={styles.titulo2}>Resumen</h2>
             <div className={styles.item}>
               <span>Costo de productos:</span>
               <span>$24.000</span>
