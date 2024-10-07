@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import styles from './carrito.module.css';
-import Subtotal from '../subtotal/subtotal'; 
+import Subtotal from '../Subtotal/Subtotal'; 
 import { useRouter } from 'next/navigation'; 
 
 const Carrito = () => {
@@ -94,6 +94,7 @@ const Carrito = () => {
     updateCartInLocalStorage(newCartItems);
   };
 
+  
   const productosFiltrados = Object.entries(cartItems).filter(([id, cantidad]) => cantidad > 0);
 
   const productosPorId = productos.reduce((acc, producto) => {
