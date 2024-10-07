@@ -1,0 +1,121 @@
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .titulo {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 30px;
+  }
+  
+  .direccionesList {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+  }
+  
+  .direccionItem {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #FFD966;
+    border-radius: 8px;
+    background-color: #FFF7E6;
+    margin-bottom: 10px;
+    align-items: center;
+    font-weight: 400;
+  }
+  
+  .button {
+    padding: 5px;
+    border-radius: 8px;
+    background-color: #FFF7E6;
+    border: 1px solid #FFD966;
+    font-size: 15px;
+    font-weight: 200;
+    color: #333;
+  }
+  
+  .button:hover {
+    background-color: #FFD966; 
+  }
+
+  .boton2{
+    padding: 5px;
+    border-radius: 8px;
+    background-color: #FFF7E6;
+    border: 1px solid #FFD966;
+    font-size: 13px;
+    font-weight: 500;
+    color: #333;
+    margin-left: 3px;
+  }
+ 
+  .span{
+    text-decoration: underline;
+    margin-right: 3px;
+    font-weight: 600;
+  }
+
+  .props{
+    max-width: 180px;
+  }
+
+
+  .editarForm {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+  border-radius: 10px; 
+  box-shadow: 3px 1px 5px 2px rgba(0,0,0,0.24);
+  -webkit-box-shadow: 3px 1px 5px 2px rgba(0,0,0,0.24);
+  -moz-box-shadow: 3px 1px 5px 2px rgba(0,0,0,0.24);
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  }
+  
+  .titulo {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold; 
+  color: #333333; 
+  }
+  
+  .input {
+    width: 80%; 
+    padding: 10px; 
+    margin: 10px; 
+    border: 1px solid #FFD966;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #FFF7E6; 
+  }
+  
+  .input::placeholder {
+    color: #aaa; 
+  }
+  
+  .boton3 {
+    padding: 5px; 
+    width: 70px;
+    border-radius: 8px; 
+    background-color: #FFF7E6; 
+    border: 1px solid #FFD966; 
+    font-size: 13px;
+    font-weight: 500; 
+    color: #333; 
+    margin-bottom: 3px;
+  }
+  
+  .boton3:hover {
+    background-color: #FFD966; 
+  }
+  
+  
