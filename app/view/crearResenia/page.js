@@ -10,8 +10,9 @@ const crearResenia = () => {
             <FlechaAtras />
             <div className={styles.contentContainer}>
                 <Title />
-                <Formulario />
             </div>
+            <Formulario />
+
         </div>
     );
 };
