@@ -99,25 +99,7 @@
   color: #333;
 }
 
-.cupon{
-  display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 10px;
-}
 
-.iconocupon{
-  width: 30px;
-  height: 30px;
-
-}
-.cuponInput {
-  width: 90%;
-  padding: 10px;
-  border: 1px solid #ffa500;
-  border-radius: 10px;
-  margin-top: 10px;
-}
 
 .item {
   display: flex;
@@ -159,4 +141,43 @@
 .botonCancelar {
   background-color: #f44336; 
   color: white;
+}
+
+.cupon{
+  display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.iconocupon{
+  width: 30px;
+  height: 30px;
+
+}
+
+.cuponContainer {
+  margin-top: 20px;
+}
+
+.inputCupon {
+  width: 52%;
+  margin-right: 15px;
+  padding: 7px;
+  border: 1px solid #ffa500;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.botonAplicarCupon {
+  background-color: #34e451ee; 
+  color: white;
+  padding: 7px 10px;
+  border-radius: 10px;
+  border: none;
+  font-size: 14px;
+}
+
+.botonAplicarCupon:disabled {
+  background-color: #d3d3d3;
 }

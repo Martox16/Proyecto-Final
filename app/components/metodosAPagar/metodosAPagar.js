@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation'; 
 import styles from './metodosAPagar.module.css';
 
-// Simulamos traer el JSON
+// JSON
 const datosLocal = [
   {
     id: 1,
@@ -16,6 +16,11 @@ const datosLocal = [
   }
 ];
 
+const cuponesValidos = {
+  "DESCUENTO10": 10,
+  "DESCUENTO20": 20
+};
+
 const MetodosAPagar = () => {
   const router = useRouter();
   const [direccion, setDireccion] = useState('');
@@ -23,7 +28,11 @@ const MetodosAPagar = () => {
   const [editable, setEditable] = useState(false); // Controla si se puede editar la dirección
   const [direccionTemporal, setDireccionTemporal] = useState(''); // Dirección temporal durante la edición
   const [envioSeleccionado, setEnvioSeleccionado] = useState(null); // Envío seleccionado
-  const [pagoSeleccionado, setPagoSeleccionado] = useState(null); // Método de pago seleccionado
+  const [pagoSeleccionado, setPagoSeleccionado] = useState(null);
+  const [subtotal, setSubtotal] = useState(1000); 
+  const [descuento, setDescuento] = useState(0);
+  const [cupon, setCupon] = useState('');
+  const [cuponAplicado, setCuponAplicado] = useState(false); 
 
   // Cargar datos del JSON al iniciar
   useEffect(() => {
@@ -67,6 +76,21 @@ const MetodosAPagar = () => {
       router.push('/view/compraRealizada');
     }
   };
+
+  const handleCuponChange = (e) => {
+    setCupon(e.target.value.toUpperCase()); // Convertir a mayúsculas
+  };
+
+  const handleAplicarCupon = () => {
+    if (cuponesValidos[cupon]) {
+      setDescuento(cuponesValidos[cupon]); // Aplicar descuento
+      setCuponAplicado(true);
+    } else {
+      alert('Cupón inválido');
+    }
+  };
+
+
 
   return (
     <div className={styles.container}>
@@ -143,6 +167,26 @@ const MetodosAPagar = () => {
         </div>
       </div>
 
+      {/* Campo de cupón */}
+      <div className={styles.cuponContainer}>
+        <h2 className={styles.titulo2}>Cupón de descuento</h2>
+        <input
+          type="text"
+          className={styles.inputCupon}
+          value={cupon}
+          onChange={handleCuponChange}
+          placeholder="Ingresa tu cupón"
+          disabled={cuponAplicado}
+        />
+        <button
+          className={styles.botonAplicarCupon}
+          onClick={handleAplicarCupon}
+          disabled={cuponAplicado}
+        >
+          {cuponAplicado ? 'Cupón Aplicado' : 'Aplicar Cupón'}
+        </button>
+      </div>
+      
       {/* Resumen */}
       <div className={styles.resumen}>
         <h2 className={styles.titulo2}>Resumen</h2>
