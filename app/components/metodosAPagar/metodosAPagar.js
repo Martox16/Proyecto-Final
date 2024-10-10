@@ -1,7 +1,14 @@
+'use client';
 import React from 'react';
+import { useRouter } from 'next/navigation'; 
 import styles from './metodosAPagar.module.css';
 
 const metodosAPagar = () => {
+  const router = useRouter();
+  const handleIrAPagar = () => {
+    router.push('/view/compraRealizada');  
+  };
+  
     return (
         <div className={styles.container}>
           <div className={styles.direccion}>
@@ -9,7 +16,7 @@ const metodosAPagar = () => {
             <button className={styles.botonCambiar}>Cambiar</button>
           </div>
           <div>
-          <p className={styles.ubicacion}>La Pampa 5370</p>
+          <p className={styles.ubicacion}>XXXX</p>
           </div>
         
           <div className={styles.divLocal}>
@@ -81,9 +88,10 @@ const metodosAPagar = () => {
             
           </div>
     
-          <button className={styles.botonPagar}>Ir A Pagar</button>
+          <button className={styles.botonPagar} onClick={handleIrAPagar}>Ir A Pagar</button>
         </div>
       );
 };
 
 export default metodosAPagar;
+
