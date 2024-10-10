@@ -18,7 +18,9 @@ const datosLocal = [
 
 const cuponesValidos = {
   "DESCUENTO10": 10,
-  "DESCUENTO20": 20
+  "DESCUENTO20": 20,
+  "PR1MERAC0MPRA":20,
+  "2DAC0MPRA":10
 };
 
 const MetodosAPagar = () => {
