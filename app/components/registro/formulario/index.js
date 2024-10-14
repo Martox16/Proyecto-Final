@@ -35,9 +35,20 @@ const Formulario = () => {
         return minLength && hasUppercase && hasLowercase;
     };
 
+    const validateEmail = (email) => {
+        // Verificar que el correo electrónico contenga '.com'
+        return email.includes('.com');
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');  // Limpiamos errores previos
+
+        // Validar el correo electrónico
+        if (!validateEmail(formData.mail)) {
+            setError('Correo invalido.');
+            return;
+        }
 
         // Validar la contraseña
         if (!validatePassword(formData.password)) {
@@ -47,7 +58,7 @@ const Formulario = () => {
 
         try {
             // Enviamos la solicitud al backend con fetch
-            const response = await fetch('http://localhost:3000/registro', { // Asegúrate que la URL sea correcta
+            const response = await fetch('http://localhost:3000/registro', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
