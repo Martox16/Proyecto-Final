@@ -10,7 +10,7 @@ import HistorialPedidos from '../../components/menuBar/container/historialPedido
 import MetodoPago from '../../components/menuBar/container/metodoPago';
 import CentroAyuda from '../../components/menuBar/container/centroAyuda';
 import Direccion from '../../components/menuBar/cuenta/direcciones';
-
+import Idioma from '../../components/menuBar/cuenta/idioma/index';
 function MenuBar() {
     const router = useRouter(); // Inicializa el hook useRouter
 
@@ -37,12 +37,8 @@ function MenuBar() {
                 <p className={styles.micuentaname}>Mi cuenta</p>
 
                 <Direccion />
+                <Idioma/>
 
-                <div className={styles.contenedor}>
-                    <img src="/menuBar/idioma.png" className={styles.fotoimg} alt="imagen idioma" />
-                    <p className={styles.desc}>Idioma</p>
-                    <img src="/menuBar/flecha.png" className={styles.fotoflecha} alt="imagen flecha" />
-                </div>
 
                 <div className={styles.contenedor}>
                     <img src="/menuBar/accesibilidad.png" className={styles.fotoimg} alt="imagen accesibilidad" />
