@@ -1,12 +1,18 @@
-'use client' //todos los que tienen usestate hay que poner arriba esto.
+'use client' 
 
 import React, { useState } from 'react';
-import styles from './styles.module.css'
+import styles from './styles.module.css';
+import { useRouter } from 'next/navigation';
 
 function CentroAyuda() {
+  const router = useRouter(); 
+
+    const handleClick = () => {
+        router.push('/view/centroAyuda'); 
+    };
     return (
     <div className={styles.contenedor}>    
-      <div>
+      <div onClick={handleClick}>
        <a className='botonAyuda'>
         <img src="/menuBar/centroAyuda.png" className="fotoAyuda" alt="Ayuda" />
       </a>
