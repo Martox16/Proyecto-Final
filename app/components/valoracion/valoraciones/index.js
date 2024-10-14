@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React, { useEffect, useState } from 'react';
 import styles from './valoraciones.module.css';
@@ -78,28 +78,29 @@ const Valoraciones = () => {
     }
   }, [valoraciones]);
 
-  const handleButtonClick = async (idReseña) => {
+  const handleButtonClick = async (comentario) => {
+    const idUsuario = userId; // Obtener el ID de usuario del estado
     try {
-        const response = await fetch(`http://localhost:3000/eliminarReseniaPorIdUsuario/${idReseña}`, {
-            method: 'DELETE',
-        });
+      const response = await fetch(`http://localhost:3000/eliminarReseniaPorIdUsuario/${encodeURIComponent(comentario)}/${idUsuario}`, {
+        method: 'DELETE',
+      });
 
-        if (!response.ok) {
-            const errorMessage = await response.text(); // Extraer el mensaje de error del servidor
-            throw new Error(`Error al eliminar la reseña: ${errorMessage}`);
-        }
+      if (!response.ok) {
+        const errorMessage = await response.text(); // Extraer el mensaje de error del servidor
+        throw new Error(`Error al eliminar la reseña: ${errorMessage}`);
+      }
 
-        // Filtra la reseña eliminada
-        setValoraciones((prevValoraciones) =>
-            prevValoraciones.filter((valoracion) => valoracion.id !== idReseña)
-        );
+      // Filtra la reseña eliminada
+      setValoraciones((prevValoraciones) =>
+        prevValoraciones.filter((valoracion) => valoracion.comentario !== comentario)
+      );
 
-        console.log('Reseña eliminada exitosamente');
+      console.log('Reseña eliminada exitosamente');
     } catch (error) {
-        console.error('Error al eliminar la reseña:', error);
-        setError(error.message);
+      console.error('Error al eliminar la reseña:', error);
+      setError(error.message);
     }
-};
+  };
 
   if (loading) {
     return <div>Cargando valoraciones...</div>;
@@ -122,9 +123,9 @@ const Valoraciones = () => {
                 {valoracion.idusuario == userId && (
                   <button
                     className={styles.binButton}
-                    onClick={() => handleButtonClick(valoracion.id)} // Asegúrate de que valoracion.id sea correcto
+                    onClick={() => handleButtonClick(valoracion.comentario)} // Pasa el comentario aquí
                   >
-                    {/* Botón adaptado */}
+                    {/* Contenido del botón... */}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"

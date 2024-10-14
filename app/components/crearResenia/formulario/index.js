@@ -8,6 +8,7 @@ const Formulario = () => {
     const [comentario, setComentario] = useState('');
     const [userId, setUserId] = useState(null);
     const [selectedTiendaId, setSelectedTiendaId] = useState(null);
+    const cantEstrellas = 3; // Valor predeterminado para cantEstrellas
 
     useEffect(() => {
         // Obtener el ID de usuario y de la tienda desde localStorage
@@ -29,12 +30,14 @@ const Formulario = () => {
 
         try {
             const reseniaData = {
-                idUsuario: userId,
-                idLocal: selectedTiendaId,
-                infoReseña: comentario,
+                idLocal: selectedTiendaId, // ID de la tienda
+                idUsuario: userId, // ID del usuario
+                cantEstrellas: cantEstrellas, // Estrellas predeterminadas
+                infoReseña: comentario, // Comentario del usuario
             };
 
-            const response = await axios.post('/api/agregarResenias', reseniaData);
+            // Cambiar la URL a la correcta
+            const response = await axios.post('http://localhost:3000/agregarResenias', reseniaData);
 
             if (response.status === 200) {
                 alert('Reseña agregada exitosamente');
