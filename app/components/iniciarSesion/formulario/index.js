@@ -20,9 +20,12 @@ const Formulario = () => {
                 // Guardar el ID del usuario en localStorage
                 localStorage.setItem('userId', data.id);
                 
-
-                // Redirigir a la página de inicio
-                router.push('/view/home');
+                // Redirigir según la contraseña
+                if (contrasena === 'logingGoogle') {
+                    router.push('/view/editarperfil');
+                } else {
+                    router.push('/view/home');
+                }
             } else if (response.status === 404) {
                 alert('Nombre no encontrado');
             } else if (response.status === 401) {

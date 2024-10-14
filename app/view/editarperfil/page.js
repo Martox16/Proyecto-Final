@@ -2,10 +2,12 @@
 // app/editarPerfil/page.js
 
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation'; // Importa useRouter
 import styles from './editarperfil.module.css';
 import FlechaAtras from '../../components/componentesGenerales/flechaAtras';
 
 const EditarPerfil = ({ searchParams }) => {
+  const router = useRouter(); // Inicializa el router
   const id = localStorage.getItem('userId');
   const [perfil, setPerfil] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -14,17 +16,16 @@ const EditarPerfil = ({ searchParams }) => {
     nombre: '',
     apellido: '',
     telefono: '',
-    password:'',
-    vendedor:'',
-    username:'',
+    password: '',
+    vendedor: '',
+    username: '',
     mail: '',
     fechaNac: '',
-    id:'',
+    id: '',
     fotoPerfil: ''
-  // Añadido para la imagen
   });
-  const [selectedImage, setSelectedImage] = useState(null); // Nuevo estado para la imagen seleccionada
-console.log(formData)
+  const [selectedImage, setSelectedImage] = useState(null);
+
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
@@ -60,23 +61,18 @@ console.log(formData)
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Nueva función para manejar la selección de la imagen
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    setSelectedImage(file); // Guarda la imagen seleccionada
-    const imageUrl = URL.createObjectURL(file); // Muestra la vista previa de la imagen seleccionada
-    setFormData({ ...formData, FotoPerfil: imageUrl });
+    setSelectedImage(file);
+    const imageUrl = URL.createObjectURL(file);
+    setFormData({ ...formData, fotoPerfil: imageUrl });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('tomi');
     try {
-      console.log('formDataToSend Antes');
-      
-      /**/
       const formDataToSend = {
-        nombre : formData.nombre || '',
+        nombre: formData.nombre || '',
         apellido: formData.apellido || '',
         telefono: formData.telefono || '',
         password: formData.password || '',
@@ -86,32 +82,25 @@ console.log(formData)
         fotoPerfil: formData.fotoPerfil || '',
         mail: formData.mail || '',
         id: localStorage.getItem('userId')
-    };
-      
-      console.log('formDataToSend despues');
-      console.log(formDataToSend);
+      };
 
-      console.log('formDataToSend', formDataToSend);
-      const response = await fetch (`http://localhost:3000/actualizarPerfil`, {
+      const response = await fetch(`http://localhost:3000/actualizarPerfil`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          // Otros encabezados si son necesarios
         },
-        
         body: JSON.stringify(formDataToSend)
       });
 
-      console.log(response);
       if (!response.ok) {
-        throw new Error('No');
+        throw new Error('Error al actualizar el perfil');
       }
 
       alert('Perfil actualizado con éxito');
+      router.push('/view/home'); // Redirigir a home después de guardar cambios
     } catch (error) {
-      alert(error);
-    
-}
+      alert(error.message);
+    }
   };
 
   if (loading) return <div>Cargando...</div>;
@@ -137,7 +126,7 @@ console.log(formData)
           <input
             id="fileInput"
             type="file"
-            style={{ display: 'none' }} // Escondemos el input, y usamos el icono como disparador
+            style={{ display: 'none' }}
             onChange={handleImageChange}
           />
         </div>
@@ -223,4 +212,3 @@ console.log(formData)
 };
 
 export default EditarPerfil;
-
