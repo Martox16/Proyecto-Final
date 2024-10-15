@@ -36,7 +36,7 @@ const Valoraciones = () => {
           const data = await response.json();
 
           if (data.length === 0) {
-            setError('NO HAY VALORACIONES');
+            setError(<div className={styles.valoracionesContainer}> <div className={styles.noValoraciones}>NO HAY VALORACIONES</div> </div>);
           } else {
             setValoraciones(data);
           }
