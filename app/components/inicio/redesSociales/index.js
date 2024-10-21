@@ -1,29 +1,16 @@
-'use client'; // Añadir esta línea para convertir el componente en un Client Component
+'use client'; 
 
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './redesSociales.module.css';
 
 const RedesSociales = () => {
-  const [mensajeVisible, setMensajeVisible] = useState(false);
-
   const manejarClickGoogle = (e) => {
-    e.preventDefault(); // Prevenir el comportamiento por defecto
-    setMensajeVisible(true); // Mostrar el mensaje
-
-    // Ocultar el mensaje después de 5 segundos y redirigir
-    setTimeout(() => {
-      setMensajeVisible(false);
-      window.location.href = 'http://localhost:3000/auth/google'; // Redirigir a la URL de Google
-    }, 5000);
+    e.preventDefault(); 
+    window.location.href = 'http://localhost:3000/auth/google'; 
   };
 
   return (
     <div className={styles.redesContainer}>
-      {mensajeVisible && (
-        <div className={styles.mensajeContainer}>
-          <span className={styles.mensaje}>Tu contraseña será, logingGoogle</span>
-        </div>
-      )}
       <div className={styles.textoContainer}>
         <hr className={styles.linea} />
         <span className={styles.texto}>Continuar con</span>
