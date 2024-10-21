@@ -16,6 +16,7 @@ const translations = {
     ja: { idioma: "ここで言語を試してください" },        
     ko: { idioma: "여기에서 언어를 시도하십시오" },      
     ru: { idioma: "Попробуйте язык здесь" }, 
+    tr: { idioma: "Burada dili deneyin" },
 };
 
 function Idioma() {
@@ -37,7 +38,7 @@ function Idioma() {
                 <img src="/flechaAtras.png" className={styles.fotoFlecha} alt="Flecha" />
             </a>
             <h1 className={styles.name}>Cambio de idioma</h1>
-            <p className={styles.p}>{translations[language].idioma}</p> {/* Muestra el texto traducido */}
+            <p className={styles.p}>{translations[language].idioma}</p>
             <div className={styles.divboton}>
             <button  className={styles.boton} onClick={() => changeLanguage('es')}>Español</button>
                 <button className={styles.boton}  onClick={() => changeLanguage('en')}>English</button>
@@ -50,6 +51,7 @@ function Idioma() {
                 <button className={styles.boton}  onClick={() => changeLanguage('ja')}>日本語</button>
                 <button className={styles.boton}  onClick={() => changeLanguage('ko')}>한국어</button>
                 <button className={styles.boton}  onClick={() => changeLanguage('ru')}>Русский</button>
+                <button className={styles.boton}  onClick={() => changeLanguage('tr')}>Türkçe</button>
             </div>
         </div>
     );

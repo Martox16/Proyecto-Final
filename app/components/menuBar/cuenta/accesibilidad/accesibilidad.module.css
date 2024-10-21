@@ -1,0 +1,100 @@
+.menuBarContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra el contenido horizontalmente */
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%; /* Asegura que el header ocupe todo el ancho disponible */
+}
+
+.cardContainer {
+    display: flex;
+    justify-content: space-between;/* Distribuye los elementos uniformemente */
+    align-items: flex-start;
+    width: 100%;
+    max-width: 500px; /* Ajusta el ancho máximo según sea necesario */
+    padding-top: 20px;
+    background-color: #FFF8EA;
+    border-radius: 15px; /* Borde redondeado */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra para darle un efecto de tarjeta */
+    margin-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    
+}
+
+.micuenta-name{
+    font-weight: bolder;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+}
+
+.micuentacontenedor{
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 350px;
+    font-family: Arial, sans-serif;
+}
+
+.micuentaname {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .contenedor{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: 1px dotted #000;
+  }
+.fotoimg{
+    width: 40px; 
+    
+    margin-right: 15px; 
+}
+.fotoflecha{
+    width: 15px; 
+    height: 15px;
+}
+
+.contenedor:last-child {
+    border-bottom: none; 
+  }
+
+  
+  .desc {
+    flex-grow: 1;
+    font-size: 16px;
+  }
+
+  
+  .logoutContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 160px;
+}
+
+.logoutButton {
+    background-color: rgb(248, 42, 42);
+    color: white;
+    border: none;
+    padding: 13px 23px;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.logoutButton:hover {
+    background-color: rgb(250, 59, 59);
+}

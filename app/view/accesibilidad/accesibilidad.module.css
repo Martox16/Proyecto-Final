@@ -1,0 +1,66 @@
+
+
+
+.botonFlecha {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px; /* Ajusta el tamaño según sea necesario */
+    height: 30px; /* Ajusta el tamaño según sea necesario */
+    border: 1px solid #cccccc; /* Borde gris */
+    border-radius: 50%; /* Hace que el botón sea circular */
+    margin-right: 10px; /* Espacio entre la flecha y el texto */
+    cursor: pointer;
+    margin-top:10px;  
+    margin-left: 10px; 
+    
+}
+
+.fotoFlecha {
+    width: 30px;
+    height: 30px;
+}
+
+.name {
+    text-align: center;
+    font-size: 28px; 
+    margin-top: 20px;
+}
+
+
+.name {
+    text-align: center;
+    font-size: 30px; /* Tamaño de fuente aumentado */
+    margin-top: 20px;
+    color: #333; /* Color más oscuro para mejor contraste */
+}
+
+.p {
+    font-size: 16px;
+    color: #555; /* Color más suave */
+    margin: 15px 20px; /* Margen uniforme */
+    text-align: justify;
+}
+
+
+.card {
+    margin: 15px;
+    background-color: #FFF8EA; /* Color de fondo suave */
+    border: 1px solid #ddd;
+    border-radius: 10px; /* Bordes redondeados más pronunciados */
+    padding: 20px; /* Padding aumentado */
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra más sutil */
+    transition: box-shadow 0.3s; /* Efecto de transición */
+}
+
+.card:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); /* Efecto al pasar el mouse */
+}
+
+.div {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Diseño responsivo */
+    grid-gap: 20px;
+    padding: 20px; /* Padding alrededor del contenedor */
+}

@@ -11,12 +11,12 @@ import MetodoPago from '../../components/menuBar/container/metodoPago';
 import CentroAyuda from '../../components/menuBar/container/centroAyuda';
 import Direccion from '../../components/menuBar/cuenta/direcciones';
 import Idioma from '../../components/menuBar/cuenta/idioma/index';
+import Accesibilidad from '../../components/menuBar/cuenta/accesibilidad/index';
 function MenuBar() {
     const router = useRouter(); // Inicializa el hook useRouter
 
     const handlePerfilClick = () => {
-        console.log("Redirigiendo a /inicio..."); // Para depuración
-        localStorage.setItem('userId', '0');
+
 
         router.push('/view/inicio'); 
     };
@@ -38,13 +38,8 @@ function MenuBar() {
 
                 <Direccion />
                 <Idioma/>
+                <Accesibilidad/>
 
-
-                <div className={styles.contenedor}>
-                    <img src="/menuBar/accesibilidad.png" className={styles.fotoimg} alt="imagen accesibilidad" />
-                    <p className={styles.desc}>Accesibilidad</p>
-                    <img src="/menuBar/flecha.png" className={styles.fotoflecha} alt="imagen flecha" />
-                </div>
 
                 <div className={styles.logoutContainer}>
                     <button className={styles.logoutButton} onClick={handlePerfilClick}>

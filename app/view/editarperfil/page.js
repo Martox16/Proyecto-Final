@@ -22,7 +22,6 @@ const EditarPerfil = ({ searchParams }) => {
     mail: '',
     fechaNac: '',
     id: '',
-    fotoPerfil: ''
   });
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -44,7 +43,6 @@ const EditarPerfil = ({ searchParams }) => {
           username: data.username,
           mail: data.mail,
           fechaNac: new Date(data.fechaNac).toISOString().split('T')[0],
-          fotoPerfil: data.fotoPerfil || '',
           id: localStorage.getItem('userId')
         });
         setLoading(false);
@@ -61,12 +59,7 @@ const EditarPerfil = ({ searchParams }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setSelectedImage(file);
-    const imageUrl = URL.createObjectURL(file);
-    setFormData({ ...formData, fotoPerfil: imageUrl });
-  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -79,7 +72,6 @@ const EditarPerfil = ({ searchParams }) => {
         vendedor: false,
         username: formData.username || '',
         fechaNac: formData.fechaNac || '',
-        fotoPerfil: formData.fotoPerfil || '',
         mail: formData.mail || '',
         id: localStorage.getItem('userId')
       };
@@ -110,26 +102,7 @@ const EditarPerfil = ({ searchParams }) => {
     <div className={styles.container}>
       <FlechaAtras />
       <form className={styles.form} onSubmit={handleSubmit}>
-        <div className={styles['form-group']}>
-          <img
-            src={formData.fotoPerfil}
-            alt="Foto de perfil"
-            className={styles.imagenperfil}
-          />
-          <label htmlFor="fileInput" className={styles.fotocamara}>
-            <img
-              src="/fotocamara.png"
-              alt="Foto camara"
-              className={styles.fotocamara}
-            />
-          </label>
-          <input
-            id="fileInput"
-            type="file"
-            style={{ display: 'none' }}
-            onChange={handleImageChange}
-          />
-        </div>
+
         <div className={styles['form-group']}>
           <label className={styles.label}>Nombre</label>
           <input
