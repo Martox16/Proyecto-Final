@@ -41,7 +41,7 @@ const Formulario = () => {
 
     const manejarClick = (e) => {
         e.preventDefault(); // Prevenir el comportamiento por defecto del enlace
-        router.push('/view/recuperarContra/ingresarMailContra'); // Redirigir a la página de recuperación de contraseña
+        router.push('/view/recuperarContra'); // Redirigir a la página de recuperación de contraseña
     };
 
     return (
