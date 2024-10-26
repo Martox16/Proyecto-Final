@@ -1,0 +1,115 @@
+.formulario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 500px; /* Aumentar el ancho del formulario */
+    margin: 0 auto;
+    padding: 40px;
+}
+
+.field {
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+.field label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.formulario input[type="email"],
+.formulario input[type="password"] {
+    width: 100%;
+    padding: 16px;
+    font-size: 18px;
+    border: 2px solid #FFAE12;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.formulario input[type="submit"],
+#button {
+    width: 100%;
+    padding: 16px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: #FFAE12;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.formulario input[type="submit"]:hover,
+#button:hover {
+    background-color: #FF9A00;
+}
+
+.errorMessage {
+    color: red;
+    font-size: 16px;
+    margin-top: -10px;
+}
+
+/* CSS proporcionado para los cuadros de verificación */
+.password {
+    display: flex; /* Asegura que los cuadros estén uno al lado del otro */
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Espacio entre los cuadros */
+    margin: 20px 0; /* Margen arriba y abajo de los cuadros */
+}
+
+.password input {
+    width: 30px; /* Ancho de cada cuadro */
+    height: 40px; /* Alto de cada cuadro */
+    text-align: center; /* Centrar el texto */
+    background-color: transparent; /* Fondo transparente */
+    border: none; /* Sin borde */
+    border-bottom: solid 2px rgb(20, 181, 230); /* Línea inferior */
+    font-size: 20px; /* Tamaño de la fuente */
+    color: rgb(0, 0, 0); /* Color del texto */
+    outline: none; /* Sin contorno al seleccionar */
+}
+
+/* Espacio adicional para el botón de verificación */
+.verifyButton {
+    margin-top: 20px; /* Margen para separar el botón de los cuadros */
+}
+
+/* Media queries para pantallas pequeñas */
+@media (max-width: 768px) {
+    .formulario {
+        padding: 20px;
+    }
+
+    .field label {
+        font-size: 18px;
+    }
+
+    .formulario input[type="email"],
+    .formulario input[type="password"],
+    .formulario input[type="submit"],
+    #button {
+        font-size: 18px;
+        padding: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .field label {
+        font-size: 16px;
+    }
+
+    .formulario input[type="email"],
+    .formulario input[type="password"],
+    .formulario input[type="submit"],
+    #button {
+        font-size: 16px;
+        padding: 12px;
+    }
+}

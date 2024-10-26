@@ -1,45 +1,44 @@
-"use client"; // Asegúrate de usar esto en componentes que usan hooks
-import React, { useState } from 'react';
+"use client";
+import React, { useState, useRef } from 'react';
 import emailjs from 'emailjs-com';
-import { useRouter } from 'next/navigation'; // Importación corregida
+import { useRouter } from 'next/navigation';
+import styles from './Formulario.module.css'; // Importa el CSS modular
 
 const Formulario = () => {
-    const router = useRouter(); // Inicializar useRouter
+    const router = useRouter();
     const [step, setStep] = useState(1);
-    const [verificationCode, setVerificationCode] = useState('');
+    const [verificationCode, setVerificationCode] = useState(['', '', '', '']); // Arreglo para 4 caracteres
     const [generatedCode, setGeneratedCode] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [passwordError, setPasswordError] = useState('');
-    const [emailToChange, setEmailToChange] = useState(''); // Nuevo estado para almacenar el email
+    const [emailToChange, setEmailToChange] = useState('');
+
+    const inputRefs = useRef([]); // Referencias para los inputs de verificación
 
     const sendEmail = (e) => {
         e.preventDefault();
-
         const btn = document.getElementById('button');
         btn.value = 'Sending...';
 
-        // Generar un código aleatorio de 4 dígitos
         const code = Math.floor(1000 + Math.random() * 9000).toString();
-        setGeneratedCode(code); // Guardar el código generado para la verificación
+        setGeneratedCode(code);
 
-        const serviceID = 'service_7ug75l3'; // Tu Service ID
-        const templateID = 'template_dnwfcud'; // Tu Template ID
-        const userID = 'enlZDClIHncmv_Ghu'; // Tu Public Key
+        const serviceID = 'service_7ug75l3';
+        const templateID = 'template_dnwfcud';
+        const userID = 'enlZDClIHncmv_Ghu';
 
-        // Obtener el email ingresado
-        const emailInput = e.target.reply_to.value; // Email ingresado
-        setEmailToChange(emailInput); // Guardar el email en el estado
+        const emailInput = e.target.reply_to.value;
+        setEmailToChange(emailInput);
 
-        // Crear un objeto de parámetros para enviar a EmailJS
         const templateParams = {
-            reply_to: emailInput, // Establecer el email que ingresó el usuario
-            message: code, // El código generado
+            reply_to: emailInput,
+            message: code,
         };
 
         emailjs.send(serviceID, templateID, templateParams, userID)
             .then(() => {
                 btn.value = 'Send Email';
-                setStep(2); // Cambiar a la vista de ingreso del código
+                setStep(2); // Avanzar al paso de verificación
             }, (err) => {
                 btn.value = 'Send Email';
                 alert('Error al enviar: ' + JSON.stringify(err));
@@ -48,8 +47,9 @@ const Formulario = () => {
 
     const handleVerification = (e) => {
         e.preventDefault();
-        if (verificationCode === generatedCode) {
-            setStep(3); // Cambiar a la vista de ingreso de nueva contraseña
+        const code = verificationCode.join('');
+        if (code === generatedCode) {
+            setStep(3);
         } else {
             alert('Código incorrecto, intenta de nuevo.');
         }
@@ -57,8 +57,7 @@ const Formulario = () => {
 
     const handlePasswordChange = async (e) => {
         e.preventDefault();
-        
-        // Validación de contraseña
+
         const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
 
         if (regex.test(newPassword)) {
@@ -68,14 +67,14 @@ const Formulario = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    mail: emailToChange, // Usar el email del estado
+                    mail: emailToChange,
                     password: newPassword,
                 }),
             });
 
             if (response.ok) {
                 alert('Contraseña actualizada con éxito!');
-                router.push('/view/iniciarSesion'); // Redirigir a la página de inicio de sesión
+                router.push('/view/iniciarSesion');
             } else {
                 const errorData = await response.json();
                 alert(`Error: ${errorData.message}`);
@@ -85,11 +84,40 @@ const Formulario = () => {
         }
     };
 
+    const handleChangeVerificationCode = (index, value) => {
+        // Validar que solo se permita un dígito
+        if (/^\d$/.test(value) || value === '') {
+            const newCode = [...verificationCode];
+            newCode[index] = value.slice(-1); // Asegurarse de que solo se tome un carácter
+            setVerificationCode(newCode);
+
+            // Mover el foco al siguiente input si hay un valor ingresado
+            if (value && index < 3) {
+                inputRefs.current[index + 1].focus();
+            }
+        }
+    };
+
+    const handleKeyDown = (index, e) => {
+        // Manejar el evento de retroceso y de entrada de números
+        if (e.key === 'Backspace') {
+            // Si el cuadro actual está vacío, mover al anterior
+            if (verificationCode[index] === '') {
+                if (index > 0) {
+                    inputRefs.current[index - 1].focus();
+                }
+            } else {
+                // Permitir que se borre el número actual
+                handleChangeVerificationCode(index, '');
+            }
+        }
+    };
+
     return (
-        <div>
+        <div className={styles.formulario}>
             {step === 1 && (
                 <form onSubmit={sendEmail} id="form">
-                    <div className="field">
+                    <div className={styles.field}>
                         <label htmlFor="reply_to">Tu Email</label>
                         <input
                             type="email"
@@ -98,28 +126,33 @@ const Formulario = () => {
                             required
                         />
                     </div>
-                    <input type="submit" id="button" value="Send Email" />
+                    <input type="submit" id="button" value="Enviar código" />
                 </form>
             )}
             {step === 2 && (
                 <form onSubmit={handleVerification}>
-                    <div className="field">
-                        <label htmlFor="verification_code">Ingresa tu código</label>
-                        <input
-                            type="text"
-                            name="verification_code"
-                            id="verification_code"
-                            value={verificationCode}
-                            onChange={(e) => setVerificationCode(e.target.value)}
-                            required
-                        />
+                    <label htmlFor="verification_code">Ingresa tu código de verificación</label>
+                    <div className={styles.password}>
+                        {verificationCode.map((code, index) => (
+                            <input
+                                key={index}
+                                type="text"
+                                maxLength="1"
+                                ref={el => inputRefs.current[index] = el} // Asignar referencia
+                                value={code}
+                                onChange={(e) => handleChangeVerificationCode(index, e.target.value)}
+                                onKeyDown={(e) => handleKeyDown(index, e)} // Manejar tecla de retroceso
+                                required
+                                onFocus={(e) => e.target.select()} // Seleccionar el texto al enfocar
+                            />
+                        ))}
                     </div>
-                    <input type="submit" value="Verificar Código" />
+                    <input type="submit" value="Verificar Código" className={styles.verifyButton} />
                 </form>
             )}
             {step === 3 && (
                 <form onSubmit={handlePasswordChange}>
-                    <div className="field">
+                    <div className={styles.field}>
                         <label htmlFor="new_password">Nueva Contraseña</label>
                         <input
                             type="password"
@@ -129,7 +162,7 @@ const Formulario = () => {
                             onChange={(e) => setNewPassword(e.target.value)}
                             required
                         />
-                        {passwordError && <p style={{ color: 'red' }}>{passwordError}</p>}
+                        {passwordError && <p className={styles.errorMessage}>{passwordError}</p>}
                     </div>
                     <input type="submit" value="Cambiar Contraseña" />
                 </form>
