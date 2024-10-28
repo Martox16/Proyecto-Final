@@ -18,12 +18,30 @@ const AgregarDireccion = ({ onAddDireccion }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const nuevaDireccion = { ...formData, id: Date.now() }; // Genera un ID único
-    onAddDireccion(nuevaDireccion); // Llama a la función para agregar la dirección
-    alert('Dirección agregada con éxito');
-    setFormData({ pais: '', ciudad: '', calle: '', detalle: '', referencia: '' }); // Restablece el formulario
+    try {
+      const userId = 1;
+      const response = await fetch('http://localhost:3000/guardarDireccion', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ...formData, userId }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        alert('Dirección agregada con éxito');
+        setFormData({ pais: '', ciudad: '', calle: '', detalle: '', referencia: '' });
+        onAddDireccion(data); // Actualiza el estado en el componente padre, si es necesario
+      } else {
+        alert('Hubo un error al agregar la dirección 1');
+      }
+    } catch (error) {
+      console.error('Error al agregar dirección:', error);
+      alert('Hubo un error al agregar la dirección 2');
+    }
   };
 
   return (

@@ -14,23 +14,25 @@ const EditarDireccion = () => {
   const [showAgregar, setShowAgregar] = useState(false);
   const [direccionEditando, setDireccionEditando] = useState(null); // Estado para la dirección que se está editando
   const router = useRouter();
+  const idusuario = 1; 
 
   useEffect(() => {
     const fetchDirecciones = async () => {
       try {
-        const response = await fetch('/direcciones.json'); // Cambia la URL al archivo JSON
+        const response = await fetch(`http://localhost:3000/mostrarDireccionToda/${idusuario}`);
         if (!response.ok) {
           throw new Error('Error al obtener las direcciones');
         }
         const data = await response.json();
-        setDirecciones(data);
+        console.log(data);
+        setDirecciones(data); 
       } catch (error) {
         setError('Error al cargar las direcciones');
       } finally {
         setLoading(false);
       }
     };
-
+  
     fetchDirecciones();
   }, []);
 
