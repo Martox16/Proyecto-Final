@@ -70,7 +70,7 @@
     text-align: center; /* Centrar el texto */
     background-color: transparent; /* Fondo transparente */
     border: none; /* Sin borde */
-    border-bottom: solid 2px rgb(20, 181, 230); /* Línea inferior */
+    border-bottom: solid 2px #FFAE12; /* Línea inferior */
     font-size: 20px; /* Tamaño de la fuente */
     color: rgb(0, 0, 0); /* Color del texto */
     outline: none; /* Sin contorno al seleccionar */

@@ -1,0 +1,20 @@
+/* components/tarjetasDispo/botonAgregar.module.css */
+.botonContainer {
+    display: flex;
+    justify-content: center; /* Centrar el botón */
+    margin: 20px 0; /* Espaciado superior e inferior */
+}
+
+.botonAgregar {
+    background-color: #FFAE12; /* Color de fondo */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    padding: 10px 20px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+    font-size: 1em; /* Tamaño de fuente */
+}
+
+.botonAgregar:hover {
+    background-color: #FFA000; /* Color de fondo en hover */
+}

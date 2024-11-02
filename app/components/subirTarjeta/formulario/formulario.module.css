@@ -1,0 +1,32 @@
+/* components/subirTarjeta/formulario.module.css */
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f9f9f9; /* Color de fondo */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+.formContainer input {
+    margin: 10px 0; /* Espaciado entre inputs */
+    padding: 10px;
+    width: 100%; /* Ancho completo */
+    max-width: 400px; /* Ancho máximo */
+    border: 1px solid #ccc; /* Borde */
+    border-radius: 4px; /* Bordes redondeados */
+}
+
+.formContainer button {
+    padding: 10px 20px;
+    background-color: #FFAE12; /* Color del botón */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    border-radius: 4px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+}
+
+.formContainer button:hover {
+    background-color: #FFA000; /* Color en hover */
+}

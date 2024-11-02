@@ -126,7 +126,7 @@ const Formulario = () => {
                             required
                         />
                     </div>
-                    <input type="submit" id="button" value="Enviar código" />
+                    <input type="submit" id="button" value="Enviar Email" />
                 </form>
             )}
             {step === 2 && (
