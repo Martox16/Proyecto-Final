@@ -14,11 +14,6 @@ const TusTarjetas = () => {
             .catch((error) => console.error('Error al cargar las tarjetas:', error));
     }, []);
 
-    const handleEditar = (id) => {
-        console.log(`Editar ${id}`);
-        // Aquí puedes agregar la lógica para editar la tarjeta
-    };
-
     const handleEliminar = (id) => {
         console.log(`Eliminar ${id}`);
         // Aquí puedes agregar la lógica para eliminar la tarjeta
@@ -65,7 +60,6 @@ const TusTarjetas = () => {
                             </div>
                         </div>
                         <div className={styles.acciones}>
-                            <button className={styles.editar} onClick={() => handleEditar(tarjeta.id)}>Editar</button>
                             <button className={styles.eliminar} onClick={() => handleEliminar(tarjeta.id)}>Eliminar</button>
                         </div>
                     </div>
