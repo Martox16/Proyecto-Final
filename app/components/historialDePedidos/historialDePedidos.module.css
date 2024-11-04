@@ -97,7 +97,7 @@ color: #615e5e;
 }
 
 .pedidoItem {
-    background-color: #fff;
+    background-color: #FFF8EA;
     border: 1px solid #ddd;
     border-radius: 10px;
     padding: 20px;
@@ -117,7 +117,7 @@ color: #615e5e;
 .pedidoItem p {
     margin: 5px 0;
     color: #555;
-    font-size: 0.9em;
+    font-size: 15px;
 }
 
 .pedidoItem p strong {
