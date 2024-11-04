@@ -1,39 +1,38 @@
 'use client';
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation'; // Importa useRouter para la redirección
-import styles from './formulario.module.css'; // Asegúrate de que este archivo CSS exista
+import { useRouter } from 'next/navigation';
+import styles from './formulario.module.css';
 
 const Formulario = () => {
-    const router = useRouter(); // Inicializa useRouter
+    const router = useRouter();
     const [formData, setFormData] = useState({
         fechaVencimiento: '',
         CVV: '',
         numeroTarjeta: '',
         nombreTitularTarjeta: '',
-        tipo: 'Tarjeta', // Tipo de tarjeta predeterminado
+        tipo: 'Tarjeta',
     });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
 
         if (name === 'numeroTarjeta') {
-            // Formatear número de tarjeta con guiones
-            const formattedValue = value.replace(/\D/g, '')
-                .replace(/(.{4})/g, '$1-')
-                .slice(0, 19); // Limita la longitud total a 19 (16 dígitos + 3 guiones)
-            setFormData({ ...formData, [name]: formattedValue });
+            // Elimina todos los caracteres no numéricos
+            let numericValue = value.replace(/\D/g, '');
+            
+            // Aplicar el formato con guiones solo si hay números para mostrar
+            if (numericValue.length > 0) {
+                numericValue = numericValue.match(/.{1,4}/g).join('-'); // Divide en grupos de 4 dígitos
+            }
+            
+            setFormData({ ...formData, [name]: numericValue });
         } else if (name === 'fechaVencimiento') {
-            // Formatear fecha como YYYY-MM-DD
-            const formattedDate = value.replace(/\D/g, '') // Elimina cualquier caracter no numérico
-                .slice(0, 8); // Limita la longitud a 8 caracteres (YYYYMMDD)
+            const formattedDate = value.replace(/\D/g, '').slice(0, 4);
+            const year = formattedDate.slice(0, 2);
+            const month = formattedDate.slice(2, 4);
+            const dateDisplay = `${year}${month ? '/' : ''}${month}`;
 
-            // Agregar guiones en el formato YYYY-MM-DD
-            const year = formattedDate.slice(0, 4);
-            const month = formattedDate.slice(4, 6);
-            const day = formattedDate.slice(6, 8);
-            const dateWithDashes = `${year}${month.length > 0 ? '-' : ''}${month}${day.length > 0 ? '-' : ''}${day}`;
-
-            setFormData({ ...formData, [name]: dateWithDashes });
+            setFormData({ ...formData, [name]: dateDisplay });
         } else {
             setFormData({ ...formData, [name]: value });
         }
@@ -41,11 +40,8 @@ const Formulario = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        // Obtener el ID de usuario del localStorage
         const userId = localStorage.getItem('userId');
 
-        // Validaciones
         if (!userId) {
             alert('ID de usuario no encontrado. Asegúrate de haber iniciado sesión.');
             return;
@@ -61,8 +57,19 @@ const Formulario = () => {
             return;
         }
 
-        // Validar que la fecha esté en el formato correcto
-        if (!/^\d{4}-\d{2}-\d{2}$/.test(formData.fechaVencimiento)) {
+        const [yearSuffix, month] = formData.fechaVencimiento.split('/');
+        const year = parseInt(`20${yearSuffix}`, 10);
+        const monthInt = parseInt(month, 10);
+
+        // Validación del año y mes
+        if (yearSuffix < 24 || monthInt < 1 || monthInt > 12) {
+            alert('La fecha de vencimiento debe tener un año igual o superior a 24 y un mes entre 01 y 12.');
+            return;
+        }
+
+        const fechaVencimiento = `20${yearSuffix}-${month}-01`;
+
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(fechaVencimiento)) {
             alert('La fecha de vencimiento debe tener el formato YYYY-MM-DD.');
             return;
         }
@@ -75,21 +82,21 @@ const Formulario = () => {
                 },
                 body: JSON.stringify({
                     ...formData,
+                    fechaVencimiento,
                     userId,
                 }),
             });
 
             if (response.ok) {
-                // Redirige a la vista de tarjetas disponibles
                 router.push('/view/tarjetasDispo');
             } else {
                 const errorText = await response.text();
                 console.error('Error al guardar la tarjeta:', response.statusText);
-                alert(`Error: ${response.statusText} - ${errorText}`); // Mostrar error
+                alert(`Error: ${response.statusText} - ${errorText}`);
             }
         } catch (error) {
             console.error('Error de red:', error);
-            alert(`Error de red: ${error.message}`); // Mostrar error
+            alert(`Error de red: ${error.message}`);
         }
     };
 
@@ -103,7 +110,7 @@ const Formulario = () => {
                     value={formData.numeroTarjeta}
                     onChange={handleChange}
                     required
-                    maxLength={19} // Longitud máxima para incluir guiones
+                    maxLength={19} 
                 />
                 <input
                     type="text"
@@ -116,11 +123,11 @@ const Formulario = () => {
                 <input
                     type="text"
                     name="fechaVencimiento"
-                    placeholder="Fecha de Vencimiento (YYYY-MM-DD)"
+                    placeholder="Fecha de Vencimiento (AA/MM)"
                     value={formData.fechaVencimiento}
                     onChange={handleChange}
                     required
-                    maxLength={10} // Longitud máxima para YYYY-MM-DD
+                    maxLength={5}
                 />
                 <input
                     type="text"
@@ -134,7 +141,7 @@ const Formulario = () => {
                 <input
                     type="hidden"
                     name="tipo"
-                    value={formData.tipo} // Tipo de tarjeta está predeterminado
+                    value={formData.tipo}
                 />
                 <button type="submit">Guardar Tarjeta</button>
             </form>

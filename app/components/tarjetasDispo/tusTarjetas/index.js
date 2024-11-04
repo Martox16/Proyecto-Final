@@ -14,9 +14,23 @@ const TusTarjetas = () => {
             .catch((error) => console.error('Error al cargar las tarjetas:', error));
     }, []);
 
-    const handleEliminar = (id) => {
-        console.log(`Eliminar ${id}`);
-        // Aquí puedes agregar la lógica para eliminar la tarjeta
+    const handleEliminar = async (id) => {
+        const userId = localStorage.getItem('userId');
+        try {
+            const response = await fetch(`http://localhost:3000/eliminarTarjeta/${id}/${userId}`, {
+                method: 'DELETE',
+            });
+
+            if (response.ok) {
+                // Si la eliminación fue exitosa, actualiza el estado
+                setTarjetas((prevTarjetas) => prevTarjetas.filter(tarjeta => tarjeta.id !== id));
+                console.log(`Tarjeta ${id} eliminada exitosamente`);
+            } else {
+                console.error('Error al eliminar la tarjeta:', await response.text());
+            }
+        } catch (error) {
+            console.error('Error en la solicitud de eliminación:', error);
+        }
     };
 
     const detectarTipoTarjeta = (numeroTarjeta) => {

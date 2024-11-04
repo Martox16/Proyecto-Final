@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './tarjetasDispo.module.css';
-import FlechaAtras from '../../components/componentesGenerales/flechaAtras/index.js';
+import FlechaAtras from '../../components/tarjetasDispo/flechaAtras/index.js';
 import Titulo from '../../components/tarjetasDispo/titulo/index.js';
 import TusTarjetas from '../../components/tarjetasDispo/tusTarjetas/index.js';
 import BotonAgregar from '../../components/tarjetasDispo/botonAgregar'; // Importa el nuevo componente
