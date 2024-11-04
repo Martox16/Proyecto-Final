@@ -2,10 +2,16 @@
 
 import React, { useState } from 'react';
 import styles from './styles.module.css'
+import { useRouter } from 'next/navigation';
 
 function historialPedidos() {
+  const router = useRouter(); 
+
+    const handleClick = () => {
+        router.push('/view/historialPedidos'); 
+    };
     return (
-      <div className={styles.contenedor}>   
+      <div onClick={handleClick} className={styles.contenedor}>   
         <div>
           <a className='botonHistorial'>
           <img src="/menuBar/historialPedidos.png" className="fotoHistorial" alt="Historial" />
@@ -18,3 +24,4 @@ function historialPedidos() {
 }
 
 export default historialPedidos;
+
