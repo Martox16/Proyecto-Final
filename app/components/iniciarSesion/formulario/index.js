@@ -48,7 +48,7 @@ const Formulario = () => {
         <form className={styles.formulario} onSubmit={handleSubmit}>
             <input 
                 type="text" 
-                placeholder="Nombre" 
+                placeholder="Nombre De Usuario" 
                 value={nombre}
                 onChange={(e) => setNombre(e.target.value)}
                 className={styles.input} 
