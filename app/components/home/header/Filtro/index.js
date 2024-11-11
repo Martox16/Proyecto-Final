@@ -1,14 +1,13 @@
 'use client'; // Asegúrate de que esto esté al principio
 import React, { useEffect, useState } from 'react';
-import '../Buscador/index';
-import Card from '../../Body-main/Card';
+import '../Buscador/index'; 
+import Card from '../../Body-main/Card'; // Asegúrate de que el componente Card esté importado correctamente
 
 const Filtro = () => {
   const [locales, setLocales] = useState([]);
   const [filtroEstrellas, setFiltroEstrellas] = useState('');
-  const [resultados, setResultados] = useState(null);
+  const [resultados, setResultados] = useState([]);
   const [error, setError] = useState(null);
-  const [mostrarFiltro, setMostrarFiltro] = useState(false);
 
   const obtenerLocales = async () => {
     try {
@@ -31,54 +30,42 @@ const Filtro = () => {
   const manejarFiltroEstrellas = (event) => {
     const estrellas = event.target.value;
     setFiltroEstrellas(estrellas);
-    filtrarResultados(estrellas);
-  };
 
-  const filtrarResultados = (estrellas) => {
+    // Filtra los locales por estrellas
     const nuevosResultados = locales.filter((local) => {
       const coincideEstrellas = estrellas === '' || local.cantestrellas === parseInt(estrellas);
       return coincideEstrellas;
     });
-    setResultados(nuevosResultados);
-  };
 
-  const toggleFiltro = (event) => {
-    event.stopPropagation(); 
-    setMostrarFiltro((prevMostrarFiltro) => !prevMostrarFiltro);
+    setResultados(nuevosResultados);
   };
 
   return (
     <div className="buscador">
-      <div className="icono-filtro" onClick={toggleFiltro}>
-        <img src="/filtrar.png" alt="Filtrar" className="icono-imagen" style={{ width: '20px', height: '20px', objectFit: 'contain' }} />
-      </div>
-
-      {mostrarFiltro && (
-        <div className="filtro-estrellas">
-          <select className="select-filtro" value={filtroEstrellas} onChange={manejarFiltroEstrellas}>
-            <option value="">Todas las estrellas</option>
-            <option value="1">1 estrella</option>
-            <option value="2">2 estrellas</option>
-            <option value="3">3 estrellas</option>
-            <option value="4">4 estrellas</option>
-            <option value="5">5 estrellas</option>
-          </select>
-        </div>
-      )}
-
+      <input
+        type="number"
+        placeholder="N Estrellas"
+        className="input-buscador"
+        value={filtroEstrellas}
+        onChange={manejarFiltroEstrellas}
+        min="1"
+        max="5"
+      />
       <div className="resultados">
         {error ? (
           <div className="error">{error}</div>
-        ) : resultados === null ? (
-          <></>
-        ) : resultados.length > 0 ? (
+        ) : filtroEstrellas.length > 0 && resultados.length > 0 ? (
           <>
             <p>Resultado/s encontrado/s</p>
             {resultados.map((local) => (
               <div key={local.id} className="resultado">
                 <div className="card">
                   <div className="imageContainer">
-                    <img src={local.foto} className="imagenPanaderia" alt={`Imagen de ${local.nombrelocal}`} />
+                    <img
+                      src={local.foto}
+                      className="imagenPanaderia"
+                      alt={`Imagen de ${local.nombrelocal}`}
+                    />
                     <h1 className="nameCard">{local.nombrelocal}</h1>
                   </div>
                   <div className="cardFooter">
@@ -97,9 +84,9 @@ const Filtro = () => {
               </div>
             ))}
           </>
-        ) : (
+        ) : filtroEstrellas.length > 0 ? (
           <div className="no-resultados">No se encontraron resultados</div>
-        )}
+        ) : null}
       </div>
     </div>
   );

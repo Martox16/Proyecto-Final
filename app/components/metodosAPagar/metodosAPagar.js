@@ -1,9 +1,9 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation'; 
+import { useRouter } from 'next/navigation';
 import styles from './metodosAPagar.module.css';
 
-// JSON
+// Datos de ejemplo de dirección y local
 const datosLocal = [
   {
     id: 1,
@@ -16,27 +16,30 @@ const datosLocal = [
   }
 ];
 
+// Cupones de descuento válidos (en porcentaje)
 const cuponesValidos = {
   "DESCUENTO10": 10,
   "DESCUENTO20": 20,
-  "PR1MERAC0MPRA":20,
-  "2DAC0MPRA":10
+  "PR1MERAC0MPRA": 20,
+  "2DAC0MPRA": 10
 };
 
 const MetodosAPagar = () => {
   const router = useRouter();
+  
+  // Estados locales
   const [direccion, setDireccion] = useState('');
   const [nombreLocal, setNombreLocal] = useState('');
-  const [editable, setEditable] = useState(false); // Controla si se puede editar la dirección
-  const [direccionTemporal, setDireccionTemporal] = useState(''); // Dirección temporal durante la edición
-  const [envioSeleccionado, setEnvioSeleccionado] = useState(null); // Envío seleccionado
+  const [editable, setEditable] = useState(false);
+  const [direccionTemporal, setDireccionTemporal] = useState('');
+  const [envioSeleccionado, setEnvioSeleccionado] = useState(null);
   const [pagoSeleccionado, setPagoSeleccionado] = useState(null);
   const [subtotal, setSubtotal] = useState(1000); 
   const [descuento, setDescuento] = useState(0);
   const [cupon, setCupon] = useState('');
-  const [cuponAplicado, setCuponAplicado] = useState(false); 
+  const [cuponAplicado, setCuponAplicado] = useState(false);
 
-  // Cargar datos del JSON al iniciar
+  // Cargar datos de ejemplo al iniciar
   useEffect(() => {
     const local = datosLocal[0];
     const direccionCompleta = `${local.calle}, ${local.ciudad}, ${local.pais} - ${local.detalle}`;
@@ -45,83 +48,91 @@ const MetodosAPagar = () => {
     setNombreLocal(local.nombreLocal);
   }, []);
 
-  // Manejar el click en "Cambiar"
+  // Manejar el click en "Cambiar" para editar la dirección
   const handleCambiarDireccion = () => {
-    setEditable(true); // Habilita la edición
+    setEditable(true);
   };
 
-  // Manejar "Cancelar" la edición
+  // Cancelar edición
   const handleCancelar = () => {
-    setEditable(false); // Deshabilita la edición
+    setEditable(false);
     setDireccionTemporal(direccion); // Restaurar la dirección original
   };
 
-  // Manejar "Guardar" los cambios
+  // Guardar la dirección editada
   const handleGuardar = () => {
-    setDireccion(direccionTemporal); // Guardar la dirección temporal como definitiva
-    setEditable(false); // Deshabilitar la edición
+    setDireccion(direccionTemporal);
+    setEditable(false);
   };
 
-  // Manejar la selección de envío
+  // Seleccionar método de envío
   const handleSeleccionEnvio = (metodo) => {
     setEnvioSeleccionado(metodo);
   };
 
-  // Manejar la selección de método de pago
+  // Seleccionar método de pago
   const handleSeleccionPago = (metodo) => {
     setPagoSeleccionado(metodo);
   };
 
-  // Manejar el botón "Ir a Pagar"
-  const handleIrAPagar = () => {
-    if (envioSeleccionado && pagoSeleccionado) {
-      router.push('/view/compraRealizada');
-    }
-  };
-
+  // Aplicar cupón de descuento
   const handleCuponChange = (e) => {
-    setCupon(e.target.value.toUpperCase()); // Convertir a mayúsculas
+    setCupon(e.target.value.toUpperCase());
   };
 
   const handleAplicarCupon = () => {
     if (cuponesValidos[cupon]) {
-      setDescuento(cuponesValidos[cupon]); // Aplicar descuento
+      setDescuento(cuponesValidos[cupon]);
       setCuponAplicado(true);
     } else {
       alert('Cupón inválido');
     }
   };
 
+  // Manejar el botón de ir a pagar
+  const handleIrAPagar = () => {
+    if (envioSeleccionado && pagoSeleccionado) {
+      router.push('/view/compraRealizada');
+    }
+  };
 
+  // Calcular el total con descuento (aplicando porcentaje sobre total)
+  const totalAntesDeDescuento = subtotal + (envioSeleccionado === 'Delivery' ? 2000 : 0);
+  const totalConDescuento = totalAntesDeDescuento - (totalAntesDeDescuento * (descuento / 100));
 
   return (
     <div className={styles.container}>
       {/* Dirección de entrega */}
-      <div className={styles.direccion}>
-        <h2 className={styles.titulo}>Dirección de entrega</h2>
-        <button className={styles.botonCambiar} onClick={handleCambiarDireccion}>Cambiar</button>
-      </div>
+      {envioSeleccionado === 'Delivery' && (
+        <div className={styles.direccion}>
+          <h2 className={styles.titulo}>Dirección de entrega</h2>
+          <button className={styles.botonCambiar} onClick={handleCambiarDireccion}>Cambiar</button>
+        </div>
+      )}
 
-      <div>
-        {editable ? (
-          <>
-            <input
-              type="text"
-              value={direccionTemporal}
-              onChange={(e) => setDireccionTemporal(e.target.value)}
-              className={styles.inputDireccion}
-            />
-            <div>
-              <button className={styles.botonGuardar} onClick={handleGuardar}>Guardar</button>
-              <button className={styles.botonCancelar} onClick={handleCancelar}>Cancelar</button>
-            </div>
-          </>
-        ) : (
-          <p className={styles.ubicacion}>{direccion}</p>
-        )}
-      </div>
+      {/* Mostrar dirección solo si el envío es "Delivery" */}
+      {envioSeleccionado === 'Delivery' && (
+        <div>
+          {editable ? (
+            <>
+              <input
+                type="text"
+                value={direccionTemporal}
+                onChange={(e) => setDireccionTemporal(e.target.value)}
+                className={styles.inputDireccion}
+              />
+              <div>
+                <button className={styles.botonGuardar} onClick={handleGuardar}>Guardar</button>
+                <button className={styles.botonCancelar} onClick={handleCancelar}>Cancelar</button>
+              </div>
+            </>
+          ) : (
+            <p className={styles.ubicacion}>{direccion}</p>
+          )}
+        </div>
+      )}
 
-      {/* Nombre del local */}
+      {/* Mostrar el nombre del local siempre */}
       <div className={styles.divLocal}>
         <h2 className={styles.tituloLocal}>Nombre del local</h2>
         <p className={styles.nombreLocal}>{nombreLocal}</p>
@@ -169,7 +180,7 @@ const MetodosAPagar = () => {
         </div>
       </div>
 
-      {/* Campo de cupón */}
+      {/* Cupón de descuento */}
       <div className={styles.cuponContainer}>
         <h2 className={styles.titulo2}>Cupón de descuento</h2>
         <input
@@ -188,36 +199,38 @@ const MetodosAPagar = () => {
           {cuponAplicado ? 'Cupón Aplicado' : 'Aplicar Cupón'}
         </button>
       </div>
-      
+
       {/* Resumen */}
       <div className={styles.resumen}>
         <h2 className={styles.titulo2}>Resumen</h2>
         <div className={styles.item}>
           <span>Costo de productos:</span>
-          <span>XXXXX</span>
+          <span>${subtotal}</span>
         </div>
         <div className={styles.item}>
           <span>Descuento:</span>
-          <span>XXXXXX</span>
+          <span>{descuento}%</span>
         </div>
         <div className={styles.item}>
           <span>Costo de envío:</span>
-          <span>XXXXX</span>
+          <span>${envioSeleccionado === 'Delivery' ? 2000 : 0}</span>
         </div>
         <div className={styles.subtotal}>
-          <span>Subtotal:</span>
-          <span>XXXXXX</span>
+          <span>Total final:</span>
+          <span>${totalConDescuento}</span>
         </div>
       </div>
 
       {/* Botón para ir a pagar */}
-      <button
-        className={styles.botonPagar}
-        onClick={handleIrAPagar}
-        disabled={!envioSeleccionado || !pagoSeleccionado} // Deshabilita si no se seleccionaron las opciones
-      >
-        Ir A Pagar
-      </button>
+      <div className={styles.botonContainer}>
+        <button
+          className={styles.botonIrAPagar}
+          onClick={handleIrAPagar}
+          disabled={!envioSeleccionado || !pagoSeleccionado}
+        >
+          Ir a pagar
+        </button>
+      </div>
     </div>
   );
 };

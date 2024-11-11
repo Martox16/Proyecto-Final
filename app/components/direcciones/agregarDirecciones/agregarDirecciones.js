@@ -22,7 +22,8 @@ const AgregarDireccion = ({ onAddDireccion }) => {
     e.preventDefault();
     try {
       const userId = 1;
-      const response = await fetch('http://localhost:3000/guardarDireccion', {
+      console.log(JSON.stringify({ ...formData, userId }));
+      const response = await fetch('http://localhost:3000/guardarDireccion/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

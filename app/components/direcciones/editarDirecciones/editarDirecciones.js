@@ -1,4 +1,3 @@
-// components/editarDireccion.js
 'use client';
 
 import React, { useEffect, useState } from 'react';
@@ -36,8 +35,20 @@ const EditarDireccion = () => {
     fetchDirecciones();
   }, []);
 
-  const eliminarDireccion = (direccionId) => {
-    setDirecciones((prevDirecciones) => prevDirecciones.filter(d => d.id !== direccionId));
+  const eliminarDireccion = async (direccionId) => {
+    try {
+      const response = await fetch(`http://localhost:3000/eliminarDireccion/${direccionId}`, {
+        method: 'DELETE',
+      });
+      if (response.ok) {
+        setDirecciones((prevDirecciones) => prevDirecciones.filter(d => d.id !== direccionId));
+      } else {
+        alert('Error al eliminar la dirección');
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Error al eliminar la dirección');
+    }
   };
 
   const agregarDireccion = (nuevaDireccion) => {

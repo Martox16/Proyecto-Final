@@ -50,17 +50,16 @@
   .button:hover {
     background-color: #45a049;
   }
+  .iconoFiltro {
+    position: fixed;
+    top: 20px; /* Ajusta el valor para moverlo hacia abajo o hacia arriba */
+    right: 20px; /* Ajusta el valor para moverlo hacia la izquierda o derecha */
+    z-index: 10; /* Asegura que el icono esté por encima de otros elementos */
+  }
   
-
-  /* Estilos para el ícono de filtro con imagen */
-.icono-filtro {
-  cursor: pointer;
-  display: inline-block;
-  margin: 10px;
-}
-
-.icono-imagen {
-  width: 20px;  /* Tamaño reducido de la imagen */
-  height: 20px;
-  object-fit: contain;  /* Para mantener la proporción de la imagen */
-}
+  .iconoImagen {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+  }
+  
