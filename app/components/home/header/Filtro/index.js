@@ -1,68 +1,108 @@
-'use client'; // Todos los hooks de estado deben estar arriba.
+'use client'; // Asegúrate de que esto esté al principio
+import React, { useEffect, useState } from 'react';
+import '../Buscador/index';
+import Card from '../../Body-main/Card';
 
-import React, { useState } from 'react';
-import styles from './filtro.module.css';
-import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
+const Filtro = () => {
+  const [locales, setLocales] = useState([]);
+  const [filtroEstrellas, setFiltroEstrellas] = useState('');
+  const [resultados, setResultados] = useState(null);
+  const [error, setError] = useState(null);
+  const [mostrarFiltro, setMostrarFiltro] = useState(false);
 
-function Filtro() {
-  // Estado para los filtros
-  const [estrellas, setEstrellas] = useState(0);
-  const [rangoPrecio, setRangoPrecio] = useState('0-299');
-  const [distancia, setDistancia] = useState('0-2km');
-  const [abierto, setAbierto] = useState(false);
+  const obtenerLocales = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/infoTiendas');
+      if (!response.ok) {
+        throw new Error('Error al obtener los locales');
+      }
+      const data = await response.json();
+      setLocales(data);
+    } catch (error) {
+      console.error('Error al obtener los locales:', error);
+      setError(error.message);
+    }
+  };
 
-  // Función para aplicar filtros
-  const aplicarFiltros = () => {
-    // Aquí deberías hacer la lógica para buscar con los filtros aplicados
-    console.log('Filtros aplicados:', { estrellas, rangoPrecio, distancia });
-    // Puedes realizar la búsqueda y actualizar la lista de elementos que estás mostrando
+  useEffect(() => {
+    obtenerLocales();
+  }, []);
+
+  const manejarFiltroEstrellas = (event) => {
+    const estrellas = event.target.value;
+    setFiltroEstrellas(estrellas);
+    filtrarResultados(estrellas);
+  };
+
+  const filtrarResultados = (estrellas) => {
+    const nuevosResultados = locales.filter((local) => {
+      const coincideEstrellas = estrellas === '' || local.cantestrellas === parseInt(estrellas);
+      return coincideEstrellas;
+    });
+    setResultados(nuevosResultados);
+  };
+
+  const toggleFiltro = (event) => {
+    event.stopPropagation(); 
+    setMostrarFiltro((prevMostrarFiltro) => !prevMostrarFiltro);
   };
 
   return (
-    <div>
-      <a className={styles.botonFiltro} onClick={() => setAbierto(!abierto)}>
-        <AdjustmentsHorizontalIcon style={{ width: 35, height: 'auto' }} />
-      </a>
+    <div className="buscador">
+      <div className="icono-filtro" onClick={toggleFiltro}>
+        <img src="/filtrar.png" alt="Filtrar" className="icono-imagen" style={{ width: '20px', height: '20px', objectFit: 'contain' }} />
+      </div>
 
-      {abierto && (
-        <div className={styles.filtrosMenu}>
-          <div>
-            <label className={styles.label}>Cantidad de Estrellas:</label>
-            <select className={styles.select} value={estrellas} onChange={(e) => setEstrellas(Number(e.target.value))}>
-              <option value={0}>Seleccionar</option>
-              {[1, 2, 3, 4, 5].map((estrella) => (
-                <option key={estrella} value={estrella}>
-                  {estrella} Estrella{estrella > 1 ? 's' : ''}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <label className={styles.label}>Rango de Precio:</label>
-            <select className={styles.select} value={rangoPrecio} onChange={(e) => setRangoPrecio(e.target.value)}>
-              <option value="0-299">$0 a $299</option>
-              <option value="300-599">$300 a $599</option>
-              <option value="600-999">$600 a $999</option>
-              <option value="1000+">$1000 o más</option>
-            </select>
-          </div>
-
-          <div>
-            <label className={styles.label}>Distancia:</label>
-            <select className={styles.select} value={distancia} onChange={(e) => setDistancia(e.target.value)}>
-              <option value="0-2km">0 a 2 km</option>
-              <option value="3-5km">3 km a 5 km</option>
-              <option value="6-10km">6 km a 10 km</option>
-              <option value="10km+">10 km o más</option>
-            </select>
-          </div>
-
-          <button className={styles.button}  onClick={aplicarFiltros}>Aplicar Filtros</button>
+      {mostrarFiltro && (
+        <div className="filtro-estrellas">
+          <select className="select-filtro" value={filtroEstrellas} onChange={manejarFiltroEstrellas}>
+            <option value="">Todas las estrellas</option>
+            <option value="1">1 estrella</option>
+            <option value="2">2 estrellas</option>
+            <option value="3">3 estrellas</option>
+            <option value="4">4 estrellas</option>
+            <option value="5">5 estrellas</option>
+          </select>
         </div>
       )}
+
+      <div className="resultados">
+        {error ? (
+          <div className="error">{error}</div>
+        ) : resultados === null ? (
+          <></>
+        ) : resultados.length > 0 ? (
+          <>
+            <p>Resultado/s encontrado/s</p>
+            {resultados.map((local) => (
+              <div key={local.id} className="resultado">
+                <div className="card">
+                  <div className="imageContainer">
+                    <img src={local.foto} className="imagenPanaderia" alt={`Imagen de ${local.nombrelocal}`} />
+                    <h1 className="nameCard">{local.nombrelocal}</h1>
+                  </div>
+                  <div className="cardFooter">
+                    <div className="footerItem">
+                      <img src="/estrella.png" className="estrella" alt="Icono de estrella" />
+                      <h2 className="textCardFooter">{local.cantestrellas}</h2>
+                    </div>
+                    <div className="footerItem">
+                      <h2 className="textCardFooter">{local.distancia} KM</h2>
+                    </div>
+                    <div className="footerItem">
+                      <h2 className="textCardFooter">{local.precio}$</h2>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </>
+        ) : (
+          <div className="no-resultados">No se encontraron resultados</div>
+        )}
+      </div>
     </div>
   );
-}
+};
 
 export default Filtro;

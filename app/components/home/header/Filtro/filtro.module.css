@@ -51,3 +51,16 @@
     background-color: #45a049;
   }
   
+
+  /* Estilos para el ícono de filtro con imagen */
+.icono-filtro {
+  cursor: pointer;
+  display: inline-block;
+  margin: 10px;
+}
+
+.icono-imagen {
+  width: 20px;  /* Tamaño reducido de la imagen */
+  height: 20px;
+  object-fit: contain;  /* Para mantener la proporción de la imagen */
+}

@@ -52,14 +52,31 @@ const EditarDireccion = () => {
     }
   };
 
-  const guardarEdicion = () => {
-    setDirecciones((prevDirecciones) => 
-      prevDirecciones.map(d => 
-        d.id === direccionEditando.id ? direccionEditando : d
-      )
-    );
-    setDireccionEditando(null); // Limpiar el estado de edición
+  const guardarEdicion = async () => {
+    try {
+      const response = await fetch(`http://localhost:3000/actualizarDireccion/${direccionEditando.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(direccionEditando),
+      });
+      if (response.ok) {
+        setDirecciones((prevDirecciones) =>
+          prevDirecciones.map((d) =>
+            d.id === direccionEditando.id ? direccionEditando : d
+          )
+        );
+        setDireccionEditando(null);
+      } else {
+        alert('Error al guardar los cambios');
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Error al guardar la edición');
+    }
   };
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
