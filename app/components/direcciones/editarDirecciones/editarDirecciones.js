@@ -19,6 +19,7 @@ const EditarDireccion = () => {
     const fetchDirecciones = async () => {
       try {
         const response = await fetch(`http://localhost:3000/mostrarDireccionToda/${idusuario}`);
+        
         if (!response.ok) {
           throw new Error('Error al obtener las direcciones');
         }
@@ -36,8 +37,9 @@ const EditarDireccion = () => {
   }, []);
 
   const eliminarDireccion = async (direccionId) => {
+    console.log(direccionId)
     try {
-      const response = await fetch(`http://localhost:3000/eliminarDireccion/${direccionId}`, {
+      const response = await fetch(`http://localhost:3000/eliminarDireccion/${direccionId}/${idusuario}`, {
         method: 'DELETE',
       });
       if (response.ok) {
@@ -65,7 +67,7 @@ const EditarDireccion = () => {
 
   const guardarEdicion = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/actualizarDireccion/${direccionEditando.id}`, {
+      const response = await fetch(`http://localhost:3000/actualizarDireccion/`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -111,26 +113,26 @@ const EditarDireccion = () => {
       </button>
       {showAgregar && <AgregarDireccion onAddDireccion={agregarDireccion} />}
       <div className={styles.direccionesList}>
-        {direcciones.length > 0 ? (
-          direcciones.map((direccion) => (
-            <div key={direccion.id} className={styles.direccionItem}>
-              <div className={styles.props}>
-                <span className={styles.span}>Calle:</span> {direccion.calle} <br />
-                <span className={styles.span}>Ciudad:</span> {direccion.ciudad} <br />
-                <span className={styles.span}>Pais:</span> {direccion.pais} <br />
-                <span className={styles.span}>Detalle:</span> {direccion.detalle} <br />
-                <span className={styles.span}>Referencia:</span> {direccion.referencia}
-              </div>
-              <div>
-                <button className={styles.boton2} onClick={() => irAEditar(direccion.id)}>Editar</button>
-                <button className={styles.boton2} onClick={() => eliminarDireccion(direccion.id)}>Eliminar</button>
-              </div>
-            </div>
-          ))
-        ) : (
-          <p>No tienes direcciones guardadas.</p>
-        )}
+  {direcciones.length > 0 ? (
+    direcciones.map((direccion) => (
+      <div key={direccion.id} className={styles.direccionItem}>
+        <div className={styles.props}>
+          <span className={styles.span}>Calle:</span> {direccion.calle} <br />
+          <span className={styles.span}>Ciudad:</span> {direccion.ciudad} <br />
+          <span className={styles.span}>Pais:</span> {direccion.pais} <br />
+          <span className={styles.span}>Detalle:</span> {direccion.detalle} <br />
+          <span className={styles.span}>Referencia:</span> {direccion.referencia}
+        </div>
+        <div>
+          <button className={styles.boton2} onClick={() => irAEditar(direccion.id)}>Editar</button>
+          <button className={styles.boton2} onClick={() => eliminarDireccion(direccion.id)}>Eliminar</button>
+        </div>
       </div>
+    ))
+  ) : (
+    <p>No tienes direcciones guardadas.</p>
+  )}
+</div>
       
       {direccionEditando && (
         <div className={styles.editarForm}>

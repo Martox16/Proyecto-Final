@@ -1,9 +1,7 @@
-// components/agregarDireccion.js
 'use client';
 
 import React, { useState } from 'react';
 import styles from './agregarDirecciones.module.css';
-
 
 const AgregarDireccion = ({ onAddDireccion }) => {
   const [formData, setFormData] = useState({
@@ -21,7 +19,7 @@ const AgregarDireccion = ({ onAddDireccion }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const userId = 1;
+       const userId = localStorage.getItem('userId'); 
       console.log(JSON.stringify({ ...formData, userId }));
       const response = await fetch('http://localhost:3000/guardarDireccion/', {
         method: 'POST',
@@ -36,6 +34,7 @@ const AgregarDireccion = ({ onAddDireccion }) => {
         alert('Dirección agregada con éxito');
         setFormData({ pais: '', ciudad: '', calle: '', detalle: '', referencia: '' });
         onAddDireccion(data); // Actualiza el estado en el componente padre, si es necesario
+        window.location.reload(); // Recarga la página
       } else {
         alert('Hubo un error al agregar la dirección 1');
       }
