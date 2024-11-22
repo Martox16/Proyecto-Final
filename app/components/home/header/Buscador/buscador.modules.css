@@ -4,5 +4,28 @@
   padding: 10px;
   border-radius: 5px;
   width: 100%;
-  max-width: 400px;
+width: 150px;
 }
+.input-fil{
+  background-color: #FFF7E9;
+  border: 1px solid #FF731D;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+width: 90px;
+
+}
+.card{
+  width: 150px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #FFF7E9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  margin: 7px 0;
+  position: relative;
+  box-sizing: border-box
+}
+
+

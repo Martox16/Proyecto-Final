@@ -41,11 +41,11 @@ const Filtro = () => {
   };
 
   return (
-    <div className="buscador">
+    <div className="filtro">
       <input
         type="number"
         placeholder="N Estrellas"
-        className="input-buscador"
+        className="input-fil"
         value={filtroEstrellas}
         onChange={manejarFiltroEstrellas}
         min="1"
