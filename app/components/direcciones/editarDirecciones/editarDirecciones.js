@@ -13,7 +13,7 @@ const EditarDireccion = () => {
   const [showAgregar, setShowAgregar] = useState(false);
   const [direccionEditando, setDireccionEditando] = useState(null); // Estado para la dirección que se está editando
   const router = useRouter();
-  const idusuario = 1; 
+  const idusuario = localStorage.getItem('userId'); // Definir el idusuario que se usará al guardar la dirección
 
   useEffect(() => {
     const fetchDirecciones = async () => {
@@ -37,7 +37,7 @@ const EditarDireccion = () => {
   }, []);
 
   const eliminarDireccion = async (direccionId) => {
-    console.log(direccionId)
+    console.log(direccionId);
     try {
       const response = await fetch(`http://localhost:3000/eliminarDireccion/${direccionId}/${idusuario}`, {
         method: 'DELETE',
@@ -67,21 +67,30 @@ const EditarDireccion = () => {
 
   const guardarEdicion = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/actualizarDireccion/`, {
-        method: 'PUT',
+      // Incluir el idusuario en el objeto de dirección editada
+      const direccionConIdUsuario = { ...direccionEditando, idusuario };
+
+      const response = await fetch(`http://localhost:3000/editarDireccion/`, {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(direccionEditando),
+        body: JSON.stringify(direccionConIdUsuario), // Ahora el idusuario está incluido
       });
+
       if (response.ok) {
+        console.log('Datos enviados:', direccionConIdUsuario);
+
+        // Actualizar la lista de direcciones con la editada
         setDirecciones((prevDirecciones) =>
           prevDirecciones.map((d) =>
             d.id === direccionEditando.id ? direccionEditando : d
           )
         );
-        setDireccionEditando(null);
+        setDireccionEditando(null); // Restablecer el estado para dejar de editar
       } else {
+        const errorMessage = await response.text();
+        console.log('Error al guardar los cambios:', response.status, errorMessage);
         alert('Error al guardar los cambios');
       }
     } catch (error) {
@@ -89,7 +98,6 @@ const EditarDireccion = () => {
       alert('Error al guardar la edición');
     }
   };
-  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -113,26 +121,26 @@ const EditarDireccion = () => {
       </button>
       {showAgregar && <AgregarDireccion onAddDireccion={agregarDireccion} />}
       <div className={styles.direccionesList}>
-  {direcciones.length > 0 ? (
-    direcciones.map((direccion) => (
-      <div key={direccion.id} className={styles.direccionItem}>
-        <div className={styles.props}>
-          <span className={styles.span}>Calle:</span> {direccion.calle} <br />
-          <span className={styles.span}>Ciudad:</span> {direccion.ciudad} <br />
-          <span className={styles.span}>Pais:</span> {direccion.pais} <br />
-          <span className={styles.span}>Detalle:</span> {direccion.detalle} <br />
-          <span className={styles.span}>Referencia:</span> {direccion.referencia}
-        </div>
-        <div>
-          <button className={styles.boton2} onClick={() => irAEditar(direccion.id)}>Editar</button>
-          <button className={styles.boton2} onClick={() => eliminarDireccion(direccion.id)}>Eliminar</button>
-        </div>
+        {direcciones.length > 0 ? (
+          direcciones.map((direccion) => (
+            <div key={direccion.id} className={styles.direccionItem}>
+              <div className={styles.props}>
+                <span className={styles.span}>Calle:</span> {direccion.calle} <br />
+                <span className={styles.span}>Ciudad:</span> {direccion.ciudad} <br />
+                <span className={styles.span}>Pais:</span> {direccion.pais} <br />
+                <span className={styles.span}>Detalle:</span> {direccion.detalle} <br />
+                <span className={styles.span}>Referencia:</span> {direccion.referencia}
+              </div>
+              <div>
+                <button className={styles.boton2} onClick={() => irAEditar(direccion.id)}>Editar</button>
+                <button className={styles.boton2} onClick={() => eliminarDireccion(direccion.id)}>Eliminar</button>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p>No tienes direcciones guardadas.</p>
+        )}
       </div>
-    ))
-  ) : (
-    <p>No tienes direcciones guardadas.</p>
-  )}
-</div>
       
       {direccionEditando && (
         <div className={styles.editarForm}>
